@@ -45,6 +45,36 @@
   font-weight: 800;
 }
 
+.about-toggle {
+  display: inline-flex;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid #dbe3f7;
+  background: #f8fbff;
+  margin-bottom: 18px;
+}
+
+.about-toggle-btn {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: #4b5c86;
+  font-weight: 800;
+  font-size: 0.86rem;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.about-toggle-btn.is-active {
+  background: #2563eb;
+  color: #fff;
+}
+
+.about-view.is-hidden {
+  display: none;
+}
+
 .about-list {
   margin: 0;
   padding-left: 20px;
