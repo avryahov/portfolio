@@ -3,7 +3,11 @@
 }
 
 .home-section {
-  padding: 72px 0;
+  padding: 44px 0;
+}
+
+.home-section:first-of-type {
+  padding-top: 28px;
 }
 
 .home-heading {
