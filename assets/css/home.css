@@ -38,6 +38,36 @@
   font-size: 1.07rem;
 }
 
+.about-structured h4 {
+  margin: 22px 0 10px;
+  font-size: 1.14rem;
+  color: #1d4ed8;
+  font-weight: 800;
+}
+
+.about-list {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+}
+
+.about-list + .about-list {
+  margin-top: 10px;
+}
+
+.about-list li + li {
+  margin-top: 8px;
+}
+
+.about-chain {
+  border-left: 4px solid #2563eb;
+  background: #f8fbff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
 .edu-line {
   position: relative;
   padding-left: 40px;
