@@ -1,6 +1,15 @@
 (function () {
   var items = document.querySelectorAll('.reveal');
-  if (!items.length || !('IntersectionObserver' in window)) {
+  if (!items.length) {
+    return;
+  }
+
+  document.documentElement.classList.add('reveal-enabled');
+
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(function (item) {
+      item.classList.add('is-visible');
+    });
     return;
   }
 

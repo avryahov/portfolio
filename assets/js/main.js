@@ -103,7 +103,7 @@
         return response.text();
       })
       .then(function (markup) {
-        target.innerHTML = markup.replaceAll('{{ROOT}}', root);
+        target.innerHTML = markup.split('{{ROOT}}').join(root);
       })
       .catch(function () {
         target.innerHTML = '';

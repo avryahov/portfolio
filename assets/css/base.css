@@ -366,12 +366,17 @@ main.section,
 }
 
 .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+html.reveal-enabled .reveal {
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 0.45s ease, transform 0.45s ease;
 }
 
-.reveal.is-visible {
+html.reveal-enabled .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
