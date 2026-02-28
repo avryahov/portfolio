@@ -328,7 +328,8 @@
 
 .qualification-brief {
   padding: 30px;
-  border-top: 6px solid #2563eb;
+  border: 1px solid #b7c8fb;
+  border-radius: var(--radius-md);
 }
 
 .qual-mini-grid {
