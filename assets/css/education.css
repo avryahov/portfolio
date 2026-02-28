@@ -1,0 +1,80 @@
+:root {
+  --edu-bg: #f6f8fc;
+  --edu-line: #d4dbee;
+  --edu-surface: #fcfdff;
+  --edu-accent: #1d4ed8;
+  --edu-accent-2: #047857;
+}
+
+.education-body {
+  background:
+    radial-gradient(880px 400px at 110% -4%, rgba(29, 78, 216, 0.15), transparent 60%),
+    radial-gradient(760px 420px at -20% 0%, rgba(4, 120, 87, 0.14), transparent 56%),
+    var(--edu-bg);
+}
+
+.education-body .card,
+.education-body .timeline-item,
+.education-body .panel {
+  border-color: var(--edu-line);
+  background: var(--edu-surface);
+}
+
+.education-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: 1px solid var(--edu-line);
+  background: var(--edu-surface);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.education-table th,
+.education-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 12px;
+  border-bottom: 1px solid var(--edu-line);
+}
+
+.education-table th {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--edu-accent);
+  letter-spacing: 0.02em;
+}
+
+.education-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.badge {
+  border-radius: 999px;
+  border: 1px solid var(--edu-line);
+  background: #eef4ff;
+  color: #1741a6;
+  font-weight: 700;
+  padding: 7px 11px;
+  font-size: 0.83rem;
+}
+
+.placeholder-note {
+  margin-top: 18px;
+  border: 1px dashed var(--edu-line);
+  background: #eefcf7;
+  border-radius: 12px;
+  padding: 14px;
+  color: #0f5132;
+}
+
+.placeholder-note b {
+  color: var(--edu-accent-2);
+}

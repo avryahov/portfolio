@@ -8,8 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/education.css" />
   </head>
-  <body>
+  <body class="education-body">
     <header class="site-header">
       <div class="container nav-wrap">
         <a class="logo" href="index.html"><span class="logo-mark"></span><span>Александр Ряхов</span></a>
@@ -27,13 +28,70 @@
 
     <main class="section">
       <div class="container">
-        <p class="kicker reveal">Академическая база</p>
+        <p class="kicker reveal">Образовательная траектория 2008–2014</p>
         <h1 class="page-title reveal">Основное образование</h1>
-        <p class="page-sub reveal">Страница подготовлена для будущего детального наполнения по дипломам и аттестатам.</p>
+        <p class="page-sub reveal">Страница собрана на основе текущей карьерной переписки. После получения сканов дипломов/аттестатов добавим точные номера и реквизиты.</p>
+
+        <section class="panel" style="padding: 24px; margin-top: 22px">
+          <h2 style="margin: 0">Хронология обучения</h2>
+          <table class="education-table" aria-label="Хронология образования">
+            <thead>
+              <tr>
+                <th>Период</th>
+                <th>Учреждение</th>
+                <th>Программа</th>
+                <th>Итог</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2008–2012</td>
+                <td>Оренбургский государственный университет</td>
+                <td>Информационные технологии (математический факультет)</td>
+                <td>Бакалавр</td>
+              </tr>
+              <tr>
+                <td>2009–2012</td>
+                <td>ОГУ (параллельная программа)</td>
+                <td>Компьютерная графика и веб-дизайн</td>
+                <td>Дополнительная специальность</td>
+              </tr>
+              <tr>
+                <td>2012–2014</td>
+                <td>Оренбургский государственный университет</td>
+                <td>Фундаментальная информатика и информационные технологии</td>
+                <td>Магистр (защита: июль 2014)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="badges">
+            <span class="badge">Сильная математическая база</span>
+            <span class="badge">Фундаментальная ИТ-подготовка</span>
+            <span class="badge">Параллельный трек web/дизайн</span>
+            <span class="badge">Совмещение учебы и работы</span>
+          </div>
+
+          <div class="placeholder-note">
+            <b>План обновления:</b> после того как ты пришлешь аттестат и дипломы, добавлю отдельный блок
+            «Документы» со сканами/превью, точными названиями, регистрационными данными и периодами.
+          </div>
+        </section>
+
+        <section class="timeline">
+          <article class="timeline-item reveal">
+            <h3>Связь с карьерой</h3>
+            <p>Образовательный фундамент напрямую повлиял на дальнейший путь: от вузовской ИС и промышленного ПО до backend-архитектуры и техлидства.</p>
+          </article>
+          <article class="timeline-item reveal">
+            <h3>Переходный этап 2012–2014</h3>
+            <p>Совмещение магистратуры с практической работой создало раннюю привычку работать в условиях многозадачности и неопределенности требований.</p>
+          </article>
+        </section>
       </div>
     </main>
 
-    <footer class="site-footer"><div class="container"><p>Детализация образования будет добавлена отдельной итерацией после новых документов.</p></div></footer>
+    <footer class="site-footer"><div class="container"><p>Раздел готов к подтверждению документами и дальнейшему расширению.</p></div></footer>
     <script src="assets/js/reveal.js"></script>
   </body>
 </html>
