@@ -158,6 +158,87 @@
     });
   }
 
+  function initContactModal() {
+    var modal = document.querySelector('[data-contact-modal]');
+    var openers = document.querySelectorAll('[data-contact-modal-open]');
+    if (!modal || !openers.length) {
+      return;
+    }
+
+    var closeControls = modal.querySelectorAll('[data-contact-modal-close]');
+    var form = modal.querySelector('[data-contact-form]');
+    var firstInput = form ? form.querySelector('input, select, textarea, button') : null;
+    var lastFocused = null;
+
+    function openModal() {
+      lastFocused = document.activeElement;
+      modal.hidden = false;
+      document.body.classList.add('contact-modal-open');
+      if (firstInput) {
+        firstInput.focus();
+      }
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.classList.remove('contact-modal-open');
+      if (lastFocused && typeof lastFocused.focus === 'function') {
+        lastFocused.focus();
+      }
+    }
+
+    openers.forEach(function (opener) {
+      opener.addEventListener('click', function (event) {
+        event.preventDefault();
+        openModal();
+      });
+    });
+
+    closeControls.forEach(function (control) {
+      control.addEventListener('click', closeModal);
+    });
+
+    window.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !modal.hidden) {
+        closeModal();
+      }
+    });
+
+    if (!form) {
+      return;
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      var data = new FormData(form);
+      var type = (data.get('requestType') || '').toString();
+      var name = (data.get('name') || '').toString();
+      var contact = (data.get('contact') || '').toString();
+      var message = (data.get('message') || '').toString();
+      var topics = data.getAll('topics').map(function (item) {
+        return String(item);
+      });
+
+      var subject = 'Обсуждение проекта: ' + (type || 'Запрос с сайта');
+      var lines = [
+        'Имя: ' + (name || 'Не указано'),
+        'Контакт: ' + (contact || 'Не указан'),
+        'Тип запроса: ' + (type || 'Не указан'),
+        'Тематика: ' + (topics.length ? topics.join(', ') : 'Не выбрана'),
+        '',
+        'Описание:',
+        message || 'Не заполнено'
+      ];
+      var body = lines.join('\n');
+      var mailto = 'mailto:a.v.rjakhov@yandex.ru?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+
+      window.location.href = mailto;
+      closeModal();
+      form.reset();
+    });
+  }
+
   function markCurrentNav() {
     var path = window.location.pathname || '/';
     var navKey = 'home';
@@ -231,5 +312,6 @@
     applyYear();
     initStickyNavFallback();
     initResponsiveNavMenus();
+    initContactModal();
   });
 })();

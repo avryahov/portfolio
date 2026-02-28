@@ -39,3 +39,58 @@
     <p class="footer-copyright">© <span data-year></span> Александр Ряхов. Портфолио в статике, готово к последующей миграции на React/CMS.</p>
   </div>
 </footer>
+
+<div class="contact-modal" data-contact-modal hidden>
+  <div class="contact-modal-backdrop" data-contact-modal-close></div>
+  <div class="contact-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
+    <button type="button" class="contact-modal-close" data-contact-modal-close aria-label="Закрыть форму">
+      <span aria-hidden="true">✕</span>
+    </button>
+
+    <h2 class="contact-modal-title" id="contact-modal-title">Обсудить проект</h2>
+    <p class="contact-modal-text">
+      Опишите задачу и контекст. Можно выбрать тип запроса и тематику, чтобы быстрее перейти к оценке сроков и формата работы.
+    </p>
+
+    <form class="contact-form" data-contact-form>
+      <label class="contact-field">
+        <span>Имя</span>
+        <input type="text" name="name" autocomplete="name" placeholder="Как к вам обращаться" required />
+      </label>
+
+      <label class="contact-field">
+        <span>Контакт для ответа</span>
+        <input type="text" name="contact" autocomplete="email" placeholder="Email, Telegram или телефон" required />
+      </label>
+
+      <label class="contact-field">
+        <span>Тип запроса</span>
+        <select name="requestType" required>
+          <option value="Проект">Проект</option>
+          <option value="Направление работ">Направление работ</option>
+          <option value="Техподдержка">Техподдержка</option>
+          <option value="Заказная разработка">Заказная разработка</option>
+          <option value="Предложение о сотрудничестве">Предложение о сотрудничестве</option>
+          <option value="Другое">Другое</option>
+        </select>
+      </label>
+
+      <fieldset class="contact-topics">
+        <legend>Тематика</legend>
+        <label><input type="checkbox" name="topics" value="Мобильная разработка" />Мобильная</label>
+        <label><input type="checkbox" name="topics" value="Серверная разработка" />Серверная</label>
+        <label><input type="checkbox" name="topics" value="Проект под ключ" />Проект под ключ</label>
+        <label><input type="checkbox" name="topics" value="Интеграции" />Интеграции</label>
+        <label><input type="checkbox" name="topics" value="Legacy-модернизация" />Legacy</label>
+      </fieldset>
+
+      <label class="contact-field">
+        <span>Описание</span>
+        <textarea name="message" rows="5" placeholder="Цель, сроки, ограничения, текущий стек"></textarea>
+      </label>
+
+      <button type="submit" class="contact-submit-btn">Отправить запрос</button>
+      <p class="contact-form-hint">После отправки откроется почтовый клиент с заполненной темой и текстом.</p>
+    </form>
+  </div>
+</div>
