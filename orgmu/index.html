@@ -8,8 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/base.css" />
+    <link rel="stylesheet" href="../assets/css/orgmu.css" />
   </head>
-  <body>
+  <body class="orgmu-body">
     <header class="site-header">
       <div class="container nav-wrap">
         <a class="logo" href="../index.html"><span class="logo-mark"></span><span>Александр Ряхов</span></a>
@@ -27,32 +28,73 @@
 
     <main class="section">
       <div class="container">
-        <p class="kicker reveal">Сентябрь 2013 — Сентябрь 2017</p>
-        <h1 class="page-title reveal">Оренбургский государственный медицинский университет</h1>
-        <p class="page-sub reveal">Роль: ведущий инженер-программист, фактически соло full-stack в критичных для вуза процессах.</p>
-
-        <div class="timeline">
-          <article class="timeline-item reveal">
-            <h3>2013–2014 · Погружение и стабилизация</h3>
-            <p>Разбор legacy «Тандем» (Tapestry + Spring), ручной анализ схем, настройка администрирования, весенняя миграция портала на Joomla.</p>
-          </article>
-          <article class="timeline-item reveal">
-            <h3>2014–2015 · Основа новой ИС</h3>
-            <p>Запуск ASP.NET/C# контура, учет студентов и ППС, экзаменационные карточки, PDF-выгрузки, формализация регламентов.</p>
-          </article>
-          <article class="timeline-item reveal">
-            <h3>2015–2016 · Расширение модулей</h3>
-            <p>Целевой набор, ординатура/аспирантура, цифровизация учебных планов, уникальная система идентификации серийных номеров.</p>
-          </article>
-          <article class="timeline-item reveal">
-            <h3>2016–2017 · Высокая нагрузка и госинтеграции</h3>
-            <p>Онлайн-тестирование с полным аудитом, масштаб БД до сотен миллионов записей, выгрузки для Минобрнауки и Минздрава.</p>
-          </article>
+        <div class="orgmu-service reveal">
+          <div class="orgmu-service-left">
+            <span class="orgmu-tag">Сайт раздела: ОрГМУ</span>
+            <span class="orgmu-tag">Период: 2013–2017</span>
+          </div>
+          <div class="orgmu-service-right">
+            <span class="orgmu-tag">Стиль: академический</span>
+            <span class="orgmu-tag">Подача: структурная</span>
+          </div>
         </div>
+
+        <p class="kicker reveal" style="margin-top: 20px">Сентябрь 2013 — Сентябрь 2017</p>
+        <h1 class="page-title reveal">Оренбургский государственный медицинский университет</h1>
+        <p class="page-sub reveal">Роль: ведущий инженер-программист. Фактически соло-разработка и развитие ключевых вузовских контуров в режиме высокой ответственности.</p>
+
+        <section class="orgmu-layout">
+          <article class="orgmu-news reveal">
+            <h2>Ключевые этапы периода</h2>
+            <div class="news-list">
+              <article class="news-item">
+                <b>2013–2014 · Legacy и адаптация</b>
+                <p>Разбор и сопровождение «Тандем», настройка экосистемы, миграция портала на Joomla.</p>
+              </article>
+              <article class="news-item">
+                <b>2014–2015 · Запуск новой ИС</b>
+                <p>ASP.NET/C# контур, экзаменационные карточки, PDF-выгрузки, старт регламентов.</p>
+              </article>
+              <article class="news-item">
+                <b>2015–2016 · Масштабирование модулей</b>
+                <p>Целевой набор, ординатура/аспирантура, цифровизация учебных планов и матриц.</p>
+              </article>
+              <article class="news-item">
+                <b>2016–2017 · Нагрузка и госинтеграции</b>
+                <p>Онлайн-тестирование, сотни миллионов записей, выгрузки для Минобрнауки и Минздрава.</p>
+              </article>
+            </div>
+          </article>
+
+          <aside class="orgmu-info reveal">
+            <h2>Профиль работ</h2>
+            <ul>
+              <li>Системный анализ legacy-кода и данных без полной документации.</li>
+              <li>Разработка модулей полного цикла: от требований до внедрения.</li>
+              <li>Интеграции с внешними и внутренними сервисами.</li>
+              <li>Документация, регламенты и поддержка эксплуатационного контура.</li>
+            </ul>
+            <div class="orgmu-doc-note">
+              После добавления архивных скриншотов/документов сюда можно вынести блок
+              «Артефакты ОрГМУ» с визуальными подтверждениями модулей.
+            </div>
+          </aside>
+        </section>
+
+        <section class="timeline">
+          <article class="timeline-item reveal">
+            <h3>Организационная сложность</h3>
+            <p>Работа одновременно на стыке учебных подразделений, административных процессов и технической реализации в одном контуре.</p>
+          </article>
+          <article class="timeline-item reveal">
+            <h3>Технический результат</h3>
+            <p>Построена и расширена рабочая ИС, которая закрывала критичные процессы учета, тестирования и отчетности образовательной организации.</p>
+          </article>
+        </section>
       </div>
     </main>
 
-    <footer class="site-footer"><div class="container"><p>ОрГМУ: ключевой этап становления инженерного мышления и системной ответственности.</p></div></footer>
+    <footer class="site-footer"><div class="container"><p>Раздел «ОрГМУ» переоформлен в более официальный академический стиль по мотивам сайта университета.</p></div></footer>
     <script src="../assets/js/reveal.js"></script>
   </body>
 </html>
