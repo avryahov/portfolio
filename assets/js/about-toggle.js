@@ -1,42 +1,25 @@
 (function () {
-  var root = document.querySelector('.about-structured');
-  if (!root) {
+  var toggle = document.querySelector('[data-about-toggle]');
+  var details = document.querySelector('[data-about-details]');
+  var summary = document.querySelector('[data-about-summary]');
+  if (!toggle || !details || !summary) {
     return;
   }
 
-  var buttons = root.querySelectorAll('[data-about-view]');
-  var panels = root.querySelectorAll('[data-about-panel]');
+  var labelExpand = 'Развернуть блок Обо мне';
+  var labelCollapse = 'Свернуть блок Обо мне';
 
-  if (!buttons.length || !panels.length) {
-    return;
+  function apply(expanded) {
+    details.hidden = !expanded;
+    summary.hidden = expanded;
+    toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    toggle.setAttribute('aria-label', expanded ? labelCollapse : labelExpand);
   }
 
-  var storageKey = 'about-view-mode';
-
-  function apply(mode, persist) {
-    var targetMode = mode === 'compact' ? 'compact' : 'expanded';
-
-    buttons.forEach(function (btn) {
-      var active = btn.getAttribute('data-about-view') === targetMode;
-      btn.classList.toggle('is-active', active);
-      btn.setAttribute('aria-selected', active ? 'true' : 'false');
-    });
-
-    panels.forEach(function (panel) {
-      var visible = panel.getAttribute('data-about-panel') === targetMode;
-      panel.classList.toggle('is-hidden', !visible);
-    });
-
-    if (persist) {
-      localStorage.setItem(storageKey, targetMode);
-    }
-  }
-
-  buttons.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      apply(btn.getAttribute('data-about-view'), true);
-    });
+  toggle.addEventListener('click', function () {
+    var expanded = toggle.getAttribute('aria-expanded') !== 'true';
+    apply(expanded);
   });
 
-  apply(localStorage.getItem(storageKey) || 'expanded', false);
+  apply(false);
 })();
