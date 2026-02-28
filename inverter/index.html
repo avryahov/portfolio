@@ -8,8 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/base.css" />
+    <link rel="stylesheet" href="../assets/css/inverter.css" />
   </head>
-  <body>
+  <body class="inverter-body">
     <header class="site-header">
       <div class="container nav-wrap">
         <a class="logo" href="../index.html"><span class="logo-mark"></span><span>Александр Ряхов</span></a>
@@ -27,34 +28,79 @@
 
     <main class="section">
       <div class="container">
-        <p class="kicker reveal">Май 2018 — Июль 2021</p>
+        <div class="inverter-top reveal">
+          <div class="inverter-menu">
+            <span class="inv-chip">Продукция</span>
+            <span class="inv-chip">Сервис</span>
+            <span class="inv-chip">Медиа</span>
+            <span class="inv-chip">Поддержка</span>
+          </div>
+          <div class="inverter-menu">
+            <span class="inv-chip">Период: 2018–2021</span>
+            <span class="inv-chip">Формат: промышленная разработка</span>
+          </div>
+        </div>
+
+        <p class="kicker reveal" style="margin-top: 20px">Май 2018 — Июль 2021</p>
         <h1 class="page-title reveal">ООО «Инвертор»</h1>
-        <p class="page-sub reveal">Роль: Java-разработчик/инженер в промышленном контуре (АСУ ТП, мониторинг оборудования, работа с протоколами и эксплуатацией).</p>
+        <p class="page-sub reveal">Роль: Java-разработчик/инженер системы мониторинга промышленного оборудования. Фокус на надежности, протоколах и эксплуатационной устойчивости.</p>
 
-        <div class="grid-3" style="margin-top: 24px">
-          <article class="card reveal">
-            <h3>Мониторинг</h3>
-            <p>Разработка и сопровождение Java Swing-систем мониторинга, Android-реплика для мобильного сценария.</p>
+        <section class="inverter-layout">
+          <article class="inv-product reveal">
+            <h2>Производственный контур работ</h2>
+            <div class="product-list">
+              <article class="product-item">
+                <b>Система мониторинга оборудования</b>
+                <p>Java Swing-приложения для мониторинга и сопровождения производственных процессов.</p>
+              </article>
+              <article class="product-item">
+                <b>Android-реплика</b>
+                <p>Мобильный дублер мониторинга для оперативной инженерной диагностики.</p>
+              </article>
+              <article class="product-item">
+                <b>Промышленные протоколы</b>
+                <p>Modbus RTU/TCP и сопряжение с оборудованием в условиях реальных ограничений площадки.</p>
+              </article>
+              <article class="product-item">
+                <b>Эксплуатационные процессы</b>
+                <p>Скрипты автоматизации, поддержка инфраструктуры, внедрение SVN/Redmine.</p>
+              </article>
+            </div>
           </article>
-          <article class="card reveal">
-            <h3>Инженерный контур</h3>
-            <p>Протоколы Modbus RTU/TCP, работа с промышленными контроллерами и стендами, полевые ограничения.</p>
-          </article>
-          <article class="card reveal">
-            <h3>Процесс и инфраструктура</h3>
-            <p>Внедрение SVN/Redmine, автоматизация через Bash и эксплуатационная поддержка на объектах.</p>
-          </article>
-        </div>
 
-        <div class="timeline">
-          <article class="timeline-item reveal"><h3>2018–2019</h3><p>Погружение в домен, развитие desktop/monitoring-ядра.</p></article>
-          <article class="timeline-item reveal"><h3>2019–2020</h3><p>Масштабирование функциональности и диагностики, усиление качества эксплуатации.</p></article>
-          <article class="timeline-item reveal"><h3>2020–2021</h3><p>Поддержка проектов для критичных контуров, зрелость в надежности и инженерной дисциплине.</p></article>
-        </div>
+          <aside class="inv-facts reveal">
+            <h2>Инженерные результаты</h2>
+            <ul>
+              <li>Усиление reliability-подхода в прикладной промышленной разработке.</li>
+              <li>Рост компетенции в интеграции ПО с «железом» и протоколами.</li>
+              <li>Переход от чистой реализации к системному сопровождению решения.</li>
+              <li>Практика работы в условиях высокой цены ошибки и ограниченных ресурсов.</li>
+            </ul>
+            <div class="inv-note">
+              Следующий шаг: добавить блок «Артефакты Инвертора» (скриншоты интерфейсов,
+              схемы, подтверждающие материалы) после твоих дополнительных данных.
+            </div>
+          </aside>
+        </section>
+
+        <section class="timeline">
+          <article class="timeline-item reveal">
+            <h3>2018–2019 · Погружение</h3>
+            <p>Освоение промышленного домена, формирование базы мониторинговых решений и интеграционного контура.</p>
+          </article>
+          <article class="timeline-item reveal">
+            <h3>2019–2020 · Масштабирование</h3>
+            <p>Расширение функционала, мобильная реплика, усиление диагностики и эксплуатационного контроля.</p>
+          </article>
+          <article class="timeline-item reveal">
+            <h3>2020–2021 · Зрелость контура</h3>
+            <p>Стабилизация решений, работа в критичных сценариях, закрепление инженерной дисциплины.</p>
+          </article>
+        </section>
       </div>
     </main>
 
-    <footer class="site-footer"><div class="container"><p>Инвертор: этап, где сформировалась инженерная устойчивость и практичность решений.</p></div></footer>
+    <footer class="site-footer"><div class="container"><p>Раздел «Инвертор» оформлен в промышленной корпоративной стилистике на базе палитры sbp-invertor.ru.</p></div></footer>
     <script src="../assets/js/reveal.js"></script>
   </body>
 </html>
