@@ -126,11 +126,12 @@ a {
   flex-wrap: nowrap;
   overflow-x: auto;
   overscroll-behavior-x: contain;
-  scrollbar-width: thin;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   max-width: min(760px, 100%);
   white-space: nowrap;
   gap: 8px;
-  padding-bottom: 2px;
+  padding-bottom: 0;
 }
 
 .site-nav a {
@@ -170,12 +171,7 @@ a {
 }
 
 .site-nav::-webkit-scrollbar {
-  height: 6px;
-}
-
-.site-nav::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--brand) 35%, var(--line));
-  border-radius: 999px;
+  display: none;
 }
 
 main.section,
