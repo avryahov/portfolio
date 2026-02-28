@@ -2,7 +2,7 @@
   --font-ui: "NT Somic", "Manrope", "Segoe UI", sans-serif;
   --font-title: "Literata", Georgia, serif;
 
-  --bg: #f3f5fb;
+  --bg: #e3e9f3;
   --bg-grad-1: rgba(89, 111, 255, 0.16);
   --bg-grad-2: rgba(22, 177, 223, 0.14);
   --surface: #ffffff;
@@ -67,7 +67,7 @@ body {
   background:
     radial-gradient(1200px 520px at 92% -8%, var(--bg-grad-1), transparent 64%),
     radial-gradient(900px 460px at -8% 8%, var(--bg-grad-2), transparent 60%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.65) 25%, transparent 25%) 0 0 / 22px 22px,
+    linear-gradient(135deg, rgba(255, 255, 255, 0.24) 25%, transparent 25%) 0 0 / 22px 22px,
     var(--bg);
   line-height: 1.55;
 }
@@ -197,7 +197,7 @@ a {
   position: sticky;
   top: 0;
   z-index: 30;
-  background: #fff;
+  background: #f2f5fc;
   border-bottom: 1px solid #e2e8f0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
