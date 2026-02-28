@@ -1,0 +1,79 @@
+:root {
+  --teach-bg: #fffaf0;
+  --teach-line: #e8d8bd;
+  --teach-surface: #fffdf7;
+  --teach-accent: #b45309;
+  --teach-accent-2: #0f766e;
+}
+
+.teaching-body {
+  background:
+    radial-gradient(900px 420px at 110% -5%, rgba(180, 83, 9, 0.16), transparent 58%),
+    radial-gradient(800px 400px at -20% 0%, rgba(15, 118, 110, 0.13), transparent 54%),
+    var(--teach-bg);
+}
+
+.teaching-body .card,
+.teaching-body .timeline-item,
+.teaching-body .panel {
+  border-color: var(--teach-line);
+  background: var(--teach-surface);
+}
+
+.teaching-grid {
+  margin-top: 24px;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.teaching-metric {
+  border: 1px solid var(--teach-line);
+  border-radius: 14px;
+  padding: 16px;
+  background: var(--teach-surface);
+}
+
+.teaching-metric b {
+  font-size: 0.85rem;
+  color: var(--teach-accent);
+  text-transform: uppercase;
+}
+
+.teaching-metric p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.track {
+  margin-top: 26px;
+  border-left: 3px dashed var(--teach-line);
+  padding-left: 18px;
+}
+
+.track-item {
+  margin-bottom: 16px;
+  border: 1px solid var(--teach-line);
+  border-radius: 12px;
+  padding: 14px;
+  background: var(--teach-surface);
+}
+
+.track-item h3 {
+  margin: 0 0 8px;
+}
+
+.track-item p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.track-item .kicker {
+  color: var(--teach-accent-2);
+}
+
+@media (max-width: 900px) {
+  .teaching-grid {
+    grid-template-columns: 1fr;
+  }
+}
