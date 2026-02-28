@@ -8,25 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/base.css" />
-    <link rel="stylesheet" href="../assets/css/teaching.css" />
+    <link rel="stylesheet" href="../assets/css/sections/teaching.css" />
   </head>
-  <body class="teaching-body">
-    <header class="site-header">
-      <div class="container nav-wrap">
-        <a class="logo" href="../index.html"><span class="logo-mark"></span><span>Александр Ряхов</span></a>
-        <nav class="site-nav" aria-label="Главная навигация">
-          <a href="../index.html">Главная</a>
-          <a href="../orgmu/">ОрГМУ</a>
-          <a href="../inverter/">Завод</a>
-          <a href="../open-solutions/">Открытые Решения</a>
-          <a href="../teaching/" aria-current="page">Преподавание</a>
-          <a href="../education/">Образование</a>
-          <a href="../qualification/">Квалификация</a>
-        </nav>
-      </div>
-    </header>
+  <body data-root=".." data-nav="teaching" data-footer-note="Преподавательский опыт оформлен в общей структуре портфолио.">
+    <div data-component="header"></div>
 
-    <main class="section">
+    <main class="section experience-page">
       <div class="container">
         <p class="kicker reveal">Детализированный педагогический трек</p>
         <h1 class="page-title reveal">Преподавательский опыт: от детей до junior-специалистов</h1>
@@ -113,7 +100,8 @@
       </div>
     </main>
 
-    <footer class="site-footer"><div class="container"><p>Преподавание — отдельная сильная часть профессионального профиля, а не дополнительная строка в резюме.</p></div></footer>
+    <div data-component="footer"></div>
+    <script src="../assets/js/main.js"></script>
     <script src="../assets/js/reveal.js"></script>
   </body>
 </html>

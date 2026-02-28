@@ -1,92 +1,24 @@
-/* Home page visual theme based on reference palette */
-.home-body {
-  --home-bg: #06031a;
-  --home-surface: rgba(16, 10, 43, 0.76);
-  --home-surface-strong: rgba(28, 14, 76, 0.78);
-  --home-ink: #f5f7ff;
-  --home-muted: #a6b1d4;
-  --home-line: rgba(112, 87, 208, 0.35);
-  --home-accent: #6f48ff;
-  --home-accent-2: #00c9ff;
-  --home-shadow: 0 0 11.5px 0 rgba(30, 9, 90, 0.28);
-
-  font-family: "NT Somic", "Manrope", "Segoe UI", sans-serif;
-  color: var(--home-ink);
-  background:
-    radial-gradient(900px 420px at 20% -10%, rgba(0, 201, 255, 0.22), transparent 60%),
-    radial-gradient(1200px 540px at 80% 0%, rgba(111, 72, 255, 0.22), transparent 64%),
-    linear-gradient(180deg, #080326 0%, #040214 100%);
+.home-body .hero-copy {
+  position: relative;
+  overflow: hidden;
 }
 
-.home-body .site-header {
-  background: rgba(9, 6, 30, 0.78);
-  border-bottom: 1px solid var(--home-line);
-  box-shadow: var(--home-shadow);
-}
-
-.home-body .logo,
-.home-body .page-title,
-.home-body .hero h1,
-.home-body .card h3,
-.home-body .timeline-item h3 {
-  color: var(--home-ink);
-}
-
-.home-body .logo-mark {
-  background: linear-gradient(135deg, var(--home-accent), var(--home-accent-2));
-  box-shadow: var(--home-shadow);
-}
-
-.home-body .site-nav a {
-  color: var(--home-muted);
-}
-
-.home-body .site-nav a:hover,
-.home-body .site-nav a[aria-current="page"] {
-  color: var(--home-ink);
-  background: rgba(111, 72, 255, 0.22);
-  box-shadow: var(--home-shadow);
-}
-
-.home-body .panel,
-.home-body .card,
-.home-body .timeline-item {
-  background: var(--home-surface);
-  border-color: var(--home-line);
-  box-shadow: var(--home-shadow);
+.home-body .hero-copy::after {
+  content: "";
+  position: absolute;
+  inset: auto -80px -80px auto;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, color-mix(in srgb, var(--brand) 24%, transparent), transparent 68%);
+  pointer-events: none;
 }
 
 .home-body .hero-card {
-  background:
-    linear-gradient(160deg, rgba(111, 72, 255, 0.18), rgba(0, 201, 255, 0.14)),
-    var(--home-surface-strong);
+  border-style: dashed;
 }
 
-.home-body .lead,
-.home-body .page-sub,
-.home-body .card p,
-.home-body .timeline-item p,
-.home-body .site-footer,
-.home-body .hero-card li {
-  color: var(--home-muted);
-}
-
-.home-body .kicker {
-  color: var(--home-accent-2);
-}
-
-.home-body .chip {
-  background: rgba(27, 12, 73, 0.8);
-  border-color: rgba(111, 72, 255, 0.45);
-  color: var(--home-ink);
-  box-shadow: var(--home-shadow);
-}
-
-.home-body .site-footer {
-  border-top-color: var(--home-line);
-}
-
-.home-body .hero h1 {
-  font-family: "NT Somic", "Literata", Georgia, serif;
-  letter-spacing: 0.01em;
+.home-body .timeline-item {
+  border-left-width: 4px;
+  border-left-color: color-mix(in srgb, var(--brand) 35%, var(--line));
 }

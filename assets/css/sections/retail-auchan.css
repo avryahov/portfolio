@@ -1,0 +1,68 @@
+.retail-hero {
+  margin-top: 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(100deg, var(--surface-3), var(--surface));
+  padding: 18px;
+  box-shadow: var(--shadow-panel);
+}
+
+.retail-hero h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.retail-hero p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.retail-menu {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.retail-chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 6px 10px;
+}
+
+.retail-metrics {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.retail-metric {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-2);
+  padding: 10px;
+  text-align: center;
+}
+
+.retail-metric strong {
+  display: block;
+  color: var(--brand);
+  font-size: 1rem;
+}
+
+.retail-metric span {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 900px) {
+  .retail-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

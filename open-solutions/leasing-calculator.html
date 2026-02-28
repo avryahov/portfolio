@@ -8,12 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/base.css" />
-    <link rel="stylesheet" href="../assets/css/open-solutions.css" />
-    <link rel="stylesheet" href="../assets/css/leasing-theme.css" />
+    <link rel="stylesheet" href="../assets/css/sections/open-solutions.css" />
+    <link rel="stylesheet" href="../assets/css/sections/leasing-theme.css" />
   </head>
-  <body class="leasing-body">
-    <header class="site-header"><div class="container nav-wrap"><a class="logo" href="../index.html"><span class="logo-mark"></span><span>Александр Ряхов</span></a><nav class="site-nav"><a href="./" aria-current="page">К проектам ОР</a></nav></div></header>
-    <main class="section"><div class="container">
+  <body data-root=".." data-nav="open-solutions" data-footer-note="Проектный кейс Открытых Решений: единый шаблон детального опыта.">
+    <div data-component="header"></div>
+    <main class="section experience-page"><div class="container">
       <p class="kicker reveal">2021–2022</p>
       <h1 class="page-title reveal">Лизинговый калькулятор</h1>
       <p class="page-sub reveal">Backend-разработка модулей финансового расчета и документооборота в корпоративном лизинговом контуре.</p>
@@ -43,7 +43,8 @@
 
       <div class="timeline"><article class="timeline-item reveal"><h3>Контекст проекта</h3><p>Клиент — крупная логистическая компания международного уровня; стартовая роль Junior Java Developer с ростом до Middle в течение проекта.</p></article><article class="timeline-item reveal"><h3>Что делал</h3><ul><li>REST API: проектирование эндпоинтов, версионирование, документирование через Swagger/OpenAPI.</li><li>Микросервисы: самостоятельная реализация ключевых сервисов под сопровождением архитектора.</li><li>Сервис синхронизации курса валют ЦБ: WebClient, XML-парсинг, хранение метаданных.</li><li>Сервисы отчетов: Thymeleaf, конвертация документов, выгрузка через Apache POI.</li><li>Валидация данных: JsonSchema + бизнес-правила.</li></ul></article><article class="timeline-item reveal"><h3>Безопасность и архитектура</h3><ul><li>Самостоятельная интеграция Spring Security + JWT в рамках спринта.</li><li>Защита эндпоинтов по ролям, обработка срока действия токенов.</li><li>Освоение слоев микросервисной архитектуры: контроллеры, сервисы, DAO.</li></ul></article><article class="timeline-item reveal"><h3>Инструменты команды</h3><ul><li>Jira, GitLab CI, merge request-процесс.</li><li>Первый опыт взаимодействия с фронтендом и DevOps.</li><li>Sentry, AOP-логирование, Logback-практики.</li></ul></article><article class="timeline-item reveal"><h3>Результат</h3><p>Быстрый переход к самостоятельной реализации сложных backend-задач и подготовка к следующему технологически тяжелому PKI-проекту.</p></article></div>
     </div></main>
-    <footer class="site-footer"><div class="container"><p><a href="./">← Назад к списку проектов</a></p></div></footer>
+    <div data-component="footer"></div>
+    <script src="../assets/js/main.js"></script>
     <script src="../assets/js/reveal.js"></script>
   </body>
 </html>

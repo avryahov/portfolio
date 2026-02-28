@@ -1,0 +1,82 @@
+.hero-osh {
+  margin-top: 22px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(100deg, var(--surface-3), var(--surface));
+  padding: 18px;
+  box-shadow: var(--shadow-panel);
+}
+
+.hero-osh h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.hero-osh p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.os-clients {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.os-client-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-2);
+  padding: 12px;
+}
+
+.os-client-card b {
+  font-size: 0.84rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.os-client-card p {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.os-metrics {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.os-metric {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  padding: 10px;
+  text-align: center;
+}
+
+.os-metric strong {
+  display: block;
+  color: var(--brand);
+  font-size: 1.15rem;
+  line-height: 1.1;
+}
+
+.os-metric span {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 980px) {
+  .os-clients {
+    grid-template-columns: 1fr;
+  }
+
+  .os-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

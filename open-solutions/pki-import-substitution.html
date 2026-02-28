@@ -8,12 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/base.css" />
-    <link rel="stylesheet" href="../assets/css/open-solutions.css" />
-    <link rel="stylesheet" href="../assets/css/pki-nda.css" />
+    <link rel="stylesheet" href="../assets/css/sections/open-solutions.css" />
+    <link rel="stylesheet" href="../assets/css/sections/pki-nda.css" />
   </head>
-  <body class="pki-body">
-    <header class="site-header"><div class="container nav-wrap"><a class="logo" href="../index.html"><span class="logo-mark"></span><span>Александр Ряхов</span></a><nav class="site-nav"><a href="./" aria-current="page">К проектам ОР</a></nav></div></header>
-    <main class="section"><div class="container">
+  <body data-root=".." data-nav="open-solutions" data-footer-note="Проектный кейс Открытых Решений: единый шаблон детального опыта.">
+    <div data-component="header"></div>
+    <main class="section experience-page"><div class="container">
       <p class="kicker reveal">2022–2023</p>
       <h1 class="page-title reveal">PKI-проект корпоративного центра сертификации (NDA)</h1>
       <p class="page-sub reveal">Наименование и заказчик не раскрываются. Ниже описан технический контур и инженерные задачи без идентифицирующих деталей.</p>
@@ -56,7 +56,8 @@
         <p class="sign">С.Л. Груздев, Генеральный директор ЗАО «Аладдин Р.Д.»</p>
       </section>
     </div></main>
-    <footer class="site-footer"><div class="container"><p><a href="./">← Назад к списку проектов</a></p></div></footer>
+    <div data-component="footer"></div>
+    <script src="../assets/js/main.js"></script>
     <script src="../assets/js/reveal.js"></script>
   </body>
 </html>

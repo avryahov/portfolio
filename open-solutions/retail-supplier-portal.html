@@ -8,12 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/base.css" />
-    <link rel="stylesheet" href="../assets/css/open-solutions.css" />
-    <link rel="stylesheet" href="../assets/css/retail-auchan.css" />
+    <link rel="stylesheet" href="../assets/css/sections/open-solutions.css" />
+    <link rel="stylesheet" href="../assets/css/sections/retail-auchan.css" />
   </head>
-  <body class="retail-body">
-    <header class="site-header"><div class="container nav-wrap"><a class="logo" href="../index.html"><span class="logo-mark"></span><span>Александр Ряхов</span></a><nav class="site-nav"><a href="./" aria-current="page">К проектам ОР</a></nav></div></header>
-    <main class="section"><div class="container">
+  <body data-root=".." data-nav="open-solutions" data-footer-note="Проектный кейс Открытых Решений: единый шаблон детального опыта.">
+    <div data-component="header"></div>
+    <main class="section experience-page"><div class="container">
       <p class="kicker reveal">2023–2025</p>
       <h1 class="page-title reveal">Портал поставщика крупного ритейла</h1>
       <p class="page-sub reveal">Последние два года работы: развитие реальной supplier-платформы (Портал Поставщика), delivery модулей и техническое лидерство команды в корпоративном ритейл-контуре.</p>
@@ -40,7 +40,8 @@
 
       <div class="timeline"><article class="timeline-item reveal"><h3>Подтвержденный контур</h3><p>Работа велась в реальной системе «Портал Поставщика» (supplier-платформа ритейла), включая пользовательский контур авторизации и бизнес-потоки поставщиков.</p></article><article class="timeline-item reveal"><h3>Год 1 (2023–2024): адаптация и погружение</h3><ul><li>Изучение BPMN и Camunda в промышленном контуре.</li><li>Освоение облачной микросервисной архитектуры: gateway, discovery, балансировка, circuit breaker.</li><li>Confluence/Jira/gitflow команды, участие в грумингах и эстимейтах.</li><li>Kafka, Keycloak, Flyway, JSONB, BFF, domain-driven UI.</li><li>Миграции версий Spring Boot/Cloud/Camunda и верификация после апдейтов.</li></ul></article><article class="timeline-item reveal"><h3>Год 2 (2024–2025): технический лидер</h3><ul><li>Курирование модуля модификации артикулов, команда 4–5 человек.</li><li>Груминги, стендапы, code review, менторство, распределение задач.</li><li>Поддержка фронтенда (React/TypeScript) и интеграционных сценариев.</li><li>Собеседования, наставничество практикантов, курс Java для тестировщиков.</li><li>Участие в пресейле: декомпозиция, оценки, риски, архитектурные предложения.</li></ul></article><article class="timeline-item reveal"><h3>Ограничения инфраструктуры (2025)</h3><table><thead><tr><th>Этап</th><th>Ограничения</th></tr></thead><tbody><tr><td>Весна 2025</td><td>Задержки доступов и ограничение прав.</td></tr><tr><td>Лето 2025</td><td>Обвалы dev-стендов и проблемы сети.</td></tr><tr><td>Лето–Осень 2025</td><td>Отключение метрик, SonarQube и Checkstyle.</td></tr><tr><td>Осень 2025</td><td>Ограничения Nexus и Gradle-зависимостей.</td></tr><tr><td>Ноябрь 2025</td><td>Разработка «вслепую» без привычных инструментов проверки.</td></tr></tbody></table></article><article class="timeline-item reveal"><h3>Результат</h3><p>Несмотря на деградацию инфраструктуры, модуль модификации артикулов доведен до релизного состояния; в ноябре 2025 аутстафф-контур закрыт стратегическим решением заказчика.</p></article></div>
     </div></main>
-    <footer class="site-footer"><div class="container"><p><a href="./">← Назад к списку проектов</a></p></div></footer>
+    <div data-component="footer"></div>
+    <script src="../assets/js/main.js"></script>
     <script src="../assets/js/reveal.js"></script>
   </body>
 </html>

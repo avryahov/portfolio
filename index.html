@@ -17,24 +17,8 @@
     <link rel="stylesheet" href="assets/css/base.css" />
     <link rel="stylesheet" href="assets/css/home.css" />
   </head>
-  <body class="home-body">
-    <header class="site-header">
-      <div class="container nav-wrap">
-        <a class="logo" href="index.html" aria-label="Главная">
-          <span class="logo-mark" aria-hidden="true"></span>
-          <span>Александр Ряхов</span>
-        </a>
-        <nav class="site-nav" aria-label="Главная навигация">
-          <a href="index.html" aria-current="page">Главная</a>
-          <a href="orgmu/">ОрГМУ</a>
-          <a href="inverter/">Завод</a>
-          <a href="open-solutions/">Открытые Решения</a>
-          <a href="teaching/">Преподавание</a>
-          <a href="education/">Образование</a>
-          <a href="qualification/">Квалификация</a>
-        </nav>
-      </div>
-    </header>
+  <body class="home-body" data-root="." data-nav="home" data-footer-note="Главная страница-визитка в единой теме с переключением светлой и темной палитры.">
+    <div data-component="header"></div>
 
     <main>
       <section class="hero">
@@ -129,11 +113,7 @@
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="container">
-        <p>© <span data-year></span> Александр Ряхов. Статическая веб-визитка.</p>
-      </div>
-    </footer>
+    <div data-component="footer"></div>
 
     <script src="assets/js/main.js"></script>
     <script src="assets/js/reveal.js"></script>

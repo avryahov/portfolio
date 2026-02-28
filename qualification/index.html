@@ -9,23 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/base.css" />
   </head>
-  <body>
-    <header class="site-header">
-      <div class="container nav-wrap">
-        <a class="logo" href="../index.html"><span class="logo-mark"></span><span>Александр Ряхов</span></a>
-        <nav class="site-nav" aria-label="Главная навигация">
-          <a href="../index.html">Главная</a>
-          <a href="../orgmu/">ОрГМУ</a>
-          <a href="../inverter/">Завод</a>
-          <a href="../open-solutions/">Открытые Решения</a>
-          <a href="../teaching/">Преподавание</a>
-          <a href="../education/">Образование</a>
-          <a href="../qualification/" aria-current="page">Квалификация</a>
-        </nav>
-      </div>
-    </header>
+  <body data-root=".." data-nav="qualification" data-footer-note="Квалификация и развитие компетенций в единой дизайн-системе.">
+    <div data-component="header"></div>
 
-    <main class="section">
+    <main class="section experience-page">
       <div class="container">
         <p class="kicker reveal">Профессиональное развитие</p>
         <h1 class="page-title reveal">Дополнительная квалификация</h1>
@@ -112,7 +99,8 @@
       </div>
     </main>
 
-    <footer class="site-footer"><div class="container"><p>Квалификация обновляется вместе с ростом практики и завершением новых учебных треков.</p></div></footer>
+    <div data-component="footer"></div>
+    <script src="../assets/js/main.js"></script>
     <script src="../assets/js/reveal.js"></script>
   </body>
 </html>

@@ -1,0 +1,101 @@
+.pki-hero {
+  margin-top: 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(100deg, var(--surface-3), var(--surface));
+  padding: 18px;
+  box-shadow: var(--shadow-panel);
+}
+
+.pki-hero h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.pki-hero p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.pki-stack {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pki-pill {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: var(--surface-2);
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.pki-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.pki-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-2);
+  padding: 12px;
+}
+
+.pki-card h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.pki-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.pki-cta {
+  margin-top: 16px;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  background: var(--surface-2);
+  color: var(--muted);
+  padding: 12px;
+  font-size: 0.94rem;
+}
+
+.pki-letter {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface-2);
+  padding: 14px;
+}
+
+.pki-letter h3 {
+  margin: 0 0 10px;
+  font-size: 1.02rem;
+}
+
+.pki-letter p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.pki-letter p + p {
+  margin-top: 10px;
+}
+
+.pki-letter .sign {
+  margin-top: 12px;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .pki-grid {
+    grid-template-columns: 1fr;
+  }
+}
