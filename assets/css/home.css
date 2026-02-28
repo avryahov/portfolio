@@ -1,5 +1,10 @@
+.temp-style-panel {
+  padding-top: 18px;
+}
+
 .home-body .hero {
-  padding-top: 30px;
+  padding-top: 12px;
+  padding-bottom: 10px;
 }
 
 .style-nav-wrap {
@@ -8,7 +13,7 @@
   background: color-mix(in srgb, var(--surface) 92%, transparent);
   box-shadow: var(--shadow-panel);
   padding: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 0;
 }
 
 .style-nav-title {
@@ -59,7 +64,7 @@
     radial-gradient(900px 450px at -10% 0%, color-mix(in srgb, var(--brand-2) 22%, transparent), transparent 54%),
     linear-gradient(180deg, color-mix(in srgb, var(--surface-2) 88%, white), var(--surface));
   box-shadow: var(--shadow-panel);
-  padding: 24px;
+  padding: 28px;
   position: relative;
   overflow: hidden;
 }
@@ -89,7 +94,7 @@
 .hero-visual {
   border: 1px solid color-mix(in srgb, var(--line) 80%, var(--brand) 20%);
   border-radius: 16px;
-  min-height: 340px;
+  min-height: 390px;
   background-image:
     linear-gradient(170deg, rgba(8, 12, 26, 0.08), rgba(8, 12, 26, 0.42)),
     url("../img/hero-portrait.jpg");
@@ -214,11 +219,15 @@
   background-position: center 36%;
 }
 
+.anchor-strip {
+  padding: 8px 0 12px;
+}
+
 .anchor-nav-wrap {
-  margin-top: 18px;
-  position: sticky;
-  top: 76px;
-  z-index: 25;
+  margin-top: 0;
+  position: relative;
+  top: auto;
+  z-index: 2;
 }
 
 .anchor-nav {
@@ -514,10 +523,6 @@
   .skills-grid,
   .contact-row {
     grid-template-columns: 1fr;
-  }
-
-  .anchor-nav-wrap {
-    top: 68px;
   }
 
   .anchor-nav {
