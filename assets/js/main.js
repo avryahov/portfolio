@@ -239,6 +239,33 @@
     });
   }
 
+  function initBackToTop() {
+    var button = document.querySelector('[data-back-to-top]');
+    if (!button) {
+      button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'back-to-top';
+      button.setAttribute('data-back-to-top', '');
+      button.setAttribute('aria-label', 'Вернуться наверх');
+      button.innerHTML = '<span aria-hidden="true">↑</span>';
+      document.body.appendChild(button);
+    }
+
+    function updateVisibility() {
+      var scrolled = window.pageYOffset || document.documentElement.scrollTop || 0;
+      var threshold = Math.max(240, Math.round(window.innerHeight * 0.35));
+      button.classList.toggle('is-visible', scrolled > threshold);
+    }
+
+    button.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    window.addEventListener('resize', updateVisibility);
+    updateVisibility();
+  }
+
   function markCurrentNav() {
     var path = window.location.pathname || '/';
     var navKey = 'home';
@@ -313,5 +340,6 @@
     initStickyNavFallback();
     initResponsiveNavMenus();
     initContactModal();
+    initBackToTop();
   });
 })();
