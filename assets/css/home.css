@@ -197,6 +197,14 @@
   pointer-events: none;
 }
 
+.experience-scroll-wrap.is-at-start::before {
+  content: none;
+}
+
+.experience-scroll-wrap.is-at-end::after {
+  content: none;
+}
+
 .experience-scroll-wrap::before {
   content: "‹";
   left: -10px;
@@ -242,11 +250,9 @@
 }
 
 .exp-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 10px;
+  align-items: start;
 }
 
 .exp-top h3 {
