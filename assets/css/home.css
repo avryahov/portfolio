@@ -172,15 +172,73 @@
   color: var(--muted);
 }
 
+.experience-scroll-wrap {
+  position: relative;
+}
+
+.experience-scroll-wrap::before,
+.experience-scroll-wrap::after {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid #b7c8fb;
+  background: rgba(255, 255, 255, 0.92);
+  color: #2f5fe8;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  box-shadow: var(--shadow-panel);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.experience-scroll-wrap::before {
+  content: "‹";
+  left: -10px;
+}
+
+.experience-scroll-wrap::after {
+  content: "›";
+  right: -10px;
+}
+
 .experience-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 26px;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  padding: 4px 2px 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #9ab4ff transparent;
+}
+
+.experience-grid::-webkit-scrollbar {
+  height: 8px;
+}
+
+.experience-grid::-webkit-scrollbar-thumb {
+  background: #9ab4ff;
+  border-radius: 999px;
+}
+
+.experience-grid::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .exp-card {
-  padding: 34px;
-  border-left: 6px solid #2563eb;
+  flex: 0 0 min(400px, 86vw);
+  min-height: 470px;
+  padding: 28px;
+  border-top: 6px solid #2563eb;
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
 }
 
 .exp-top {
@@ -239,7 +297,8 @@
 }
 
 .exp-actions {
-  margin-top: 18px;
+  margin-top: auto;
+  padding-top: 18px;
 }
 
 .exp-link {
@@ -247,11 +306,12 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  border-radius: 999px;
+  width: 100%;
+  border-radius: 10px;
   background: #1d4ed8;
   color: #fff;
   font-weight: 800;
-  padding: 10px 16px;
+  padding: 12px 16px;
 }
 
 .skills-grid {
@@ -289,8 +349,14 @@
 }
 
 @media (max-width: 900px) {
-  .experience-grid {
-    grid-template-columns: 1fr;
+  .experience-scroll-wrap::before,
+  .experience-scroll-wrap::after {
+    display: inline-flex;
+  }
+
+  .exp-card {
+    flex-basis: 84vw;
+    min-height: 460px;
   }
 
   .skills-grid {
