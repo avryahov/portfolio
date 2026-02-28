@@ -1,0 +1,133 @@
+.retail-body {
+  --rt-bg: #f4f9ff;
+  --rt-surface: #ffffff;
+  --rt-surface-2: #f7fbff;
+  --rt-line: #d5e3f3;
+  --rt-ink: #112a45;
+  --rt-muted: #4f6788;
+  --rt-blue: #0b5faa;
+  --rt-blue-2: #2a78be;
+  --rt-cyan: #1ea8d8;
+  --rt-shadow: 0 0 11.5px 0 rgba(30, 9, 90, 0.28);
+  font-family: "NT Somic", "Manrope", "Segoe UI", sans-serif;
+  color: var(--rt-ink);
+  background:
+    radial-gradient(950px 440px at 115% -8%, rgba(30, 168, 216, 0.2), transparent 60%),
+    radial-gradient(820px 420px at -20% 0%, rgba(11, 95, 170, 0.16), transparent 58%),
+    var(--rt-bg);
+}
+
+.retail-body .site-header {
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid var(--rt-line);
+  box-shadow: var(--rt-shadow);
+}
+
+.retail-body .logo,
+.retail-body .page-title,
+.retail-body .timeline-item h3 {
+  color: var(--rt-ink);
+}
+
+.retail-body .logo-mark {
+  background: linear-gradient(135deg, var(--rt-blue), var(--rt-cyan));
+  box-shadow: var(--rt-shadow);
+}
+
+.retail-body .site-nav a {
+  color: var(--rt-muted);
+}
+
+.retail-body .site-nav a:hover,
+.retail-body .site-nav a[aria-current="page"] {
+  color: var(--rt-blue);
+  background: rgba(11, 95, 170, 0.11);
+}
+
+.retail-body .kicker {
+  color: var(--rt-blue);
+}
+
+.retail-body .page-sub,
+.retail-body .timeline-item p,
+.retail-body .site-footer {
+  color: var(--rt-muted);
+}
+
+.retail-body .timeline-item,
+.retail-body .panel {
+  border-color: var(--rt-line);
+  background: var(--rt-surface);
+  box-shadow: var(--rt-shadow);
+}
+
+.retail-hero {
+  margin-top: 20px;
+  border: 1px solid var(--rt-line);
+  border-radius: 16px;
+  background: linear-gradient(100deg, #0b4f91, #1f70b2);
+  color: #ecf6ff;
+  padding: 18px;
+  box-shadow: var(--rt-shadow);
+}
+
+.retail-hero h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.retail-hero p {
+  margin: 8px 0 0;
+  opacity: 0.95;
+}
+
+.retail-menu {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.retail-chip {
+  border: 1px solid var(--rt-line);
+  border-radius: 999px;
+  background: var(--rt-surface-2);
+  color: var(--rt-blue);
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 6px 10px;
+}
+
+.retail-metrics {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.retail-metric {
+  border: 1px solid var(--rt-line);
+  border-radius: 12px;
+  background: var(--rt-surface-2);
+  padding: 10px;
+  text-align: center;
+}
+
+.retail-metric strong {
+  display: block;
+  color: var(--rt-blue);
+  font-size: 1rem;
+}
+
+.retail-metric span {
+  display: block;
+  margin-top: 6px;
+  color: var(--rt-muted);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 900px) {
+  .retail-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
