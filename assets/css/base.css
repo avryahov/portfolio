@@ -142,6 +142,23 @@ a {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
+.anchor-strip-placeholder {
+  display: none;
+}
+
+.anchor-strip.is-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 60;
+}
+
+.anchor-strip.is-fixed + .anchor-strip-placeholder {
+  display: block;
+}
+
 .anchor-nav {
   display: flex;
   justify-content: center;

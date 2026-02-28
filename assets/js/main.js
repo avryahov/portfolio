@@ -52,6 +52,41 @@
     });
   }
 
+  function initStickyNavFallback() {
+    var strip = document.querySelector('.anchor-strip');
+    if (!strip) {
+      return;
+    }
+
+    if (strip.nextElementSibling && strip.nextElementSibling.classList.contains('anchor-strip-placeholder')) {
+      strip.nextElementSibling.remove();
+    }
+
+    var placeholder = document.createElement('div');
+    placeholder.className = 'anchor-strip-placeholder';
+    strip.insertAdjacentElement('afterend', placeholder);
+
+    var startTop = strip.offsetTop;
+
+    function update() {
+      var fixed = window.pageYOffset >= startTop;
+      strip.classList.toggle('is-fixed', fixed);
+      if (fixed) {
+        placeholder.style.height = strip.offsetHeight + 'px';
+      } else {
+        placeholder.style.height = '0px';
+      }
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', function () {
+      startTop = placeholder.offsetTop - strip.offsetHeight;
+      update();
+    });
+
+    update();
+  }
+
   function markCurrentNav() {
     var path = window.location.pathname || '/';
     var navKey = 'home';
@@ -123,5 +158,6 @@
     markCurrentNav();
     initThemeToggle();
     applyYear();
+    initStickyNavFallback();
   });
 })();
