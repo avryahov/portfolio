@@ -326,6 +326,93 @@
   gap: 24px;
 }
 
+.qualification-brief {
+  padding: 30px;
+  border-top: 6px solid #2563eb;
+}
+
+.qual-mini-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+  gap: 14px;
+}
+
+.qual-mini-card {
+  padding: 14px 12px 12px;
+  border-radius: 12px;
+  border: 1px solid #d2defd;
+  background: #f9fbff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qual-mini-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.qual-mini-card h4 {
+  margin: 10px 0 0;
+  font-size: 1.02rem;
+}
+
+.grade-badge {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 6px 10px;
+}
+
+.grade-senior {
+  background: #d7f4de;
+  color: #136533;
+}
+
+.grade-middle-plus {
+  background: #dce8ff;
+  color: #1b4ca8;
+}
+
+.grade-middle {
+  background: #e6ecfb;
+  color: #304d8f;
+}
+
+.grade-junior {
+  background: #ffeec9;
+  color: #92540d;
+}
+
+.grade-junior-plus {
+  background: #ffdfb8;
+  color: #8a4a05;
+}
+
+.qual-toggle-btn {
+  margin-top: 18px;
+  width: 100%;
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 10px;
+  border: 1px solid #2f66e8;
+  background: #2f66e8;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
 .skill-group {
   padding: 30px;
   border-top: 6px solid #2563eb;
