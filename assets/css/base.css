@@ -233,6 +233,31 @@ a {
   color: var(--muted);
 }
 
+.timeline-item ul,
+.timeline-item ol {
+  margin: 10px 0 0;
+  padding-left: 18px;
+}
+
+.timeline-item li + li {
+  margin-top: 6px;
+}
+
+.timeline-item table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 0.92rem;
+}
+
+.timeline-item th,
+.timeline-item td {
+  border: 1px solid var(--line);
+  padding: 8px;
+  text-align: left;
+  vertical-align: top;
+}
+
 .kicker {
   font-weight: 800;
   color: var(--brand);
