@@ -72,11 +72,13 @@
 
     var links = document.querySelectorAll('[data-nav-target]');
     links.forEach(function (link) {
-      if (link.getAttribute('data-nav-target') === navKey) {
+      var isCurrent = link.getAttribute('data-nav-target') === navKey;
+      if (isCurrent) {
         link.setAttribute('aria-current', 'page');
       } else {
         link.removeAttribute('aria-current');
       }
+      link.classList.toggle('active', isCurrent);
     });
   }
 
