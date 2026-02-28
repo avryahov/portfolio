@@ -497,12 +497,101 @@ main.section,
 
 .site-footer {
   border-top: 1px solid var(--line);
-  padding: 34px 0 56px;
-  color: var(--muted);
+  padding: 48px 0 56px;
+  color: #e6edff;
+  background:
+    radial-gradient(900px 380px at 80% -10%, rgba(36, 167, 217, 0.26), transparent 62%),
+    radial-gradient(820px 340px at -15% 120%, rgba(94, 71, 255, 0.28), transparent 66%),
+    linear-gradient(165deg, #101734 0%, #15264a 52%, #132343 100%);
 }
 
-.site-footer p {
+.site-footer-inner {
+  display: grid;
+  gap: 30px;
+}
+
+.footer-contacts h2 {
   margin: 0;
+  font-family: var(--font-title);
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+  text-align: center;
+  color: #ffffff;
+}
+
+.footer-contact-row {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.footer-contact-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 999px;
+  padding: 11px 18px;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  background: rgba(37, 99, 235, 0.68);
+  box-shadow: var(--shadow-glow);
+}
+
+.footer-contact-pill:hover {
+  background: rgba(37, 99, 235, 0.9);
+}
+
+.footer-format-list {
+  margin: 22px auto 0;
+  padding: 20px 22px 20px 36px;
+  max-width: 960px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(180, 201, 255, 0.45);
+  background: rgba(12, 23, 53, 0.52);
+}
+
+.footer-format-list li + li {
+  margin-top: 10px;
+}
+
+.footer-desktop-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 24px;
+  padding-top: 4px;
+}
+
+.footer-nav-group {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.footer-nav-group h3 {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+.footer-nav-group a {
+  width: fit-content;
+  text-decoration: none;
+  color: #d5e6ff;
+  font-weight: 600;
+}
+
+.footer-nav-group a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-copyright {
+  margin: 0;
+  color: #bfd2f8;
+  font-size: 0.95rem;
 }
 
 .reveal {
@@ -577,5 +666,17 @@ html.reveal-enabled .reveal.is-visible {
   .anchor-nav a {
     font-size: 0.9rem;
     padding: 8px 12px;
+  }
+
+  .footer-desktop-nav {
+    display: none;
+  }
+
+  .site-footer {
+    padding: 38px 0 44px;
+  }
+
+  .footer-format-list {
+    padding-right: 18px;
   }
 }

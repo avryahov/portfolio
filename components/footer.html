@@ -1,5 +1,41 @@
-<footer class="site-footer">
-  <div class="container">
-    <p>© <span data-year></span> Александр Ряхов. Портфолио в статике, готово к последующей миграции на React/CMS.</p>
+<footer class="site-footer" id="site-footer">
+  <div class="container site-footer-inner">
+    <div class="footer-contacts">
+      <h2>Контакты</h2>
+      <div class="footer-contact-row">
+        <a class="footer-contact-pill" href="mailto:a.v.rjakhov@yandex.ru">a.v.rjakhov@yandex.ru</a>
+        <a class="footer-contact-pill" href="tel:+79228040363">+7 (922) 804-03-63</a>
+        <span class="footer-contact-pill">Оренбург, РФ · удаленно</span>
+      </div>
+      <ul class="footer-format-list">
+        <li>ИП по договору подряда (готов рассматривать и трудовой формат).</li>
+        <li>Фиксированная стоимость или почасовая оплата по scope проекта.</li>
+        <li>Четкие этапы, прозрачные артефакты и приемка результата.</li>
+        <li>Проекты любой сложности: legacy-модернизация, greenfield, интеграции.</li>
+      </ul>
+    </div>
+
+    <nav class="footer-desktop-nav" aria-label="Навигация в футтере">
+      <section class="footer-nav-group">
+        <h3>Навигация по сайту</h3>
+        <a href="{{ROOT}}/index.html">Главная</a>
+        <a href="{{ROOT}}/orgmu/">ОрГМУ</a>
+        <a href="{{ROOT}}/inverter/">Завод</a>
+        <a href="{{ROOT}}/open-solutions/">Открытые Решения</a>
+        <a href="{{ROOT}}/teaching/">Преподавание</a>
+        <a href="{{ROOT}}/education/">Образование</a>
+        <a href="{{ROOT}}/qualification/">Квалификация</a>
+      </section>
+      <section class="footer-nav-group">
+        <h3>Разделы главной</h3>
+        <a href="{{ROOT}}/index.html#about">Обо мне</a>
+        <a href="{{ROOT}}/index.html#education">Образование</a>
+        <a href="{{ROOT}}/index.html#experience">Опыт работы</a>
+        <a href="{{ROOT}}/index.html#qualification">Квалификация</a>
+        <a href="{{ROOT}}/index.html#site-footer">Контакты</a>
+      </section>
+    </nav>
+
+    <p class="footer-copyright">© <span data-year></span> Александр Ряхов. Портфолио в статике, готово к последующей миграции на React/CMS.</p>
   </div>
 </footer>
