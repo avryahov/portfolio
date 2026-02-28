@@ -579,8 +579,11 @@ main.section,
 .site-footer {
   border-top: 1px solid var(--line);
   padding: 44px 0 34px;
-  color: #d8e1fa;
-  background: #05070f;
+  color: #e6edff;
+  background:
+    radial-gradient(900px 380px at 80% -10%, rgba(36, 167, 217, 0.26), transparent 62%),
+    radial-gradient(820px 340px at -15% 120%, rgba(94, 71, 255, 0.28), transparent 66%),
+    linear-gradient(165deg, #101734 0%, #15264a 52%, #132343 100%);
 }
 
 .site-footer-inner {
