@@ -591,6 +591,43 @@ main.section,
   gap: 30px;
 }
 
+.footer-dislocation {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.footer-dislocation h2 {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: #ffffff;
+}
+
+.footer-dislocation p {
+  margin: 0;
+  color: #cfdbfc;
+}
+
+.footer-contact-page-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 999px;
+  padding: 11px 18px;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  background: rgba(37, 99, 235, 0.68);
+  box-shadow: var(--shadow-glow);
+}
+
+.footer-contact-page-link:hover {
+  background: rgba(37, 99, 235, 0.9);
+}
+
 .footer-contacts h2 {
   margin: 0;
   font-family: var(--font-title);
