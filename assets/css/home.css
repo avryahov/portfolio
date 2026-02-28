@@ -178,45 +178,8 @@
 
 .experience-scroll-wrap {
   position: relative;
-}
-
-.experience-scroll-wrap::before,
-.experience-scroll-wrap::after {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 1px solid #b7c8fb;
-  background: rgba(255, 255, 255, 0.92);
-  color: #2f5fe8;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 1.1rem;
-  box-shadow: var(--shadow-panel);
-  z-index: 2;
-  pointer-events: none;
-}
-
-.experience-scroll-wrap.is-at-start::before {
-  content: none;
-}
-
-.experience-scroll-wrap.is-at-end::after {
-  content: none;
-}
-
-.experience-scroll-wrap::before {
-  content: "‹";
-  left: -10px;
-}
-
-.experience-scroll-wrap::after {
-  content: "›";
-  right: -10px;
+  overflow: visible;
+  padding: 0;
 }
 
 .experience-grid {
@@ -226,21 +189,59 @@
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   padding: 4px 2px 10px;
-  scrollbar-width: thin;
-  scrollbar-color: #9ab4ff transparent;
+  scrollbar-width: none;
+  touch-action: pan-y;
 }
 
 .experience-grid::-webkit-scrollbar {
-  height: 8px;
+  display: none;
 }
 
-.experience-grid::-webkit-scrollbar-thumb {
-  background: #9ab4ff;
+.experience-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 132px;
+  border: 1px solid #b7c8fb;
   border-radius: 999px;
+  padding: 0;
+  background: rgba(236, 242, 251, 0.96);
+  cursor: pointer;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-panel);
 }
 
-.experience-grid::-webkit-scrollbar-track {
+.experience-nav-btn-prev {
+  left: -38px;
+}
+
+.experience-nav-btn-next {
+  right: -38px;
+}
+
+.experience-nav-btn span {
+  width: auto;
+  height: auto;
+  margin: 0;
+  border-radius: 0;
+  border: 0;
   background: transparent;
+  color: #2f5fe8;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.55rem;
+}
+
+.experience-scroll-wrap.is-at-start .experience-nav-btn-prev,
+.experience-scroll-wrap.is-at-end .experience-nav-btn-next {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .exp-card {
@@ -447,9 +448,8 @@
 }
 
 @media (max-width: 900px) {
-  .experience-scroll-wrap::before,
-  .experience-scroll-wrap::after {
-    display: inline-flex;
+  .experience-grid {
+    touch-action: pan-x;
   }
 
   .exp-card {
