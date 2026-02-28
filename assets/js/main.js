@@ -58,6 +58,15 @@
       return;
     }
 
+    var hasNativeSticky = typeof CSS !== 'undefined' &&
+      typeof CSS.supports === 'function' &&
+      (CSS.supports('position', 'sticky') || CSS.supports('position', '-webkit-sticky'));
+
+    if (hasNativeSticky) {
+      strip.classList.remove('is-fixed');
+      return;
+    }
+
     if (strip.nextElementSibling && strip.nextElementSibling.classList.contains('anchor-strip-placeholder')) {
       strip.nextElementSibling.remove();
     }
