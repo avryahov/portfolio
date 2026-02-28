@@ -133,6 +133,35 @@
   font-size: 0.94rem;
 }
 
+.pki-letter {
+  margin-top: 18px;
+  border: 1px solid var(--pki-line);
+  border-radius: 14px;
+  background: var(--pki-surface-2);
+  padding: 14px;
+}
+
+.pki-letter h3 {
+  margin: 0 0 10px;
+  color: var(--pki-blue);
+  font-size: 1.02rem;
+}
+
+.pki-letter p {
+  margin: 0;
+  color: var(--pki-muted);
+}
+
+.pki-letter p + p {
+  margin-top: 10px;
+}
+
+.pki-letter .sign {
+  margin-top: 12px;
+  color: #2d4f73;
+  font-weight: 700;
+}
+
 @media (max-width: 900px) {
   .pki-grid {
     grid-template-columns: 1fr;
