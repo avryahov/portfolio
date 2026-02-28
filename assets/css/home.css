@@ -246,6 +246,8 @@
 
 .exp-card {
   flex: 0 0 min(400px, 86vw);
+  min-width: min(400px, 86vw);
+  max-width: min(400px, 86vw);
   min-height: 470px;
   padding: 28px;
   border-top: 6px solid rgba(186, 215, 255, 0.95);
@@ -301,16 +303,23 @@
   color: #f2f6ff;
   font-size: 0.96rem;
   line-height: 1.35;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 0;
+  max-width: 100%;
 }
 
 .exp-skills span {
-  display: inline;
+  display: inline-flex;
   color: inherit;
   font-weight: 700;
+  min-width: 0;
+  white-space: normal;
 }
 
-.exp-skills span:not(:last-child)::after {
-  content: " \2014 ";
+.exp-skills span + span::before {
+  content: " \2727 ";
   color: rgba(220, 231, 255, 0.95);
   font-weight: 600;
 }
@@ -462,6 +471,8 @@
 
   .exp-card {
     flex-basis: 84vw;
+    min-width: 84vw;
+    max-width: 84vw;
     min-height: 460px;
   }
 
