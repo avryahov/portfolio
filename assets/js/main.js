@@ -52,21 +52,22 @@
     });
   }
 
-  function applyFooterNote() {
-    var note = document.body.getAttribute('data-footer-note');
-    if (!note) {
-      return;
-    }
-    var noteNode = document.querySelector('[data-footer-note]');
-    if (noteNode) {
-      noteNode.textContent = note;
-    }
-  }
-
   function markCurrentNav() {
-    var navKey = document.body.getAttribute('data-nav');
-    if (!navKey) {
-      return;
+    var path = window.location.pathname || '/';
+    var navKey = 'home';
+
+    if (path.indexOf('/orgmu/') === 0) {
+      navKey = 'orgmu';
+    } else if (path.indexOf('/inverter/') === 0) {
+      navKey = 'inverter';
+    } else if (path.indexOf('/open-solutions/') === 0) {
+      navKey = 'open-solutions';
+    } else if (path.indexOf('/teaching/') === 0) {
+      navKey = 'teaching';
+    } else if (path.indexOf('/education/') === 0) {
+      navKey = 'education';
+    } else if (path.indexOf('/qualification/') === 0) {
+      navKey = 'qualification';
     }
 
     var links = document.querySelectorAll('[data-nav-target]');
@@ -118,7 +119,6 @@
   ]).then(function () {
     syncThemeToggle(document.documentElement.getAttribute('data-theme') || 'light');
     markCurrentNav();
-    applyFooterNote();
     initThemeToggle();
     applyYear();
   });
