@@ -294,18 +294,21 @@
 
 .exp-skills {
   margin-top: 18px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  color: #2a4fa7;
+  font-size: 0.96rem;
+  line-height: 1.35;
 }
 
 .exp-skills span {
-  background: #2563eb;
-  color: #fff;
-  border-radius: 999px;
-  padding: 8px 14px;
-  font-size: 0.86rem;
+  display: inline;
+  color: inherit;
   font-weight: 700;
+}
+
+.exp-skills span:not(:last-child)::after {
+  content: " \2014 ";
+  color: #5372be;
+  font-weight: 600;
 }
 
 .exp-actions {
