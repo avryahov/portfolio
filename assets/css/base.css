@@ -101,16 +101,13 @@ a {
   display: grid;
   grid-template-columns: minmax(320px, 1fr) auto;
   grid-template-rows: auto auto;
-  align-items: end;
+  align-items: start;
   gap: 14px 26px;
 }
 
-.landing-name-wrap {
+.landing-title {
   grid-column: 1;
-  grid-row: 1 / span 2;
-  display: grid;
-  align-content: end;
-  justify-items: start;
+  grid-row: 1;
   text-align: left;
 }
 
@@ -123,10 +120,13 @@ a {
 }
 
 .landing-subtitle {
+  grid-column: 1;
+  grid-row: 2;
   margin: 12px 0 0;
   font-size: clamp(1.05rem, 2vw, 1.5rem);
   max-width: 880px;
   opacity: 0.95;
+  text-align: left;
 }
 
 .landing-cta-row {
@@ -135,7 +135,7 @@ a {
   grid-row: 1;
   display: flex;
   justify-content: flex-end;
-  align-self: start;
+  align-self: end;
 }
 
 .landing-cta-btn {
@@ -679,9 +679,9 @@ html.reveal-enabled .reveal.is-visible {
     gap: 16px;
   }
 
-  .landing-name-wrap {
+  .landing-title {
+    grid-column: 1;
     grid-row: 1;
-    justify-items: center;
     text-align: center;
   }
 
@@ -690,6 +690,13 @@ html.reveal-enabled .reveal.is-visible {
     grid-row: 2;
     justify-content: center;
     align-self: center;
+  }
+
+  .landing-subtitle {
+    grid-column: 1;
+    grid-row: 2;
+    text-align: center;
+    margin-top: 0;
   }
 
   .landing-icon-links {
