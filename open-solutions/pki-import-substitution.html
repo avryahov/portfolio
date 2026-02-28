@@ -9,15 +9,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../assets/css/base.css" />
     <link rel="stylesheet" href="../assets/css/open-solutions.css" />
+    <link rel="stylesheet" href="../assets/css/pki-nda.css" />
   </head>
-  <body class="os-body">
+  <body class="pki-body">
     <header class="site-header"><div class="container nav-wrap"><a class="logo" href="../index.html"><span class="logo-mark"></span><span>Александр Ряхов</span></a><nav class="site-nav"><a href="./" aria-current="page">К проектам ОР</a></nav></div></header>
     <main class="section"><div class="container">
       <p class="kicker reveal">2022–2023</p>
-      <h1 class="page-title reveal">Импортозамещение PKI-платформы</h1>
-      <p class="page-sub reveal">Стабилизация и эволюция сертификатного контура: legacy + greenfield-микросервисы.</p>
-      <div class="project-facts reveal"><div class="fact"><b>Роль</b><span>Middle Backend</span></div><div class="fact"><b>Стек</b><span>Java 7–17, JavaEE, Spring Boot, Bash</span></div><div class="fact"><b>Фокус</b><span>X.509, OCSP/CRL, миграция</span></div></div>
-      <div class="timeline"><article class="timeline-item reveal"><h3>Что делал</h3><p>Погружение в legacy без документации, рефакторинг старого ядра, проектирование API межсервисного взаимодействия.</p></article><article class="timeline-item reveal"><h3>Особенности</h3><p>Кросс-платформенное тестирование под отечественные ОС, поддержка документации для сертификации, автоматизация Bash-скриптами.</p></article><article class="timeline-item reveal"><h3>Результат</h3><p>Подготовка платформы к устойчивой работе в условиях импортозамещения и enterprise-процессов качества.</p></article></div>
+      <h1 class="page-title reveal">PKI-проект корпоративного центра сертификации (NDA)</h1>
+      <p class="page-sub reveal">Наименование и заказчик не раскрываются. Ниже описан технический контур и инженерные задачи без идентифицирующих деталей.</p>
+
+      <section class="pki-hero reveal" aria-label="Контур проекта">
+        <h2>Certificate Authority / Registration Authority / validation services</h2>
+        <p>Стабилизация и развитие отечественного PKI-контура: legacy-поддержка, миграция на современный стек и поддержка сертификационных процессов.</p>
+      </section>
+
+      <div class="pki-stack reveal" aria-label="Технологии">
+        <span class="pki-pill">Java 7/8/11/17</span>
+        <span class="pki-pill">Java EE + Spring Boot</span>
+        <span class="pki-pill">X.509 / OCSP / CRL</span>
+        <span class="pki-pill">PostgreSQL</span>
+        <span class="pki-pill">Bash automation</span>
+        <span class="pki-pill">Cross-platform testing</span>
+      </div>
+
+      <div class="pki-grid">
+        <article class="pki-card reveal">
+          <h3>Роль и зона ответственности</h3>
+          <p>Middle Backend: работа с legacy-слоем, декомпозиция задач, проектирование API и участие в производственном контуре качества.</p>
+        </article>
+        <article class="pki-card reveal">
+          <h3>Сложность домена</h3>
+          <p>Криптография, валидация сертификатов, высокая цена ошибок и необходимость совместимости с существующей инфраструктурой.</p>
+        </article>
+      </div>
+
+      <div class="timeline"><article class="timeline-item reveal"><h3>Что делал</h3><p>Погружение в legacy без полной документации, рефакторинг серверного ядра, проектирование межсервисных интерфейсов и миграционные шаги.</p></article><article class="timeline-item reveal"><h3>Особенности</h3><p>Кросс-платформенное тестирование под отечественные ОС, сопровождение документации для сертификационных процедур, автоматизация Bash-скриптами.</p></article><article class="timeline-item reveal"><h3>Результат</h3><p>Повышена устойчивость PKI-платформы и подготовлен технологический фундамент для дальнейшей эволюции архитектуры.</p></article></div>
+
+      <div class="pki-cta reveal">
+        Формулировки выверены с учетом NDA: сохранена техническая глубина, но исключены названия и данные, позволяющие идентифицировать конкретного заказчика.
+      </div>
     </div></main>
     <footer class="site-footer"><div class="container"><p><a href="./">← Назад к списку проектов</a></p></div></footer>
     <script src="../assets/js/reveal.js"></script>

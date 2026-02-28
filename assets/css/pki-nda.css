@@ -1,0 +1,140 @@
+.pki-body {
+  --pki-bg: #f2f7fc;
+  --pki-surface: #ffffff;
+  --pki-surface-2: #f7fbff;
+  --pki-line: #d4e1ef;
+  --pki-ink: #132844;
+  --pki-muted: #4e6686;
+  --pki-blue: #0a5da9;
+  --pki-blue-2: #2376bc;
+  --pki-cyan: #1ea4d8;
+  --pki-shadow: 0 0 11.5px 0 rgba(30, 9, 90, 0.28);
+  font-family: "NT Somic", "Manrope", "Segoe UI", sans-serif;
+  color: var(--pki-ink);
+  background:
+    radial-gradient(900px 420px at 110% -7%, rgba(30, 164, 216, 0.2), transparent 60%),
+    radial-gradient(780px 400px at -20% 0%, rgba(10, 93, 169, 0.15), transparent 58%),
+    var(--pki-bg);
+}
+
+.pki-body .site-header {
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid var(--pki-line);
+  box-shadow: var(--pki-shadow);
+}
+
+.pki-body .logo,
+.pki-body .page-title,
+.pki-body .timeline-item h3 {
+  color: var(--pki-ink);
+}
+
+.pki-body .logo-mark {
+  background: linear-gradient(135deg, var(--pki-blue), var(--pki-cyan));
+  box-shadow: var(--pki-shadow);
+}
+
+.pki-body .site-nav a {
+  color: var(--pki-muted);
+}
+
+.pki-body .site-nav a:hover,
+.pki-body .site-nav a[aria-current="page"] {
+  color: var(--pki-blue);
+  background: rgba(10, 93, 169, 0.11);
+}
+
+.pki-body .kicker {
+  color: var(--pki-blue);
+}
+
+.pki-body .page-sub,
+.pki-body .timeline-item p,
+.pki-body .site-footer {
+  color: var(--pki-muted);
+}
+
+.pki-body .timeline-item,
+.pki-body .panel {
+  border-color: var(--pki-line);
+  background: var(--pki-surface);
+  box-shadow: var(--pki-shadow);
+}
+
+.pki-hero {
+  margin-top: 20px;
+  border: 1px solid var(--pki-line);
+  border-radius: 16px;
+  background: linear-gradient(100deg, #0b4f92, #1f6fb3);
+  color: #edf6ff;
+  padding: 18px;
+  box-shadow: var(--pki-shadow);
+}
+
+.pki-hero h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.pki-hero p {
+  margin: 8px 0 0;
+  opacity: 0.95;
+}
+
+.pki-stack {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pki-pill {
+  border: 1px solid var(--pki-line);
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: var(--pki-surface-2);
+  color: var(--pki-blue);
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.pki-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.pki-card {
+  border: 1px solid var(--pki-line);
+  border-radius: 12px;
+  background: var(--pki-surface-2);
+  padding: 12px;
+}
+
+.pki-card h3 {
+  margin: 0 0 8px;
+  color: var(--pki-blue);
+  font-size: 1rem;
+}
+
+.pki-card p {
+  margin: 0;
+  color: var(--pki-muted);
+}
+
+.pki-cta {
+  margin-top: 16px;
+  border: 1px dashed #99bcdf;
+  border-radius: 12px;
+  background: #edf5ff;
+  color: #1f4f84;
+  padding: 12px;
+  font-size: 0.94rem;
+}
+
+@media (max-width: 900px) {
+  .pki-grid {
+    grid-template-columns: 1fr;
+  }
+}
