@@ -57,6 +57,10 @@ body {
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-ui);
   color: var(--ink);
@@ -372,6 +376,10 @@ main.section,
   padding: 12px 14px;
   background: linear-gradient(110deg, var(--surface-3), var(--surface));
   box-shadow: var(--shadow-panel);
+}
+
+.anchor-target {
+  scroll-margin-top: 130px;
 }
 
 .site-footer {
