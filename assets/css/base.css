@@ -825,6 +825,11 @@ html.reveal-enabled .reveal.is-visible {
     overflow: hidden;
   }
 
+  .landing-header {
+    padding-top: 96px;
+    padding-bottom: 46px;
+  }
+
   .anchor-strip .container {
     justify-content: flex-start;
     min-height: 56px;
