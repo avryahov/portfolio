@@ -1,5 +1,54 @@
 .home-body .hero {
-  padding-top: 42px;
+  padding-top: 30px;
+}
+
+.style-nav-wrap {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  box-shadow: var(--shadow-panel);
+  padding: 12px;
+  margin-bottom: 14px;
+}
+
+.style-nav-title {
+  margin: 0 0 10px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.style-nav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.style-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.style-btn {
+  flex: 0 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  padding: 8px 12px;
+  font-weight: 800;
+  font-size: 0.86rem;
+  cursor: pointer;
+}
+
+.style-btn.is-active,
+.style-btn:hover {
+  color: #fff;
+  border-color: transparent;
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
 }
 
 .business-card {
@@ -10,7 +59,7 @@
     radial-gradient(900px 450px at -10% 0%, color-mix(in srgb, var(--brand-2) 22%, transparent), transparent 54%),
     linear-gradient(180deg, color-mix(in srgb, var(--surface-2) 88%, white), var(--surface));
   box-shadow: var(--shadow-panel);
-  padding: 28px;
+  padding: 24px;
   position: relative;
   overflow: hidden;
 }
@@ -28,6 +77,25 @@
 .business-card > * {
   position: relative;
   z-index: 1;
+}
+
+.business-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.hero-visual {
+  border: 1px solid color-mix(in srgb, var(--line) 80%, var(--brand) 20%);
+  border-radius: 16px;
+  min-height: 340px;
+  background-image:
+    linear-gradient(170deg, rgba(8, 12, 26, 0.08), rgba(8, 12, 26, 0.42)),
+    url("../img/hero-portrait.jpg");
+  background-size: cover;
+  background-position: center 18%;
+  box-shadow: var(--shadow-panel);
 }
 
 .business-title {
@@ -55,7 +123,7 @@
   margin-top: 18px;
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .business-pill {
@@ -66,6 +134,84 @@
   font-weight: 700;
   font-size: 0.92rem;
   text-align: center;
+}
+
+.home-style-2 .business-card {
+  border-radius: 30px 14px 30px 14px;
+}
+
+.home-style-2 .hero-visual {
+  background-position: center 30%;
+  filter: saturate(1.1);
+}
+
+.home-style-3 .business-layout {
+  grid-template-columns: 0.9fr 1.1fr;
+}
+
+.home-style-3 .hero-visual {
+  order: -1;
+}
+
+.home-style-4 .business-card {
+  background:
+    linear-gradient(160deg, color-mix(in srgb, var(--surface-3) 92%, #dfe3f7), var(--surface));
+}
+
+.home-style-4 .hero-visual {
+  filter: grayscale(0.35) contrast(1.08);
+}
+
+.home-style-5 .business-card {
+  backdrop-filter: blur(6px);
+}
+
+.home-style-5 .hero-visual {
+  border-radius: 26px;
+}
+
+.home-style-6 .business-layout {
+  grid-template-columns: 1fr;
+}
+
+.home-style-6 .hero-visual {
+  min-height: 260px;
+  order: -1;
+}
+
+.home-style-7 .business-card {
+  border-top: 6px solid var(--brand);
+}
+
+.home-style-7 .hero-visual {
+  background-position: center 10%;
+}
+
+.home-style-8 .business-card {
+  border-right: 6px solid color-mix(in srgb, var(--brand-2) 70%, var(--brand));
+}
+
+.home-style-8 .hero-visual {
+  border-radius: 8px 24px 8px 24px;
+}
+
+.home-style-9 .business-card {
+  background:
+    radial-gradient(900px 440px at 20% -20%, color-mix(in srgb, var(--brand-2) 20%, transparent), transparent 60%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-2) 90%, white), var(--surface));
+}
+
+.home-style-9 .hero-visual {
+  filter: contrast(1.08);
+}
+
+.home-style-10 .business-card {
+  border-left: 6px solid var(--brand);
+  border-right: 6px solid var(--brand-2);
+}
+
+.home-style-10 .hero-visual {
+  background-position: center 36%;
 }
 
 .anchor-nav-wrap {
@@ -342,7 +488,14 @@
 }
 
 @media (max-width: 1080px) {
-  .business-meta,
+  .business-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    min-height: 260px;
+  }
+
   .skills-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

@@ -17,26 +17,47 @@
     <link rel="stylesheet" href="assets/css/base.css" />
     <link rel="stylesheet" href="assets/css/home.css" />
   </head>
-  <body class="home-body" data-root=".">
+  <body class="home-body home-style-1" data-root=".">
     <div data-component="header"></div>
 
     <main>
       <section class="hero">
         <div class="container">
+          <section class="style-nav-wrap reveal" aria-label="Временная панель вариантов хедера">
+            <p class="style-nav-title">Темп-навигация вариантов большого хедера</p>
+            <div class="style-nav" role="tablist" aria-label="Варианты большого хедера">
+              <button type="button" class="style-btn is-active" data-hero-style="1">Пример 1</button>
+              <button type="button" class="style-btn" data-hero-style="2">Пример 2</button>
+              <button type="button" class="style-btn" data-hero-style="3">Пример 3</button>
+              <button type="button" class="style-btn" data-hero-style="4">Пример 4</button>
+              <button type="button" class="style-btn" data-hero-style="5">Пример 5</button>
+              <button type="button" class="style-btn" data-hero-style="6">Пример 6</button>
+              <button type="button" class="style-btn" data-hero-style="7">Пример 7</button>
+              <button type="button" class="style-btn" data-hero-style="8">Пример 8</button>
+              <button type="button" class="style-btn" data-hero-style="9">Пример 9</button>
+              <button type="button" class="style-btn" data-hero-style="10">Пример 10</button>
+            </div>
+          </section>
+
           <article class="business-card reveal">
-            <p class="kicker">Технический лидер · Java Backend · Team Lead</p>
-            <h1 class="business-title">Александр Ряхов</h1>
-            <p class="business-sub">Техуниверсал: от прошивок и «железа» до enterprise и облаков</p>
-            <p class="business-lead">
-              13+ лет в ИТ, 7+ лет коммерческой разработки, переход через несколько доменов: вуз,
-              промышленная автоматизация, PKI, ритейл и продуктовые инициативы. Работаю как
-              инженер полного цикла и технический лидер команды.
-            </p>
-            <div class="business-meta" aria-label="Быстрые факты">
-              <span class="business-pill">Оренбург, Россия</span>
-              <span class="business-pill">a.v.rjakhov@yandex.ru</span>
-              <span class="business-pill">+7 (922) 804-03-63</span>
-              <span class="business-pill">13+ лет опыта</span>
+            <div class="business-layout">
+              <div class="business-copy">
+                <p class="kicker">Технический лидер · Java Backend · Team Lead</p>
+                <h1 class="business-title">Александр Ряхов</h1>
+                <p class="business-sub">Техуниверсал: от прошивок и «железа» до enterprise и облаков</p>
+                <p class="business-lead">
+                  13+ лет в ИТ, 7+ лет коммерческой разработки, переход через несколько доменов: вуз,
+                  промышленная автоматизация, PKI, ритейл и продуктовые инициативы. Работаю как
+                  инженер полного цикла и технический лидер команды.
+                </p>
+                <div class="business-meta" aria-label="Быстрые факты">
+                  <span class="business-pill">Оренбург, Россия</span>
+                  <span class="business-pill">a.v.rjakhov@yandex.ru</span>
+                  <span class="business-pill">+7 (922) 804-03-63</span>
+                  <span class="business-pill">13+ лет опыта</span>
+                </div>
+              </div>
+              <div class="hero-visual" role="img" aria-label="Портретный визуал для большого хедера"></div>
             </div>
           </article>
 
@@ -233,6 +254,7 @@
     <div data-component="footer"></div>
 
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/home-style-switcher.js"></script>
     <script src="assets/js/reveal.js"></script>
   </body>
 </html>
