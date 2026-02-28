@@ -257,15 +257,6 @@ a {
   transition: all 0.28s;
 }
 
-.anchor-nav .nav-icon {
-  display: none;
-  line-height: 1;
-}
-
-.anchor-nav .nav-label {
-  display: inline;
-}
-
 .anchor-nav a:hover,
 .anchor-nav a.active,
 .anchor-nav a[aria-current="page"] {
@@ -746,24 +737,21 @@ html.reveal-enabled .reveal.is-visible {
     flex-wrap: nowrap;
     gap: 8px;
     padding: 10px 0;
+    overflow-x: auto;
+    white-space: nowrap;
+    justify-content: flex-start;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .anchor-nav::-webkit-scrollbar {
+    display: none;
   }
 
   .anchor-nav a {
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .anchor-nav .nav-icon {
-    display: inline-flex;
-    font-size: 1rem;
-  }
-
-  .anchor-nav .nav-label {
-    display: none;
+    flex: 0 0 auto;
+    padding: 8px 12px;
+    font-size: 0.92rem;
   }
 
   .site-page-nav .theme-toggle {
@@ -838,32 +826,39 @@ html.reveal-enabled .reveal.is-visible {
   }
 
   .anchor-strip .container {
-    justify-content: flex-end;
+    justify-content: flex-start;
     min-height: 56px;
   }
 
   .nav-menu-toggle {
     display: inline-flex;
+    position: fixed;
+    top: 10px;
+    left: 16px;
     z-index: 121;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    font-size: 1.45rem;
   }
 
   .nav-menu-toggle.is-open {
-    position: fixed;
-    top: 10px;
-    right: 16px;
-    width: 46px;
-    height: 46px;
+    width: 50px;
+    height: 50px;
     border-radius: 12px;
   }
 
   .anchor-nav {
     position: fixed;
-    inset: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: min(64vw, 270px);
     background:
       radial-gradient(900px 380px at 80% -10%, rgba(36, 167, 217, 0.2), transparent 62%),
       radial-gradient(820px 340px at -15% 120%, rgba(94, 71, 255, 0.24), transparent 66%),
       #f4f7ff;
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
@@ -871,10 +866,21 @@ html.reveal-enabled .reveal.is-visible {
     padding: 76px 18px 24px;
     overflow-y: auto;
     z-index: 120;
+    -webkit-overflow-scrolling: touch;
+    transform: translateX(-100%);
+    transition: none;
+    visibility: hidden;
+    pointer-events: none;
   }
 
   .anchor-nav.is-open {
-    display: flex;
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .anchor-nav.is-animated {
+    transition: transform 0.25s ease;
   }
 
   .anchor-nav a {
@@ -887,15 +893,6 @@ html.reveal-enabled .reveal.is-visible {
     gap: 10px;
     background: #ffffff;
     border: 1px solid #d8e3fb;
-  }
-
-  .anchor-nav .nav-icon {
-    display: inline-flex;
-    font-size: 1rem;
-  }
-
-  .anchor-nav .nav-label {
-    display: inline;
   }
 
   .site-page-nav .theme-toggle {

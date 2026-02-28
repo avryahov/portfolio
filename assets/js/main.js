@@ -109,7 +109,8 @@
         return;
       }
 
-      function closeMenu() {
+      function closeMenu(withAnimation) {
+        nav.classList.toggle('is-animated', !!withAnimation);
         nav.classList.remove('is-open');
         toggle.classList.remove('is-open');
         document.body.classList.remove('nav-overlay-open');
@@ -119,6 +120,7 @@
       }
 
       function openMenu() {
+        nav.classList.add('is-animated');
         nav.classList.add('is-open');
         toggle.classList.add('is-open');
         document.body.classList.add('nav-overlay-open');
@@ -130,29 +132,29 @@
       toggle.addEventListener('click', function () {
         var opened = nav.classList.contains('is-open');
         if (opened) {
-          closeMenu();
+          closeMenu(true);
         } else {
           openMenu();
         }
       });
 
       nav.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', closeMenu);
+        link.addEventListener('click', function () {
+          closeMenu(true);
+        });
       });
 
       window.addEventListener('keydown', function (event) {
         if (event.key === 'Escape') {
-          closeMenu();
+          closeMenu(true);
         }
       });
 
       window.addEventListener('resize', function () {
-        if (window.innerWidth > 767) {
-          closeMenu();
-        }
+        closeMenu(false);
       });
 
-      closeMenu();
+      closeMenu(false);
     });
   }
 
