@@ -50,12 +50,36 @@
 
       <section class="anchor-strip">
         <div class="container">
+          <button
+            class="nav-menu-toggle"
+            type="button"
+            data-nav-menu-toggle
+            aria-label="Открыть меню навигации"
+            aria-expanded="false"
+          >
+            <span aria-hidden="true">☰</span>
+          </button>
           <nav class="anchor-nav" aria-label="Навигация по главной странице">
-            <a href="#about" class="active">Обо мне</a>
-            <a href="#education">Образование</a>
-            <a href="#experience">Опыт работы</a>
-            <a href="#qualification">Квалификация</a>
-            <a href="#site-footer">Контакты</a>
+            <a href="#about" class="active">
+              <span class="nav-icon" aria-hidden="true">👤</span>
+              <span class="nav-label">Обо мне</span>
+            </a>
+            <a href="#education">
+              <span class="nav-icon" aria-hidden="true">🎓</span>
+              <span class="nav-label">Образование</span>
+            </a>
+            <a href="#experience">
+              <span class="nav-icon" aria-hidden="true">💼</span>
+              <span class="nav-label">Опыт работы</span>
+            </a>
+            <a href="#qualification">
+              <span class="nav-icon" aria-hidden="true">🛠</span>
+              <span class="nav-label">Квалификация</span>
+            </a>
+            <a href="#site-footer">
+              <span class="nav-icon" aria-hidden="true">✉</span>
+              <span class="nav-label">Контакты</span>
+            </a>
           </nav>
         </div>
       </section>

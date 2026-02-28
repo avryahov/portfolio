@@ -28,14 +28,44 @@
 </header>
 <section class="anchor-strip page-nav-strip">
   <div class="container">
+    <button
+      class="nav-menu-toggle"
+      type="button"
+      data-nav-menu-toggle
+      aria-label="Открыть меню навигации"
+      aria-expanded="false"
+    >
+      <span aria-hidden="true">☰</span>
+    </button>
     <nav class="anchor-nav site-page-nav" aria-label="Навигация сайта">
-      <a href="{{ROOT}}/index.html" data-nav-target="home">Главная</a>
-      <a href="{{ROOT}}/orgmu/" data-nav-target="orgmu">ОрГМУ</a>
-      <a href="{{ROOT}}/inverter/" data-nav-target="inverter">Завод</a>
-      <a href="{{ROOT}}/open-solutions/" data-nav-target="open-solutions">Открытые Решения</a>
-      <a href="{{ROOT}}/teaching/" data-nav-target="teaching">Преподавание</a>
-      <a href="{{ROOT}}/education/" data-nav-target="education">Образование</a>
-      <a href="{{ROOT}}/qualification/" data-nav-target="qualification">Квалификация</a>
+      <a href="{{ROOT}}/index.html" data-nav-target="home">
+        <span class="nav-icon" aria-hidden="true">🏠</span>
+        <span class="nav-label">Главная</span>
+      </a>
+      <a href="{{ROOT}}/orgmu/" data-nav-target="orgmu">
+        <span class="nav-icon" aria-hidden="true">🏥</span>
+        <span class="nav-label">ОрГМУ</span>
+      </a>
+      <a href="{{ROOT}}/inverter/" data-nav-target="inverter">
+        <span class="nav-icon" aria-hidden="true">⚙</span>
+        <span class="nav-label">Завод</span>
+      </a>
+      <a href="{{ROOT}}/open-solutions/" data-nav-target="open-solutions">
+        <span class="nav-icon" aria-hidden="true">🧩</span>
+        <span class="nav-label">Открытые Решения</span>
+      </a>
+      <a href="{{ROOT}}/teaching/" data-nav-target="teaching">
+        <span class="nav-icon" aria-hidden="true">👨‍🏫</span>
+        <span class="nav-label">Преподавание</span>
+      </a>
+      <a href="{{ROOT}}/education/" data-nav-target="education">
+        <span class="nav-icon" aria-hidden="true">🎓</span>
+        <span class="nav-label">Образование</span>
+      </a>
+      <a href="{{ROOT}}/qualification/" data-nav-target="qualification">
+        <span class="nav-icon" aria-hidden="true">📚</span>
+        <span class="nav-label">Квалификация</span>
+      </a>
       <button class="theme-toggle" type="button" data-theme-toggle aria-label="Переключить тему" title="Переключить тему">
         <span data-theme-icon>☾</span>
         <span data-theme-label>Тёмная</span>

@@ -96,6 +96,66 @@
     update();
   }
 
+  function initResponsiveNavMenus() {
+    var strips = document.querySelectorAll('.anchor-strip');
+    if (!strips.length) {
+      return;
+    }
+
+    strips.forEach(function (strip) {
+      var toggle = strip.querySelector('[data-nav-menu-toggle]');
+      var nav = strip.querySelector('.anchor-nav');
+      if (!toggle || !nav) {
+        return;
+      }
+
+      function closeMenu() {
+        nav.classList.remove('is-open');
+        toggle.classList.remove('is-open');
+        document.body.classList.remove('nav-overlay-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Открыть меню навигации');
+        toggle.innerHTML = '<span aria-hidden="true">☰</span>';
+      }
+
+      function openMenu() {
+        nav.classList.add('is-open');
+        toggle.classList.add('is-open');
+        document.body.classList.add('nav-overlay-open');
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.setAttribute('aria-label', 'Закрыть меню навигации');
+        toggle.innerHTML = '<span aria-hidden="true">✕</span>';
+      }
+
+      toggle.addEventListener('click', function () {
+        var opened = nav.classList.contains('is-open');
+        if (opened) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', closeMenu);
+      });
+
+      window.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+          closeMenu();
+        }
+      });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 767) {
+          closeMenu();
+        }
+      });
+
+      closeMenu();
+    });
+  }
+
   function markCurrentNav() {
     var path = window.location.pathname || '/';
     var navKey = 'home';
@@ -168,5 +228,6 @@
     initThemeToggle();
     applyYear();
     initStickyNavFallback();
+    initResponsiveNavMenus();
   });
 })();
