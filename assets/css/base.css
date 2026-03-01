@@ -850,8 +850,8 @@ main.section,
 }
 
 .footer-grid-divider {
-  height: 1px;
-  background: rgba(205, 218, 255, 0.25);
+  height: 3px;
+  background: rgba(205, 218, 255, 0.44);
 }
 
 .footer-grid-divider-top {
