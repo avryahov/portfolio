@@ -908,8 +908,10 @@ main.section,
 
 .footer-link-col h3 {
   margin: 0 0 4px;
-  color: #ffffff;
+  color: #f9fcff;
   font-size: 1.03rem;
+  font-weight: 800;
+  letter-spacing: 0.012em;
 }
 
 .footer-link-col a,
@@ -952,8 +954,10 @@ main.section,
 .footer-cities-block h3,
 .footer-legal-block h3 {
   margin: 0 0 4px;
-  color: #ffffff;
+  color: #f9fcff;
   font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.012em;
 }
 
 .footer-office-block p,
