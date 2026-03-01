@@ -3,11 +3,19 @@
   var legacyStorageKey = 'portfolio-theme';
 
   function setTheme(theme, persist) {
-    document.documentElement.setAttribute('data-theme', theme);
+    var root = document.documentElement;
+    root.classList.add('theme-switching');
+    root.setAttribute('data-theme', theme);
     if (persist) {
       localStorage.setItem(storageKey, theme);
     }
     syncThemeToggle(theme);
+
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () {
+        root.classList.remove('theme-switching');
+      });
+    });
   }
 
   function syncThemeToggle(theme) {
