@@ -601,6 +601,23 @@ main.section,
   max-width: 860px;
 }
 
+.experience-summary {
+  margin: 14px 0 20px;
+}
+
+.role-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.role-head-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: inline-block;
+}
+
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
