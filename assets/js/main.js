@@ -310,9 +310,10 @@
     }
 
     var root = normalizeRootPath(document.body.getAttribute('data-root') || '.');
-    var url = root + '/components/' + componentPath;
+    var componentVersion = '20260301-6';
+    var url = root + '/components/' + componentPath + '?v=' + componentVersion;
 
-    return fetch(url)
+    return fetch(url, { cache: 'no-store' })
       .then(function (response) {
         if (!response.ok) {
           throw new Error('Cannot load component: ' + url);
