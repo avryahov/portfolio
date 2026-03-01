@@ -1,32 +1,3 @@
-.inverter-top {
-  margin-top: 18px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  background: linear-gradient(90deg, var(--surface-3), var(--surface));
-  box-shadow: var(--shadow-panel);
-  padding: 10px 14px;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.inverter-menu {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.inv-chip {
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--surface);
-  padding: 6px 10px;
-  font-size: 0.82rem;
-  font-weight: 700;
-}
-
 .inverter-layout {
   margin-top: 16px;
   display: grid;
