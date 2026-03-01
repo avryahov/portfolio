@@ -60,6 +60,7 @@
   color: rgba(255, 255, 255, 0.95);
 }
 
+
 .about-text {
   margin: 14px 0 0;
   color: rgba(255, 255, 255, 0.95);
@@ -533,6 +534,7 @@
     min-height: 40px;
     font-size: 0.88rem;
   }
+
 }
 
 /* Legacy light home styling */
