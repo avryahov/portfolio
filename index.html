@@ -355,9 +355,9 @@
                   <h3>Анализ</h3>
                 </div>
                 <ul class="lifecycle-points">
-                  <li>Сбор бизнес- и техтребований.</li>
-                  <li>Аудит текущего решения и legacy.</li>
-                  <li>Оценка рисков, сроков и бюджета.</li>
+                  <li>Формализация бизнес-целей и требований.</li>
+                  <li>Аудит текущего решения и технического ландшафта.</li>
+                  <li>Оценка рисков, сроков и ресурсной модели.</li>
                 </ul>
               </article>
               <article class="lifecycle-step lifecycle-design" role="listitem">
@@ -365,9 +365,9 @@
                   <h3>Проектирование</h3>
                 </div>
                 <ul class="lifecycle-points">
-                  <li>Архитектура и границы сервисов.</li>
-                  <li>Контракты API и интеграции.</li>
-                  <li>План итераций и технический roadmap.</li>
+                  <li>Проработка архитектуры и границ сервисов.</li>
+                  <li>Проектирование API и интеграционных контрактов.</li>
+                  <li>Формирование roadmap и плана итераций.</li>
                 </ul>
               </article>
               <article class="lifecycle-step lifecycle-development" role="listitem">
@@ -375,9 +375,9 @@
                   <h3>Разработка</h3>
                 </div>
                 <ul class="lifecycle-points">
-                  <li>Backend и интеграционный контур.</li>
-                  <li>Реализация бизнес-логики и данных.</li>
-                  <li>Контроль качества кода и ревью.</li>
+                  <li>Реализация backend и интеграционного контура.</li>
+                  <li>Имплементация бизнес-логики и модели данных.</li>
+                  <li>Code review и контроль технического качества.</li>
                 </ul>
               </article>
               <article class="lifecycle-step lifecycle-testing" role="listitem">
@@ -385,9 +385,9 @@
                   <h3>Тестирование</h3>
                 </div>
                 <ul class="lifecycle-points">
-                  <li>Функциональная и интеграционная проверка.</li>
-                  <li>Проверка нагрузки и отказоустойчивости.</li>
-                  <li>Исправление дефектов до acceptance.</li>
+                  <li>Функциональное и интеграционное тестирование.</li>
+                  <li>Нагрузочное тестирование и проверка отказоустойчивости.</li>
+                  <li>Устранение дефектов до приемки (acceptance).</li>
                 </ul>
               </article>
               <article class="lifecycle-step lifecycle-release" role="listitem">
@@ -395,9 +395,9 @@
                   <h3>Релиз</h3>
                 </div>
                 <ul class="lifecycle-points">
-                  <li>CI/CD и подготовка production-среды.</li>
+                  <li>Настройка CI/CD и подготовка production-среды.</li>
                   <li>Миграции данных и безопасный rollout.</li>
-                  <li>Документация и передача в эксплуатацию.</li>
+                  <li>Подготовка эксплуатационной документации.</li>
                 </ul>
               </article>
               <div class="lifecycle-boundary" aria-hidden="true"></div>
@@ -406,9 +406,9 @@
                   <h3>Поддержка</h3>
                 </div>
                 <ul class="lifecycle-points">
-                  <li>Мониторинг и оперативная реакция.</li>
-                  <li>SLA-поддержка и устранение инцидентов.</li>
-                  <li>Развитие продукта по roadmap.</li>
+                  <li>Мониторинг и оперативное реагирование.</li>
+                  <li>SLA-поддержка и управление инцидентами.</li>
+                  <li>Эволюционное развитие продукта по roadmap.</li>
                 </ul>
               </article>
             </div>
@@ -423,43 +423,49 @@
                 <article class="devops-step devops-analysis" role="listitem">
                   <div class="devops-arrow"><h4>Инфраструктурное обследование</h4></div>
                   <ul class="devops-points">
-                    <li>Аудит площадки или облака и ограничений по безопасности.</li>
-                    <li>Определение целевой схемы окружений и подхода к развёртыванию.</li>
+                    <li>Аудит инфраструктуры и ограничений безопасности.</li>
+                    <li>Проектирование целевой схемы окружений.</li>
+                    <li>Стратегия развертывания и масштабирования.</li>
                   </ul>
                 </article>
                 <article class="devops-step devops-design" role="listitem">
                   <div class="devops-arrow"><h4>Провижининг окружений</h4></div>
                   <ul class="devops-points">
-                    <li>Сеть, доступы, DNS, хранилища, секреты, базовые сервисы.</li>
-                    <li>Подготовка on-prem/cloud контура для разработки и тестирования.</li>
+                    <li>Настройка сети, DNS, хранилищ и секретов.</li>
+                    <li>Подготовка dev/test/prod контуров.</li>
+                    <li>Базовая инфраструктурная автоматизация.</li>
                   </ul>
                 </article>
                 <article class="devops-step devops-development" role="listitem">
                   <div class="devops-arrow"><h4>CI/CD конвейер</h4></div>
                   <ul class="devops-points">
-                    <li>Сборка и версионирование артефактов, правила quality gates.</li>
-                    <li>Автодеплой по средам и управляемые rollback-сценарии.</li>
+                    <li>Сборка и версионирование артефактов.</li>
+                    <li>Quality gates и автоматизированные проверки.</li>
+                    <li>Автодеплой и rollback-стратегии.</li>
                   </ul>
                 </article>
                 <article class="devops-step devops-testing" role="listitem">
                   <div class="devops-arrow"><h4>Наблюдаемость (Observability)</h4></div>
                   <ul class="devops-points">
-                    <li>Логи, метрики, трассировка и алерты для теста и production.</li>
-                    <li>Технические SLI/SLO, диагностика деградаций и узких мест.</li>
+                    <li>Централизованные логи, метрики и трассировки.</li>
+                    <li>Алертинг для test и production.</li>
+                    <li>SLI/SLO и диагностика деградаций.</li>
                   </ul>
                 </article>
                 <article class="devops-step devops-release" role="listitem">
                   <div class="devops-arrow"><h4>Релиз-инжиниринг</h4></div>
                   <ul class="devops-points">
-                    <li>Миграции, бэкапы и blue-green/canary сценарии запуска.</li>
-                    <li>Контроль релиза, эксплуатационные чек-листы и откат.</li>
+                    <li>Миграции, backup-стратегия и blue/green-релизы.</li>
+                    <li>Контроль стабильности запуска.</li>
+                    <li>Эксплуатационные чек-листы и сценарии отката.</li>
                   </ul>
                 </article>
                 <article class="devops-step devops-support" role="listitem">
                   <div class="devops-arrow"><h4>SRE-сопровождение</h4></div>
                   <ul class="devops-points">
-                    <li>Инцидент-менеджмент, runbook и операционная автоматизация.</li>
-                    <li>Сопровождение после релиза по дополнительному соглашению.</li>
+                    <li>Incident management и post-mortem анализ.</li>
+                    <li>Runbook и операционная автоматизация.</li>
+                    <li>Поддержка по SLA и сопровождение релизов.</li>
                   </ul>
                 </article>
               </div>
