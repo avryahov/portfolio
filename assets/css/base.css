@@ -847,6 +847,15 @@ main.section,
   height: 22px;
 }
 
+.footer-icon-github {
+  color: #ffffff;
+}
+
+.footer-icon-github svg {
+  width: 21px;
+  height: 21px;
+}
+
 .footer-unified-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
