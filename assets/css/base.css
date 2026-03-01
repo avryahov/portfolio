@@ -839,6 +839,25 @@ main.section,
   height: 22px;
 }
 
+.footer-icon-youtube {
+  color: #ff0000;
+}
+
+.footer-icon-youtube.footer-contact-ring {
+  background: #ff0000;
+  border-color: #ff4040;
+}
+
+.footer-icon-youtube.footer-contact-ring:hover {
+  background: #e60000;
+  border-color: #ff5a5a;
+}
+
+.footer-icon-youtube svg {
+  width: 22px;
+  height: 22px;
+}
+
 .footer-unified-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
