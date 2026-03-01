@@ -1058,6 +1058,12 @@ main.section,
   filter: brightness(1.06);
 }
 
+.back-to-top svg {
+  width: 25px;
+  height: 25px;
+  fill: currentColor;
+}
+
 body.contact-modal-open {
   overflow: hidden;
 }
