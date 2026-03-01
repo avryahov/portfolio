@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="assets/css/base.css?v=20260301-22" />
     <link rel="stylesheet" href="assets/css/themes/theme-dark.css?v=20260301-2" />
     <link rel="stylesheet" href="assets/css/themes/theme-light.css?v=20260301-1" />
-    <link rel="stylesheet" href="assets/css/home.css?v=20260301-8" />
+    <link rel="stylesheet" href="assets/css/home.css?v=20260301-29" />
   </head>
   <body class="home-body" data-root=".">
     <main>
@@ -83,6 +83,7 @@
             <a href="#about" class="active">Обо мне</a>
             <a href="#education">Образование</a>
             <a href="#experience">Опыт работы</a>
+            <a href="#lifecycle">ЖЦ разработки</a>
             <a href="#qualification">Квалификация</a>
             <a href="services/">Услуги</a>
             <a href="blog/">Блог</a>
@@ -320,6 +321,153 @@
               <span aria-hidden="true">›</span>
             </button>
           </div>
+        </div>
+      </section>
+
+      <section id="lifecycle" class="home-section anchor-target">
+        <div class="container">
+          <article class="lifecycle-block reveal">
+            <header class="lifecycle-head">
+              <h2>Жизненный цикл разработки ПО под ключ</h2>
+            </header>
+            <div class="role-cards" role="list" aria-label="Роли в контуре разработки">
+              <article class="role-card" role="listitem">
+                <img class="role-icon" src="assets/img/role-icons/analyst.svg" alt="" aria-hidden="true" loading="lazy" />
+                <h3>Аналитик</h3>
+              </article>
+              <article class="role-card" role="listitem">
+                <img class="role-icon" src="assets/img/role-icons/architect.svg" alt="" aria-hidden="true" loading="lazy" />
+                <h3>Архитектор</h3>
+              </article>
+              <article class="role-card" role="listitem">
+                <img class="role-icon" src="assets/img/role-icons/fullstack.svg" alt="" aria-hidden="true" loading="lazy" />
+                <h3>FullStack</h3>
+              </article>
+              <article class="role-card" role="listitem">
+                <img class="role-icon" src="assets/img/role-icons/qa.svg" alt="" aria-hidden="true" loading="lazy" />
+                <h3>QA</h3>
+              </article>
+            </div>
+            <div class="lifecycle-track" role="list" aria-label="Этапы жизненного цикла разработки ПО">
+              <article class="lifecycle-step lifecycle-analysis" role="listitem">
+                <div class="lifecycle-arrow">
+                  <h3>Анализ</h3>
+                </div>
+                <ul class="lifecycle-points">
+                  <li>Сбор бизнес- и техтребований.</li>
+                  <li>Аудит текущего решения и legacy.</li>
+                  <li>Оценка рисков, сроков и бюджета.</li>
+                </ul>
+              </article>
+              <article class="lifecycle-step lifecycle-design" role="listitem">
+                <div class="lifecycle-arrow">
+                  <h3>Проектирование</h3>
+                </div>
+                <ul class="lifecycle-points">
+                  <li>Архитектура и границы сервисов.</li>
+                  <li>Контракты API и интеграции.</li>
+                  <li>План итераций и технический roadmap.</li>
+                </ul>
+              </article>
+              <article class="lifecycle-step lifecycle-development" role="listitem">
+                <div class="lifecycle-arrow">
+                  <h3>Разработка</h3>
+                </div>
+                <ul class="lifecycle-points">
+                  <li>Backend и интеграционный контур.</li>
+                  <li>Реализация бизнес-логики и данных.</li>
+                  <li>Контроль качества кода и ревью.</li>
+                </ul>
+              </article>
+              <article class="lifecycle-step lifecycle-testing" role="listitem">
+                <div class="lifecycle-arrow">
+                  <h3>Тестирование</h3>
+                </div>
+                <ul class="lifecycle-points">
+                  <li>Функциональная и интеграционная проверка.</li>
+                  <li>Проверка нагрузки и отказоустойчивости.</li>
+                  <li>Исправление дефектов до acceptance.</li>
+                </ul>
+              </article>
+              <article class="lifecycle-step lifecycle-release" role="listitem">
+                <div class="lifecycle-arrow">
+                  <h3>Релиз</h3>
+                </div>
+                <ul class="lifecycle-points">
+                  <li>CI/CD и подготовка production-среды.</li>
+                  <li>Миграции данных и безопасный rollout.</li>
+                  <li>Документация и передача в эксплуатацию.</li>
+                </ul>
+              </article>
+              <div class="lifecycle-boundary" aria-hidden="true"></div>
+              <article class="lifecycle-step lifecycle-support" role="listitem">
+                <div class="lifecycle-arrow">
+                  <h3>Поддержка</h3>
+                </div>
+                <ul class="lifecycle-points">
+                  <li>Мониторинг и оперативная реакция.</li>
+                  <li>SLA-поддержка и устранение инцидентов.</li>
+                  <li>Развитие продукта по roadmap.</li>
+                </ul>
+              </article>
+            </div>
+            <div class="time-management-strip" aria-label="Непрерывный тайм-менеджмент">
+              <div class="time-management-main">
+                <span class="time-management-title">Тайм-менеджмент до релиза</span>
+              </div>
+              <div class="time-management-post" aria-hidden="true"></div>
+            </div>
+            <div class="devops-parallel" aria-label="Параллельный DevOps контур">
+              <div class="devops-track" role="list" aria-label="DevOps действия, связанные с этапами ЖЦ">
+                <article class="devops-step devops-analysis" role="listitem">
+                  <div class="devops-arrow"><h4>Инфраструктурное обследование</h4></div>
+                  <ul class="devops-points">
+                    <li>Аудит площадки или облака и ограничений по безопасности.</li>
+                    <li>Определение целевой схемы окружений и подхода к развёртыванию.</li>
+                  </ul>
+                </article>
+                <article class="devops-step devops-design" role="listitem">
+                  <div class="devops-arrow"><h4>Провижининг окружений</h4></div>
+                  <ul class="devops-points">
+                    <li>Сеть, доступы, DNS, хранилища, секреты, базовые сервисы.</li>
+                    <li>Подготовка on-prem/cloud контура для разработки и тестирования.</li>
+                  </ul>
+                </article>
+                <article class="devops-step devops-development" role="listitem">
+                  <div class="devops-arrow"><h4>CI/CD конвейер</h4></div>
+                  <ul class="devops-points">
+                    <li>Сборка и версионирование артефактов, правила quality gates.</li>
+                    <li>Автодеплой по средам и управляемые rollback-сценарии.</li>
+                  </ul>
+                </article>
+                <article class="devops-step devops-testing" role="listitem">
+                  <div class="devops-arrow"><h4>Наблюдаемость (Observability)</h4></div>
+                  <ul class="devops-points">
+                    <li>Логи, метрики, трассировка и алерты для теста и production.</li>
+                    <li>Технические SLI/SLO, диагностика деградаций и узких мест.</li>
+                  </ul>
+                </article>
+                <article class="devops-step devops-release" role="listitem">
+                  <div class="devops-arrow"><h4>Релиз-инжиниринг</h4></div>
+                  <ul class="devops-points">
+                    <li>Миграции, бэкапы и blue-green/canary сценарии запуска.</li>
+                    <li>Контроль релиза, эксплуатационные чек-листы и откат.</li>
+                  </ul>
+                </article>
+                <article class="devops-step devops-support" role="listitem">
+                  <div class="devops-arrow"><h4>SRE-сопровождение</h4></div>
+                  <ul class="devops-points">
+                    <li>Инцидент-менеджмент, runbook и операционная автоматизация.</li>
+                    <li>Сопровождение после релиза по дополнительному соглашению.</li>
+                  </ul>
+                </article>
+              </div>
+              <div class="lifecycle-meta-row">
+                <p class="lifecycle-docs-note">Сбор и ведение полного пакета технической документации до релиза.</p>
+                <p class="lifecycle-support-note lifecycle-support-note-bottom">Поддержка и сопровождение выполняются по доп. соглашению.</p>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
