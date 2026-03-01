@@ -380,7 +380,7 @@
 }
 
 .qual-mini-card {
-  padding: 14px 12px 12px;
+  padding: 22px 12px 14px;
   border-radius: 12px;
   border: 1px solid rgba(126, 150, 226, 0.38);
   background: rgba(13, 27, 67, 0.82);
@@ -455,6 +455,11 @@
   cursor: pointer;
 }
 
+.experience-page .qualification-brief {
+  margin-top: 28px;
+  margin-bottom: 28px;
+}
+
 .skill-group {
   padding: 30px;
   border-top: 6px solid #4b72f0;
@@ -502,6 +507,11 @@
 }
 
 @media (max-width: 640px) {
+  .experience-page .qualification-brief {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
   .qualification-brief {
     padding: 14px;
   }
@@ -512,7 +522,7 @@
   }
 
   .qual-mini-card {
-    padding: 8px;
+    padding: 12px 8px 8px;
     min-height: 50px;
     border-radius: 10px;
     justify-content: center;
