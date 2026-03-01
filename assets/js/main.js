@@ -1,5 +1,6 @@
 (function () {
-  var storageKey = 'portfolio-theme';
+  var storageKey = 'portfolio-theme-v2';
+  var legacyStorageKey = 'portfolio-theme';
 
   function setTheme(theme, persist) {
     document.documentElement.setAttribute('data-theme', theme);
@@ -10,37 +11,52 @@
   }
 
   function syncThemeToggle(theme) {
-    var icon = document.querySelector('[data-theme-icon]');
-    var label = document.querySelector('[data-theme-label]');
-    if (!icon || !label) {
+    var toggles = document.querySelectorAll('[data-theme-toggle]');
+    if (!toggles.length) {
       return;
     }
 
-    if (theme === 'dark') {
-      icon.textContent = '☀';
-      label.textContent = 'Светлая';
-    } else {
-      icon.textContent = '☾';
-      label.textContent = 'Тёмная';
-    }
+    toggles.forEach(function (toggle) {
+      var icon = toggle.querySelector('[data-theme-icon]');
+      if (!icon) {
+        return;
+      }
+
+      if (theme === 'dark') {
+        icon.textContent = '☀';
+        toggle.setAttribute('aria-label', 'Переключить на светлую тему');
+        toggle.setAttribute('title', 'Переключить на светлую тему');
+      } else {
+        icon.textContent = '☾';
+        toggle.setAttribute('aria-label', 'Переключить на тёмную тему');
+        toggle.setAttribute('title', 'Переключить на тёмную тему');
+      }
+    });
   }
 
   function initTheme() {
+    var legacyValue = localStorage.getItem(legacyStorageKey);
+    if (legacyValue !== null && localStorage.getItem(storageKey) === null) {
+      localStorage.removeItem(legacyStorageKey);
+    }
+
     var saved = localStorage.getItem(storageKey);
-    var theme = saved === 'dark' ? 'dark' : 'light';
+    var theme = saved === 'light' ? 'light' : 'dark';
     setTheme(theme, false);
   }
 
   function initThemeToggle() {
-    var toggle = document.querySelector('[data-theme-toggle]');
-    if (!toggle) {
+    var toggles = document.querySelectorAll('[data-theme-toggle]');
+    if (!toggles.length) {
       return;
     }
 
-    toggle.addEventListener('click', function () {
-      var current = document.documentElement.getAttribute('data-theme') || 'light';
-      var next = current === 'dark' ? 'light' : 'dark';
-      setTheme(next, true);
+    toggles.forEach(function (toggle) {
+      toggle.addEventListener('click', function () {
+        var current = document.documentElement.getAttribute('data-theme') || 'dark';
+        var next = current === 'dark' ? 'light' : 'dark';
+        setTheme(next, true);
+      });
     });
   }
 
@@ -310,7 +326,7 @@
     }
 
     var root = normalizeRootPath(document.body.getAttribute('data-root') || '.');
-    var componentVersion = '20260301-6';
+    var componentVersion = '20260301-8';
     var url = root + '/components/' + componentPath + '?v=' + componentVersion;
 
     return fetch(url, { cache: 'no-store' })

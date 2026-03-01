@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,8 +14,10 @@
       href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=Manrope:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/base.css?v=20260301-7" />
-    <link rel="stylesheet" href="assets/css/home.css?v=20260301-3" />
+    <link rel="stylesheet" href="assets/css/base.css?v=20260301-20" />
+    <link rel="stylesheet" href="assets/css/themes/theme-dark.css?v=20260301-2" />
+    <link rel="stylesheet" href="assets/css/themes/theme-light.css?v=20260301-1" />
+    <link rel="stylesheet" href="assets/css/home.css?v=20260301-7" />
   </head>
   <body class="home-body" data-root=".">
     <main>
@@ -94,6 +96,9 @@
               <span class="nav-search-icon" aria-hidden="true">🔍</span>
               <input type="search" name="q" placeholder="Поиск по сайту" aria-label="Поиск по сайту" />
             </form>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="Переключить на светлую тему" title="Переключить на светлую тему">
+              <span data-theme-icon aria-hidden="true">☀</span>
+            </button>
           </nav>
         </div>
       </section>
@@ -487,7 +492,7 @@
 
     <div data-component="footer"></div>
 
-    <script src="assets/js/main.js?v=20260301-6"></script>
+    <script src="assets/js/main.js?v=20260301-7"></script>
     <script src="assets/js/home-nav.js?v=20260301-2"></script>
     <script src="assets/js/about-toggle.js"></script>
     <script src="assets/js/reveal.js"></script>

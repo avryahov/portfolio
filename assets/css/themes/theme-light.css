@@ -1,0 +1,19 @@
+html[data-theme="light"] {
+  --bg: #e3e9f3;
+  --bg-grad-1: rgba(89, 111, 255, 0.16);
+  --bg-grad-2: rgba(22, 177, 223, 0.14);
+  --surface: #ffffff;
+  --surface-2: #f0f3ff;
+  --surface-3: #e8edff;
+
+  --ink: #141b3b;
+  --muted: #4f5a7c;
+  --line: #cbd4f4;
+
+  --brand: #5e47ff;
+  --brand-2: #24a7d9;
+  --brand-soft: rgba(94, 71, 255, 0.14);
+
+  --shadow-glow: 0 0 11.5px 0 rgba(30, 9, 90, 0.28);
+  --shadow-panel: 0 10px 30px rgba(24, 34, 78, 0.11);
+}

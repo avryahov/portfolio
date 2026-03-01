@@ -1,0 +1,20 @@
+:root,
+html[data-theme="dark"] {
+  --bg: #050a22;
+  --bg-grad-1: rgba(68, 85, 196, 0.3);
+  --bg-grad-2: rgba(26, 118, 184, 0.22);
+  --surface: rgba(12, 20, 54, 0.9);
+  --surface-2: rgba(17, 29, 72, 0.92);
+  --surface-3: rgba(30, 48, 108, 0.85);
+
+  --ink: #eef3ff;
+  --muted: #b7c4e8;
+  --line: rgba(128, 145, 214, 0.36);
+
+  --brand: #4d73ff;
+  --brand-2: #5f86ff;
+  --brand-soft: rgba(108, 130, 255, 0.2);
+
+  --shadow-glow: 0 0 16px rgba(60, 100, 255, 0.28);
+  --shadow-panel: 0 16px 34px rgba(2, 7, 22, 0.48);
+}
