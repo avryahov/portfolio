@@ -611,6 +611,10 @@ html[data-theme="light"] .qual-mini-card {
   background: #f9fbff;
 }
 
+html[data-theme="light"] .qual-mini-card h4 {
+  color: #111111;
+}
+
 html[data-theme="light"] .qual-toggle-btn {
   border: 1px solid #2f66e8;
   background: #2f66e8;
