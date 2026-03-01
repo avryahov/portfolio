@@ -736,12 +736,12 @@ main.section,
 .footer-social-wrap {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .footer-social-wrap a {
-  width: 36px;
-  height: 36px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.18);
   background: rgba(255, 255, 255, 0.08);
@@ -757,6 +757,71 @@ main.section,
 .footer-social-wrap a:hover {
   background: rgba(74, 111, 255, 0.35);
   border-color: rgba(173, 196, 255, 0.58);
+}
+
+.footer-icon-link {
+  width: 46px;
+  height: 46px;
+}
+
+.footer-icon-link svg {
+  width: 21px;
+  height: 21px;
+  fill: currentColor;
+}
+
+.footer-contact-ring {
+  background: rgba(233, 241, 255, 0.78);
+  border-color: rgba(255, 255, 255, 0.62);
+}
+
+.footer-contact-ring:hover {
+  background: rgba(244, 248, 255, 0.9);
+}
+
+.footer-icon-max {
+  color: #7a4dff;
+}
+
+.footer-icon-max svg {
+  width: 20px;
+  height: 20px;
+}
+
+.footer-icon-tg {
+  color: #2aabee;
+}
+
+.footer-icon-vk {
+  color: #4fa7ff;
+}
+
+.footer-icon-megafon {
+  color: #00b956;
+}
+
+.footer-icon-mts {
+  color: #ff2c2c;
+}
+
+.footer-icon-tmobile,
+.footer-icon-yandex {
+  color: rgba(233, 241, 255, 0.96);
+}
+
+.footer-icon-tmobile.footer-contact-ring,
+.footer-icon-yandex.footer-contact-ring {
+  background: rgba(246, 199, 74, 0.78);
+  border-color: rgba(255, 226, 129, 0.95);
+}
+
+.footer-icon-tmobile.footer-contact-ring:hover,
+.footer-icon-yandex.footer-contact-ring:hover {
+  background: rgba(250, 208, 88, 0.9);
+}
+
+.footer-icon-gmail {
+  color: #34a853;
 }
 
 .footer-unified-grid {
