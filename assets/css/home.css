@@ -438,6 +438,34 @@
 
 .lifecycle-flow-sync {
   min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.lifecycle-flow-sync::-webkit-scrollbar {
+  display: none;
+}
+
+.lifecycle-flow-sync > .role-cards,
+.lifecycle-flow-sync > .lifecycle-track,
+.lifecycle-flow-sync > .time-management-strip,
+.lifecycle-flow-sync > .devops-parallel {
+  width: max-content;
+  min-width: max-content;
+}
+
+.lifecycle-flow-sync .role-cards,
+.lifecycle-flow-sync .lifecycle-track,
+.lifecycle-flow-sync .time-management-strip,
+.lifecycle-flow-sync .devops-track,
+.lifecycle-flow-sync .lifecycle-meta-row {
+  overflow: visible;
+}
+
+.lifecycle-flow-sync .devops-parallel {
+  padding-right: 2px;
 }
 
 .lifecycle-meta-row {
@@ -1115,37 +1143,6 @@
 
   .devops-points li {
     font-size: 0.86rem;
-  }
-
-  .lifecycle-flow-sync {
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 4px;
-    scrollbar-width: none;
-  }
-
-  .lifecycle-flow-sync::-webkit-scrollbar {
-    display: none;
-  }
-
-  .lifecycle-flow-sync > .role-cards,
-  .lifecycle-flow-sync > .lifecycle-track,
-  .lifecycle-flow-sync > .time-management-strip,
-  .lifecycle-flow-sync > .devops-parallel {
-    width: max-content;
-    min-width: max-content;
-  }
-
-  .lifecycle-flow-sync .role-cards,
-  .lifecycle-flow-sync .lifecycle-track,
-  .lifecycle-flow-sync .time-management-strip,
-  .lifecycle-flow-sync .devops-track,
-  .lifecycle-flow-sync .lifecycle-meta-row {
-    overflow: visible;
-  }
-
-  .lifecycle-flow-sync .devops-parallel {
-    padding-right: 2px;
   }
 
 }
