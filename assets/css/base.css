@@ -131,6 +131,11 @@ a {
   text-align: left;
 }
 
+.landing-subtitle-gap {
+  display: block;
+  height: 0.9em;
+}
+
 .landing-cta-row {
   margin-top: 0;
   grid-column: 2;
