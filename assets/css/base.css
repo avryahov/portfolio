@@ -166,7 +166,9 @@ a {
   display: flex;
   justify-content: flex-end;
   align-self: end;
+  flex-wrap: wrap;
   gap: 12px;
+  align-items: center;
 }
 
 .landing-icon-link {
@@ -191,6 +193,100 @@ a {
 
 .landing-icon-link:hover {
   background: rgba(255, 255, 255, 0.26);
+}
+
+.landing-contact-ring {
+  background: rgba(233, 241, 255, 0.78);
+  border-color: rgba(255, 255, 255, 0.62);
+}
+
+.landing-contact-ring:hover {
+  background: rgba(244, 248, 255, 0.9);
+}
+
+.landing-icon-link-max svg {
+  width: 26px;
+  height: 26px;
+  display: block;
+  fill: currentColor;
+}
+
+.landing-icon-link-max {
+  padding: 0;
+  color: #7a4dff;
+}
+
+.landing-icon-link-tg {
+  color: #2aabee;
+}
+
+.landing-icon-link-vk {
+  width: 54px;
+  min-width: 54px;
+  border-radius: 50%;
+  padding: 0;
+  color: #4fa7ff;
+}
+
+.landing-icon-link-vk svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.landing-icon-link-megafon {
+  padding: 0;
+  color: #00b956;
+}
+
+.landing-icon-link-mts {
+  padding: 0;
+  color: #ff2c2c;
+}
+
+.landing-icon-link-tmobile {
+  padding: 0;
+  color: #ffd43b;
+}
+
+.landing-icon-link-yandex {
+  padding: 0;
+  color: #ffd43b;
+}
+
+.landing-icon-link-gmail {
+  padding: 0;
+  color: #34a853;
+}
+
+.landing-icon-link-megafon svg,
+.landing-icon-link-mts svg,
+.landing-icon-link-tmobile svg,
+.landing-icon-link-yandex svg,
+.landing-icon-link-gmail svg {
+  width: 22px;
+  height: 22px;
+}
+
+.landing-icon-link-yandex svg,
+.landing-icon-link-gmail svg {
+  fill: currentColor;
+}
+
+.landing-icon-link-tmobile.landing-contact-ring,
+.landing-icon-link-yandex.landing-contact-ring {
+  background: rgba(246, 199, 74, 0.78);
+  border-color: rgba(255, 226, 129, 0.95);
+}
+
+.landing-icon-link-tmobile.landing-contact-ring:hover,
+.landing-icon-link-yandex.landing-contact-ring:hover {
+  background: rgba(250, 208, 88, 0.9);
+}
+
+.landing-icon-link-tmobile,
+.landing-icon-link-yandex {
+  color: rgba(233, 241, 255, 0.96);
 }
 
 .anchor-strip {
