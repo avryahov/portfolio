@@ -839,6 +839,25 @@ main.section,
   height: 22px;
 }
 
+.footer-icon-dzen {
+  color: #ffffff;
+}
+
+.footer-icon-dzen.footer-contact-ring {
+  background: #101010;
+  border-color: #2a2a2a;
+}
+
+.footer-icon-dzen.footer-contact-ring:hover {
+  background: #1a1a1a;
+  border-color: #3a3a3a;
+}
+
+.footer-icon-dzen svg {
+  width: 22px;
+  height: 22px;
+}
+
 .footer-icon-youtube {
   color: #ff0000;
 }
