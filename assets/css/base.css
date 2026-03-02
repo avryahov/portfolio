@@ -99,6 +99,7 @@ a {
   align-items: stretch;
   gap: 12px 28px;
   padding-left: clamp(360px, 27vw, 520px);
+  transform: translateX(86px);
 }
 
 .landing-visual {
@@ -1428,6 +1429,7 @@ html.reveal-enabled .reveal.is-visible {
     grid-template-rows: auto;
     gap: 16px;
     padding-left: 0;
+    transform: none;
   }
 
   .landing-visual {
