@@ -98,8 +98,10 @@
             <a href="services/">Услуги</a>
             <a href="blog/">Блог</a>
             <a href="contacts/">Контакты</a>
-            <form class="nav-search" role="search" action="javascript:void(0)">
-              <span class="nav-search-icon" aria-hidden="true">🔍</span>
+            <form class="nav-search" role="search" action="javascript:void(0)" data-nav-search>
+              <button class="nav-search-toggle" type="button" data-nav-search-toggle aria-label="Открыть поиск по сайту" aria-expanded="false">
+                <span aria-hidden="true">🔍</span>
+              </button>
               <input type="search" name="q" placeholder="Поиск по сайту" aria-label="Поиск по сайту" />
             </form>
             <button class="theme-toggle" type="button" data-theme-toggle aria-label="Переключить на светлую тему" title="Переключить на светлую тему">

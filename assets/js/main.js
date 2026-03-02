@@ -182,6 +182,113 @@
     });
   }
 
+  function initNavSearchAccordion() {
+    var strips = document.querySelectorAll('.anchor-strip');
+    if (!strips.length) {
+      return;
+    }
+
+    strips.forEach(function (strip) {
+      var nav = strip.querySelector('.anchor-nav');
+      var search = strip.querySelector('[data-nav-search]');
+      var toggle = strip.querySelector('[data-nav-search-toggle]');
+      var input = search ? search.querySelector('input[type="search"]') : null;
+      if (!nav || !search || !toggle || !input) {
+        return;
+      }
+
+      var mobileMenuMedia = window.matchMedia('(max-width: 767px) and (orientation: portrait)');
+      var closeTimer = 0;
+
+      function setToggleState(opened) {
+        toggle.setAttribute('aria-expanded', opened ? 'true' : 'false');
+        toggle.setAttribute('aria-label', opened ? 'Свернуть поиск по сайту' : 'Открыть поиск по сайту');
+      }
+
+      function closeSearch() {
+        search.classList.remove('is-expanded');
+        setToggleState(false);
+      }
+
+      function shouldCollapseSearch() {
+        var navLinks = nav.querySelectorAll('a');
+        var overflowed = nav.scrollWidth > nav.clientWidth + 1;
+        if (!navLinks.length) {
+          return overflowed;
+        }
+
+        var edgeLink = navLinks[navLinks.length - 1];
+        var linkRect = edgeLink.getBoundingClientRect();
+        var searchRect = search.getBoundingClientRect();
+        return searchRect.left <= linkRect.right + 8 || overflowed;
+      }
+
+      function scrollNavToEnd() {
+        nav.scrollTo({ left: nav.scrollWidth, behavior: 'auto' });
+      }
+
+      function updateSearchLayout() {
+        var compactViewport = window.innerWidth <= 1400;
+
+        if (mobileMenuMedia.matches) {
+          search.classList.remove('is-collapsed');
+          closeSearch();
+          return;
+        }
+
+        search.classList.remove('is-collapsed');
+        closeSearch();
+
+        if (compactViewport || shouldCollapseSearch()) {
+          search.classList.add('is-collapsed');
+          setToggleState(false);
+        } else {
+          setToggleState(true);
+        }
+      }
+
+      toggle.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        if (!search.classList.contains('is-collapsed')) {
+          input.focus();
+          return;
+        }
+
+        var opened = search.classList.toggle('is-expanded');
+        setToggleState(opened);
+
+        if (opened) {
+          scrollNavToEnd();
+          window.clearTimeout(closeTimer);
+          closeTimer = window.setTimeout(function () {
+            input.focus();
+          }, 120);
+        }
+      });
+
+      input.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+          closeSearch();
+          toggle.focus();
+        }
+      });
+
+      document.addEventListener('click', function (event) {
+        if (!search.classList.contains('is-expanded')) {
+          return;
+        }
+        if (search.contains(event.target)) {
+          return;
+        }
+        closeSearch();
+      });
+
+      window.addEventListener('resize', updateSearchLayout);
+      updateSearchLayout();
+    });
+  }
+
   function initContactModal() {
     var modal = document.querySelector('[data-contact-modal]');
     var openers = document.querySelectorAll('[data-contact-modal-open]');
@@ -380,6 +487,7 @@
     applyYear();
     initStickyNavFallback();
     initResponsiveNavMenus();
+    initNavSearchAccordion();
     initContactModal();
     initBackToTop();
   });
