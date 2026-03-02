@@ -212,11 +212,13 @@
 }
 
 @media (pointer: fine) {
-  .experience-grid {
+  .experience-grid,
+  .lifecycle-flow-sync {
     cursor: grab;
   }
 
-  .experience-grid.is-dragging-track {
+  .experience-grid.is-dragging-track,
+  .lifecycle-flow-sync.is-dragging-track {
     cursor: grabbing;
   }
 

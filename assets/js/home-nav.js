@@ -194,4 +194,5 @@
   }
 
   initDragScroll(experienceGrid);
+  initDragScroll(document.querySelector('.lifecycle-flow-sync'));
 })();
