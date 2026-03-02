@@ -1479,13 +1479,18 @@ html.reveal-enabled .reveal.is-visible {
     padding-bottom: 0;
     grid-column: 1;
     grid-row: auto;
+    justify-self: center;
+    margin: 0 auto;
   }
 
   .landing-cta-row {
+    width: 100%;
+    justify-content: center;
     margin-top: 0;
   }
 
   .landing-icon-links {
+    width: 100%;
     justify-content: center;
   }
 
