@@ -633,6 +633,12 @@ a {
   margin: 0 auto;
 }
 
+@media (min-width: 1024px) {
+  .container {
+    width: min(var(--container), 90%);
+  }
+}
+
 .site-header {
   position: sticky;
   top: 0;
