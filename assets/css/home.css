@@ -872,6 +872,12 @@ body.drag-scroll-armed * {
   cursor: pointer;
 }
 
+/* Temporary hide for "Подробнее" and "Показать все навыки и грейды". */
+body[data-root="."] .exp-link,
+body[data-root="."] .qual-toggle-btn {
+  display: none !important;
+}
+
 .experience-page .qualification-brief {
   margin-top: 28px;
   margin-bottom: 28px;
