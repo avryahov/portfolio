@@ -1492,29 +1492,39 @@ html.reveal-enabled .reveal.is-visible {
   }
 
   .landing-aside {
-    width: min(100%, 252px);
+    width: min(100%, 520px);
     min-height: auto;
     align-items: center;
     justify-content: center;
-    gap: 14px;
+    gap: 12px;
     padding-top: 0;
     padding-bottom: 0;
     grid-column: 1;
     grid-row: 4;
     justify-self: center;
     margin: 0 auto;
+    flex-direction: row;
   }
 
   .landing-cta-row {
     transform: none;
-    width: 100%;
-    justify-content: center;
+    width: auto;
+    justify-content: flex-start;
     margin-top: 0;
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .landing-icon-links {
+    width: auto;
+    justify-content: flex-end;
+    gap: 10px;
+    flex: 0 0 auto;
+  }
+
+  .landing-cta-btn {
+    min-width: 210px;
     width: 100%;
-    justify-content: center;
   }
 
   .landing-header h1 {
@@ -1766,6 +1776,30 @@ html.reveal-enabled .reveal.is-visible {
 }
 
 @media (max-width: 540px) {
+  .landing-aside {
+    width: min(100%, 460px);
+    gap: 8px;
+  }
+
+  .landing-cta-btn {
+    min-width: 176px;
+    padding: 10px 16px;
+  }
+
+  .landing-icon-links {
+    gap: 8px;
+  }
+
+  .landing-icon-link {
+    width: 46px;
+    height: 46px;
+  }
+
+  .landing-icon-link svg {
+    width: 22px;
+    height: 22px;
+  }
+
   .back-to-top {
     right: 8px;
     top: 66%;
