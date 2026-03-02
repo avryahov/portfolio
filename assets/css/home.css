@@ -201,7 +201,7 @@
   gap: 20px;
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: none;
   padding: 4px 2px 10px;
   scrollbar-width: none;
   touch-action: pan-y;
@@ -211,22 +211,20 @@
   display: none;
 }
 
-@media (pointer: fine) {
-  .experience-grid,
-  .lifecycle-flow-sync {
-    cursor: grab;
-  }
+.experience-grid,
+.lifecycle-flow-sync {
+  cursor: grab;
+}
 
-  .experience-grid.is-dragging-track,
-  .lifecycle-flow-sync.is-dragging-track {
-    cursor: grabbing;
-  }
+.experience-grid.is-dragging-track,
+.lifecycle-flow-sync.is-dragging-track {
+  cursor: grabbing;
+}
 
-  body.drag-scroll-armed,
-  body.drag-scroll-armed * {
-    -webkit-user-select: none !important;
-    user-select: none;
-  }
+body.drag-scroll-armed,
+body.drag-scroll-armed * {
+  -webkit-user-select: none !important;
+  user-select: none;
 }
 
 .exp-card {
@@ -238,7 +236,7 @@
   border-top: 6px solid rgba(156, 186, 255, 0.82);
   display: flex;
   flex-direction: column;
-  scroll-snap-align: start;
+  scroll-snap-align: none;
   box-shadow: none;
   border: 1px solid rgba(128, 154, 232, 0.35);
   background:
@@ -916,6 +914,7 @@
 
   .experience-grid {
     touch-action: pan-x;
+    scroll-snap-type: x mandatory;
   }
 
   .exp-card {
@@ -923,6 +922,7 @@
     min-width: 84vw;
     max-width: 84vw;
     min-height: 460px;
+    scroll-snap-align: start;
   }
 
   .skills-grid {

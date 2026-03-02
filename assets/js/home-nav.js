@@ -51,8 +51,47 @@
 
   var experienceGrid = document.querySelector('.experience-grid');
 
+  function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+  }
+
+  function initDesktopWheelHorizontalScroll(track) {
+    if (!track) {
+      return;
+    }
+
+    var desktopViewport = window.matchMedia('(min-width: 768px)');
+    if (!desktopViewport.matches) {
+      return;
+    }
+
+    track.addEventListener('wheel', function (event) {
+      if (!desktopViewport.matches) {
+        return;
+      }
+
+      var maxScrollLeft = track.scrollWidth - track.clientWidth;
+      if (maxScrollLeft <= 0) {
+        return;
+      }
+
+      var dominantDelta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+      if (dominantDelta === 0) {
+        return;
+      }
+
+      var nextLeft = clamp(track.scrollLeft + dominantDelta, 0, maxScrollLeft);
+      if (nextLeft === track.scrollLeft) {
+        return;
+      }
+
+      track.scrollLeft = nextLeft;
+      event.preventDefault();
+    }, { passive: false });
+  }
+
   function initDragScroll(track) {
-    if (!track || !window.matchMedia('(pointer: fine)').matches) {
+    if (!track) {
       return;
     }
 
@@ -106,6 +145,7 @@
       document.body.classList.add('drag-scroll-armed');
       startX = event.pageX;
       startLeft = track.scrollLeft;
+      event.preventDefault();
     });
 
     window.addEventListener('mousemove', function (event) {
@@ -128,11 +168,8 @@
 
     window.addEventListener('mouseup', stopDrag);
     window.addEventListener('blur', stopDrag);
-    track.addEventListener('mouseleave', stopDrag);
     track.addEventListener('dragstart', function (event) {
-      if (dragging) {
-        event.preventDefault();
-      }
+      event.preventDefault();
     });
 
     track.addEventListener('click', function (event) {
@@ -147,5 +184,6 @@
   }
 
   initDragScroll(experienceGrid);
+  initDesktopWheelHorizontalScroll(experienceGrid);
   initDragScroll(document.querySelector('.lifecycle-flow-sync'));
 })();
