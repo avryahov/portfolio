@@ -1111,6 +1111,13 @@ main.section,
   height: var(--circle-icon-size);
 }
 
+/* Temporarily hide selected social channels without removing markup. */
+.footer-social-wrap .footer-icon-rutube,
+.footer-social-wrap .footer-icon-dzen,
+.footer-social-wrap .footer-icon-youtube {
+  display: none;
+}
+
 .footer-icon-github {
   color: #ffffff;
 }
