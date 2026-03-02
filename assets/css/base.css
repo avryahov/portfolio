@@ -1885,6 +1885,32 @@ html.reveal-enabled .reveal.is-visible {
     border-radius: 50%;
     justify-content: center;
   }
+
+  .anchor-nav-controls .back-to-top {
+    position: static;
+    right: auto;
+    top: auto;
+    transform: none;
+    z-index: auto;
+    width: 44px;
+    min-width: 44px;
+    max-width: 44px;
+    height: 44px;
+    min-height: 44px;
+    max-height: 44px;
+    margin: 0;
+    font-size: 1.08rem;
+    box-shadow: 0 6px 14px rgba(20, 35, 84, 0.24);
+    transition: none;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .anchor-nav-controls .back-to-top.is-visible {
+    display: inline-flex;
+  }
 }
 
 @media (max-width: 540px) {
