@@ -183,6 +183,7 @@ a {
   display: flex;
   justify-content: stretch;
   margin-top: 0;
+  transform: translateY(-61px);
 }
 
 .landing-aside {
@@ -1484,6 +1485,7 @@ html.reveal-enabled .reveal.is-visible {
   }
 
   .landing-cta-row {
+    transform: none;
     width: 100%;
     justify-content: center;
     margin-top: 0;
