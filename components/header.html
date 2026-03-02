@@ -55,23 +55,27 @@
       <span aria-hidden="true">☰</span>
     </button>
     <nav class="anchor-nav site-page-nav" aria-label="Навигация сайта">
-      <a href="{{ROOT}}/index.html" data-nav-target="home">Главная</a>
-      <a href="{{ROOT}}/orgmu/" data-nav-target="orgmu">ОрГМУ</a>
-      <a href="{{ROOT}}/inverter/" data-nav-target="inverter">Завод</a>
-      <a href="{{ROOT}}/open-solutions/" data-nav-target="open-solutions">Открытые Решения</a>
-      <a href="{{ROOT}}/teaching/" data-nav-target="teaching">Преподавание</a>
-      <a href="{{ROOT}}/qualification/" data-nav-target="qualification">Квалификация</a>
-      <a href="{{ROOT}}/services/">Услуги</a>
-      <a href="{{ROOT}}/blog/">Блог</a>
-      <form class="nav-search" role="search" action="javascript:void(0)" data-nav-search>
-        <button class="nav-search-toggle" type="button" data-nav-search-toggle aria-label="Открыть поиск по сайту" aria-expanded="false">
-          <span aria-hidden="true">🔍</span>
+      <div class="anchor-nav-scroll" data-nav-scroll>
+        <a href="{{ROOT}}/index.html" data-nav-target="home">Главная</a>
+        <a href="{{ROOT}}/orgmu/" data-nav-target="orgmu">ОрГМУ</a>
+        <a href="{{ROOT}}/inverter/" data-nav-target="inverter">Завод</a>
+        <a href="{{ROOT}}/open-solutions/" data-nav-target="open-solutions">Открытые Решения</a>
+        <a href="{{ROOT}}/teaching/" data-nav-target="teaching">Преподавание</a>
+        <a href="{{ROOT}}/qualification/" data-nav-target="qualification">Квалификация</a>
+        <a href="{{ROOT}}/services/">Услуги</a>
+        <a href="{{ROOT}}/blog/">Блог</a>
+      </div>
+      <div class="anchor-nav-controls">
+        <form class="nav-search" role="search" action="javascript:void(0)" data-nav-search>
+          <button class="nav-search-toggle" type="button" data-nav-search-toggle aria-label="Открыть поиск по сайту" aria-expanded="false">
+            <span aria-hidden="true">🔍</span>
+          </button>
+          <input type="search" name="q" placeholder="Поиск по сайту" aria-label="Поиск по сайту" />
+        </form>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Переключить на светлую тему" title="Переключить на светлую тему">
+          <span data-theme-icon aria-hidden="true">☀</span>
         </button>
-        <input type="search" name="q" placeholder="Поиск по сайту" aria-label="Поиск по сайту" />
-      </form>
-      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Переключить на светлую тему" title="Переключить на светлую тему">
-        <span data-theme-icon aria-hidden="true">☀</span>
-      </button>
+      </div>
     </nav>
   </div>
 </section>

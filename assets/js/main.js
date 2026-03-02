@@ -129,6 +129,7 @@
     strips.forEach(function (strip) {
       var toggle = strip.querySelector('[data-nav-menu-toggle]');
       var nav = strip.querySelector('.anchor-nav');
+      var navScroll = strip.querySelector('[data-nav-scroll]');
       if (!toggle || !nav) {
         return;
       }
@@ -166,7 +167,7 @@
         }
       });
 
-      nav.querySelectorAll('a').forEach(function (link) {
+      (navScroll || nav).querySelectorAll('a').forEach(function (link) {
         link.addEventListener('click', function () {
           closeMenu(true);
         });
@@ -205,10 +206,13 @@
 
     strips.forEach(function (strip) {
       var nav = strip.querySelector('.anchor-nav');
+      var navScroll = strip.querySelector('[data-nav-scroll]');
+      var controls = strip.querySelector('.anchor-nav-controls');
       var search = strip.querySelector('[data-nav-search]');
       var toggle = strip.querySelector('[data-nav-search-toggle]');
       var input = search ? search.querySelector('input[type="search"]') : null;
-      if (!nav || !search || !toggle || !input) {
+      var track = navScroll || nav;
+      if (!nav || !track || !search || !toggle || !input) {
         return;
       }
 
@@ -225,20 +229,20 @@
       }
 
       function shouldCollapseSearch() {
-        var navLinks = nav.querySelectorAll('a');
-        var overflowed = nav.scrollWidth > nav.clientWidth + 1;
+        var navLinks = track.querySelectorAll('a');
+        var overflowed = track.scrollWidth > track.clientWidth + 1;
         if (!navLinks.length) {
           return overflowed;
         }
 
         var edgeLink = navLinks[navLinks.length - 1];
         var linkRect = edgeLink.getBoundingClientRect();
-        var searchRect = search.getBoundingClientRect();
-        return searchRect.left <= linkRect.right + 8 || overflowed;
+        var controlsRect = controls ? controls.getBoundingClientRect() : search.getBoundingClientRect();
+        return linkRect.right >= controlsRect.left - 8 || overflowed;
       }
 
       function scrollNavToEnd() {
-        nav.scrollTo({ left: nav.scrollWidth, behavior: 'auto' });
+        track.scrollTo({ left: track.scrollWidth, behavior: 'auto' });
       }
 
       function updateSearchLayout() {
