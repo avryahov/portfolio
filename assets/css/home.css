@@ -211,6 +211,22 @@
   display: none;
 }
 
+@media (pointer: fine) {
+  .experience-grid {
+    cursor: grab;
+  }
+
+  .experience-grid.is-dragging-track {
+    cursor: grabbing;
+  }
+
+  body.drag-scroll-armed,
+  body.drag-scroll-armed * {
+    -webkit-user-select: none !important;
+    user-select: none;
+  }
+}
+
 .experience-nav-btn {
   position: absolute;
   top: 50%;
