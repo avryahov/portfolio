@@ -229,53 +229,6 @@
   }
 }
 
-.experience-nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 30px;
-  height: 132px;
-  border: 1px solid rgba(144, 167, 238, 0.52);
-  border-radius: 999px;
-  padding: 0;
-  background: rgba(18, 35, 82, 0.94);
-  cursor: pointer;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-panel);
-}
-
-.experience-nav-btn-prev {
-  left: -38px;
-}
-
-.experience-nav-btn-next {
-  right: -38px;
-}
-
-.experience-nav-btn span {
-  width: auto;
-  height: auto;
-  margin: 0;
-  border-radius: 0;
-  border: 0;
-  background: transparent;
-  color: #c8d8ff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 1.55rem;
-}
-
-.experience-scroll-wrap.is-at-start .experience-nav-btn-prev,
-.experience-scroll-wrap.is-at-end .experience-nav-btn-next {
-  opacity: 0;
-  pointer-events: none;
-}
-
 .exp-card {
   flex: 0 0 min(400px, 86vw);
   min-width: min(400px, 86vw);
@@ -1203,15 +1156,6 @@ html[data-theme="light"] .edu-item::before {
 
 html[data-theme="light"] .edu-period {
   color: #2563eb;
-}
-
-html[data-theme="light"] .experience-nav-btn {
-  border: 1px solid #b7c8fb;
-  background: rgba(236, 242, 251, 0.96);
-}
-
-html[data-theme="light"] .experience-nav-btn span {
-  color: #2f5fe8;
 }
 
 html[data-theme="light"] .exp-card {

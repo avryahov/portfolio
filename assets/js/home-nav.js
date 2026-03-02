@@ -49,54 +49,7 @@
     onScroll();
   }
 
-  var experienceWrap = document.querySelector('.experience-scroll-wrap');
-  var experienceGrid = experienceWrap ? experienceWrap.querySelector('.experience-grid') : null;
-  var prevButton = experienceWrap ? experienceWrap.querySelector('[data-exp-prev]') : null;
-  var nextButton = experienceWrap ? experienceWrap.querySelector('[data-exp-next]') : null;
-
-  function updateExperienceHints() {
-    if (!experienceWrap || !experienceGrid) {
-      return;
-    }
-
-    var maxScrollLeft = Math.max(0, experienceGrid.scrollWidth - experienceGrid.clientWidth);
-    var scrollLeft = experienceGrid.scrollLeft;
-    var edgeTolerance = 2;
-
-    experienceWrap.classList.toggle('is-at-start', scrollLeft <= edgeTolerance);
-    experienceWrap.classList.toggle('is-at-end', scrollLeft >= (maxScrollLeft - edgeTolerance));
-  }
-
-  if (experienceWrap && experienceGrid) {
-    function getStepSize() {
-      var firstCard = experienceGrid.querySelector('.exp-card');
-      if (!firstCard) {
-        return Math.max(280, experienceGrid.clientWidth * 0.7);
-      }
-      return firstCard.getBoundingClientRect().width + 20;
-    }
-
-    function scrollByStep(direction) {
-      var target = experienceGrid.scrollLeft + (getStepSize() * direction);
-      experienceGrid.scrollLeft = target;
-    }
-
-    if (prevButton && nextButton) {
-      prevButton.addEventListener('click', function () {
-        scrollByStep(-1);
-        updateExperienceHints();
-      });
-
-      nextButton.addEventListener('click', function () {
-        scrollByStep(1);
-        updateExperienceHints();
-      });
-    }
-
-    experienceGrid.addEventListener('scroll', updateExperienceHints, { passive: true });
-    window.addEventListener('resize', updateExperienceHints);
-    window.requestAnimationFrame(updateExperienceHints);
-  }
+  var experienceGrid = document.querySelector('.experience-grid');
 
   function initDragScroll(track) {
     if (!track || !window.matchMedia('(pointer: fine)').matches) {
