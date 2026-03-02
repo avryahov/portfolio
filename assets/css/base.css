@@ -1787,123 +1787,86 @@ html.reveal-enabled .reveal.is-visible {
   }
 }
 
-@media (max-width: 767px) and (orientation: portrait) {
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 78px;
+  }
+
   body.nav-overlay-open {
-    overflow: hidden;
+    overflow: auto;
   }
 
   .landing-header h1 {
     font-size: clamp(2rem, 8.4vw, 2.7rem);
   }
 
-  .landing-header {
-    padding-top: 96px;
-    padding-bottom: 46px;
+  .anchor-strip,
+  .anchor-strip.is-fixed {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    z-index: 95;
   }
 
   .anchor-strip .container {
     justify-content: flex-start;
-    min-height: 56px;
+    min-height: 62px;
   }
 
   .nav-menu-toggle {
-    display: inline-flex;
-    position: fixed;
-    top: 10px;
-    left: 16px;
-    z-index: 121;
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
-    font-size: 1.45rem;
-  }
-
-  .nav-menu-toggle.is-open {
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
+    display: none !important;
   }
 
   .anchor-nav {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: min(64vw, 270px);
-    background:
-      radial-gradient(900px 380px at 80% -10%, rgba(67, 130, 228, 0.32), transparent 62%),
-      radial-gradient(820px 340px at -15% 120%, rgba(95, 82, 217, 0.36), transparent 66%),
-      #08123a;
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    align-items: center;
     justify-content: flex-start;
-    gap: 10px;
-    padding: 76px 18px 24px;
-    overflow-y: auto;
-    z-index: 120;
-    -webkit-overflow-scrolling: touch;
-    transform: translateX(-100%);
-    transition: none;
-    visibility: hidden;
-    pointer-events: none;
+    gap: 8px;
+    padding: 8px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    transform: none;
+    visibility: visible;
+    pointer-events: auto;
+    background: transparent;
   }
 
-  .anchor-nav.is-open {
-    transform: translateX(0);
+  .anchor-nav.is-open,
+  .anchor-nav.is-animated {
+    transform: none;
     visibility: visible;
     pointer-events: auto;
   }
 
-  .anchor-nav.is-animated {
-    transition: transform 0.25s ease;
-  }
-
   .anchor-nav a {
-    width: 100%;
-    min-height: 48px;
-    padding: 11px 14px;
-    border-radius: 12px;
+    width: auto;
+    min-height: 40px;
+    padding: 8px 12px;
+    border-radius: 999px;
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    background: rgba(16, 29, 73, 0.86);
-    border: 1px solid rgba(127, 149, 223, 0.4);
   }
 
-  .anchor-nav .nav-search {
-    margin-left: 0;
-    width: 100%;
-    min-width: 0;
-    max-width: none;
-  }
-
-  .anchor-nav .nav-search.is-collapsed,
-  .anchor-nav .nav-search.is-collapsed.is-expanded {
-    width: 100%;
-    min-width: 0;
-    max-width: none;
-    margin-left: 0;
-    padding: 0 14px;
-    gap: 8px;
-  }
-
-  .anchor-nav .nav-search.is-collapsed input,
-  .anchor-nav .nav-search.is-collapsed.is-expanded input {
-    width: 100%;
-    opacity: 1;
-    pointer-events: auto;
+  .anchor-nav .nav-search.is-collapsed {
+    margin-left: auto;
   }
 
   .anchor-nav .theme-toggle {
-    position: static;
-    right: auto;
-    width: 48px;
-    min-width: 48px;
-    max-width: 48px;
-    height: 48px;
-    min-height: 48px;
-    max-height: 48px;
+    width: 44px;
+    min-width: 44px;
+    max-width: 44px;
+    height: 44px;
+    min-height: 44px;
+    max-height: 44px;
     border-radius: 50%;
     justify-content: center;
   }
@@ -2122,18 +2085,4 @@ html[data-theme="dark"] .theme-toggle {
 
 html[data-theme="dark"] .theme-toggle:hover {
   background: #ffffff;
-}
-
-@media (max-width: 767px) and (orientation: portrait) {
-  html[data-theme="light"] .anchor-nav {
-    background:
-      radial-gradient(900px 380px at 80% -10%, rgba(36, 167, 217, 0.2), transparent 62%),
-      radial-gradient(820px 340px at -15% 120%, rgba(94, 71, 255, 0.24), transparent 66%),
-      #f4f7ff;
-  }
-
-  html[data-theme="light"] .anchor-nav a {
-    background: #ffffff;
-    border: 1px solid #d8e3fb;
-  }
 }
