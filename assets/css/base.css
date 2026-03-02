@@ -245,6 +245,11 @@ a {
   filter: brightness(1.08);
 }
 
+/* Temporary hide of the "Обсудить проект" action button. */
+.landing-cta-row {
+  display: none !important;
+}
+
 .landing-icon-links {
   display: flex;
   justify-content: space-between;
