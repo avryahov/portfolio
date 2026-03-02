@@ -431,6 +431,26 @@ a {
   margin-left: 10px;
 }
 
+.anchor-nav-scroll a,
+.anchor-nav .nav-search-toggle,
+.anchor-nav .theme-toggle,
+.anchor-nav-controls .back-to-top {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.anchor-nav .nav-search-toggle,
+.anchor-nav .theme-toggle,
+.anchor-nav-controls .back-to-top {
+  overflow: hidden;
+}
+
+.anchor-nav .nav-search-toggle:focus:not(:focus-visible),
+.anchor-nav .theme-toggle:focus:not(:focus-visible),
+.anchor-nav-controls .back-to-top:focus:not(:focus-visible),
+.anchor-nav-scroll a:focus:not(:focus-visible) {
+  outline: none;
+}
+
 @media (pointer: fine) {
   .anchor-nav-scroll {
     cursor: grab;
