@@ -345,6 +345,7 @@
           }, 0);
         }
         pressed = false;
+        document.body.classList.remove('nav-drag-armed');
         stopDragMode();
       }
 
@@ -358,6 +359,7 @@
         }
 
         pressed = true;
+        document.body.classList.add('nav-drag-armed');
         startX = event.pageX;
         startLeft = track.scrollLeft;
       });

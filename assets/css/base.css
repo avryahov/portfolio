@@ -436,7 +436,15 @@ a {
     cursor: grabbing;
   }
 
+  body.nav-drag-armed,
+  body.nav-drag-armed *,
   body.nav-dragging {
+    -webkit-user-select: none !important;
+    user-select: none;
+  }
+
+  body.nav-dragging * {
+    -webkit-user-select: none !important;
     user-select: none;
   }
 }
