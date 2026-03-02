@@ -104,9 +104,9 @@ a {
 
 .landing-visual {
   position: absolute;
-  left: clamp(-238px, -13vw, -110px);
+  left: -238px;
   bottom: -118px;
-  width: clamp(440px, 32vw, 680px);
+  width: 680px;
   overflow: visible;
   display: block;
   z-index: 36;
@@ -122,6 +122,24 @@ a {
   transform: translateY(14px) scale(1.05);
   transform-origin: left bottom;
   filter: drop-shadow(0 20px 28px rgba(6, 12, 36, 0.34));
+}
+
+@media (max-width: 1480px) {
+  .landing-visual {
+    left: -280px;
+  }
+}
+
+@media (max-width: 1320px) {
+  .landing-visual {
+    left: -340px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .landing-visual {
+    left: -420px;
+  }
 }
 
 .landing-visual-image-light {
@@ -1442,6 +1460,7 @@ html.reveal-enabled .reveal.is-visible {
     z-index: 1;
     justify-content: center;
     margin: 0 auto;
+    grid-row: 1;
   }
 
   .landing-visual-image {
@@ -1454,12 +1473,12 @@ html.reveal-enabled .reveal.is-visible {
     min-height: auto;
     align-items: center;
     grid-column: 1;
-    grid-row: auto;
+    grid-row: 3;
   }
 
   .landing-heading {
     grid-column: 1;
-    grid-row: auto;
+    grid-row: 2;
     text-align: center;
   }
 
@@ -1481,7 +1500,7 @@ html.reveal-enabled .reveal.is-visible {
     padding-top: 0;
     padding-bottom: 0;
     grid-column: 1;
-    grid-row: auto;
+    grid-row: 4;
     justify-self: center;
     margin: 0 auto;
   }
