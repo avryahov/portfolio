@@ -301,6 +301,105 @@
     });
   }
 
+  function initNavDragScroll() {
+    var tracks = document.querySelectorAll('[data-nav-scroll]');
+    if (!tracks.length) {
+      return;
+    }
+
+    var finePointer = window.matchMedia('(pointer: fine)');
+    if (!finePointer.matches) {
+      return;
+    }
+
+    tracks.forEach(function (track) {
+      var pressed = false;
+      var dragging = false;
+      var startX = 0;
+      var startLeft = 0;
+      var suppressClick = false;
+
+      function startDragMode() {
+        if (dragging) {
+          return;
+        }
+        dragging = true;
+        track.classList.add('is-dragging');
+        document.body.classList.add('nav-dragging');
+      }
+
+      function stopDragMode() {
+        if (!dragging) {
+          return;
+        }
+        dragging = false;
+        track.classList.remove('is-dragging');
+        document.body.classList.remove('nav-dragging');
+      }
+
+      function stopDrag() {
+        if (dragging) {
+          suppressClick = true;
+          window.setTimeout(function () {
+            suppressClick = false;
+          }, 0);
+        }
+        pressed = false;
+        stopDragMode();
+      }
+
+      track.addEventListener('mousedown', function (event) {
+        if (event.button !== 0) {
+          return;
+        }
+
+        if (event.target.closest('button, input, textarea, select')) {
+          return;
+        }
+
+        pressed = true;
+        startX = event.pageX;
+        startLeft = track.scrollLeft;
+      });
+
+      window.addEventListener('mousemove', function (event) {
+        if (!pressed) {
+          return;
+        }
+
+        var delta = event.pageX - startX;
+        if (!dragging && Math.abs(delta) > 4) {
+          startDragMode();
+        }
+
+        if (!dragging) {
+          return;
+        }
+
+        track.scrollLeft = startLeft - delta;
+        event.preventDefault();
+      });
+
+      window.addEventListener('mouseup', stopDrag);
+      window.addEventListener('blur', stopDrag);
+      track.addEventListener('mouseleave', stopDrag);
+      track.addEventListener('dragstart', function (event) {
+        if (dragging) {
+          event.preventDefault();
+        }
+      });
+
+      track.addEventListener('click', function (event) {
+        if (!suppressClick) {
+          return;
+        }
+        event.preventDefault();
+        event.stopPropagation();
+        suppressClick = false;
+      }, true);
+    });
+  }
+
   function initContactModal() {
     var modal = document.querySelector('[data-contact-modal]');
     var openers = document.querySelectorAll('[data-contact-modal-open]');
@@ -500,6 +599,7 @@
     initStickyNavFallback();
     initResponsiveNavMenus();
     initNavSearchAccordion();
+    initNavDragScroll();
     initContactModal();
     initBackToTop();
   });

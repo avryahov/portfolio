@@ -427,6 +427,20 @@ a {
   margin-left: 10px;
 }
 
+@media (pointer: fine) {
+  .anchor-nav-scroll {
+    cursor: grab;
+  }
+
+  .anchor-nav-scroll.is-dragging {
+    cursor: grabbing;
+  }
+
+  body.nav-dragging {
+    user-select: none;
+  }
+}
+
 .nav-menu-toggle {
   display: none;
   width: 42px;
