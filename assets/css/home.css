@@ -12,11 +12,11 @@
 }
 
 .home-section {
-  padding: 44px 0;
+  padding: 32px 0;
 }
 
 .home-section:first-of-type {
-  padding-top: 28px;
+  padding-top: 20px;
 }
 
 .home-heading {
@@ -136,11 +136,11 @@
 }
 
 .edu-line {
-  --edu-gap: 22px;
+  --edu-gap: 16px;
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-  gap: 28px;
+  gap: 16px;
   padding-top: 0;
   align-items: flex-start;
 }
