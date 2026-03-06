@@ -136,14 +136,39 @@
 }
 
 .edu-line {
+  --edu-gap: 22px;
+  --edu-target-cols: 5;
+  --edu-card-width: clamp(
+    280px,
+    calc((100% - (var(--edu-gap) * (var(--edu-target-cols) - 1))) / var(--edu-target-cols)),
+    360px
+  );
   position: relative;
   display: flex;
-  gap: 22px;
+  gap: var(--edu-gap);
   padding-top: 54px;
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
   scroll-snap-type: x proximity;
+}
+
+@media (max-width: 1780px) {
+  .edu-line {
+    --edu-target-cols: 4;
+  }
+}
+
+@media (max-width: 1460px) {
+  .edu-line {
+    --edu-target-cols: 3;
+  }
+}
+
+@media (max-width: 1180px) {
+  .edu-line {
+    --edu-target-cols: 2;
+  }
 }
 
 .edu-line::-webkit-scrollbar {
@@ -163,8 +188,8 @@
 
 .edu-item {
   position: relative;
-  flex: 0 0 min(420px, 86vw);
-  min-width: min(420px, 86vw);
+  flex: 0 0 var(--edu-card-width);
+  min-width: var(--edu-card-width);
   padding: 24px;
   background: linear-gradient(120deg, rgba(12, 22, 58, 0.94) 0%, rgba(17, 25, 64, 0.94) 100%);
   border: 1px solid rgba(112, 136, 212, 0.32);
@@ -926,6 +951,11 @@ body[data-root="."] .qual-toggle-btn {
 }
 
 @media (max-width: 900px) {
+  .edu-line {
+    --edu-target-cols: 1;
+    --edu-card-width: 84vw;
+  }
+
   .lifecycle-track {
     overflow-x: auto;
     overflow-y: hidden;
@@ -1173,6 +1203,7 @@ html[data-theme="light"] .edu-item::before {
   border: 4px solid #fff;
   box-shadow: 0 0 0 4px #2563eb;
 }
+
 
 html[data-theme="light"] .edu-period {
   color: #2563eb;
