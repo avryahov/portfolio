@@ -1,6 +1,6 @@
 :root {
   --font-ui: "NT Somic", "Manrope", "Segoe UI", sans-serif;
-  --font-title: "Literata", Georgia, serif;
+  --font-title: var(--font-ui);
 
   /* Fallback dark tokens to avoid white UI if theme files fail to load */
   --bg: #050a22;
@@ -180,7 +180,7 @@ a {
 
 .landing-header h1 {
   margin: 0;
-  font-family: "Literata", Georgia, serif;
+  font-family: var(--font-ui);
   font-size: clamp(1.9rem, 2.7vw, 2.55rem);
   line-height: 1.08;
   white-space: nowrap;

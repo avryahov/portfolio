@@ -21,7 +21,7 @@
 
 .home-heading {
   text-align: center;
-  font-family: "Literata", Georgia, serif;
+  font-family: var(--font-ui);
   font-size: clamp(2rem, 4vw, 3rem);
   margin: 0;
 }
@@ -894,7 +894,7 @@ body[data-root="."] .qual-toggle-btn {
   margin: 0;
   color: #9eb9ff;
   font-size: 1.45rem;
-  font-family: "Literata", Georgia, serif;
+  font-family: var(--font-ui);
 }
 
 .skill-tags {
