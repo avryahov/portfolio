@@ -321,6 +321,10 @@ a {
   display: block;
 }
 
+.landing-icon-link-github {
+  color: rgba(233, 241, 255, 0.96);
+}
+
 .landing-icon-link-megafon {
   padding: 0;
   color: #00b956;
@@ -1087,40 +1091,6 @@ main.section,
 
 .footer-icon-gmail {
   color: #34a853;
-}
-
-.footer-icon-rutube {
-  color: #ffffff;
-}
-
-.footer-icon-rutube svg {
-  width: var(--circle-icon-size);
-  height: var(--circle-icon-size);
-}
-
-.footer-icon-dzen {
-  color: #ffffff;
-}
-
-.footer-icon-dzen svg {
-  width: var(--circle-icon-size);
-  height: var(--circle-icon-size);
-}
-
-.footer-icon-youtube {
-  color: #ff0000;
-}
-
-.footer-icon-youtube svg {
-  width: var(--circle-icon-size);
-  height: var(--circle-icon-size);
-}
-
-/* Temporarily hide selected social channels without removing markup. */
-.footer-social-wrap .footer-icon-rutube,
-.footer-social-wrap .footer-icon-dzen,
-.footer-social-wrap .footer-icon-youtube {
-  display: none;
 }
 
 .footer-icon-github {
