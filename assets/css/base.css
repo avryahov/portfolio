@@ -1140,6 +1140,8 @@ main.section,
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.35;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .footer-col-services {
@@ -1856,7 +1858,9 @@ html.reveal-enabled .reveal.is-visible {
 @media (max-width: 767px) {
   html,
   body {
-    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
   }
 
   body {
@@ -1882,9 +1886,14 @@ html.reveal-enabled .reveal.is-visible {
   }
 
   .anchor-strip .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
     justify-content: flex-start;
     min-height: 78px;
     position: relative;
+    overflow: hidden;
   }
 
   .nav-menu-toggle {
@@ -1896,6 +1905,7 @@ html.reveal-enabled .reveal.is-visible {
     justify-content: space-between;
     gap: 8px;
     padding: 12px 0;
+    overflow: hidden;
   }
 
   .anchor-nav-scroll {
@@ -1957,6 +1967,29 @@ html.reveal-enabled .reveal.is-visible {
 }
 
 @media (max-width: 540px) {
+  .site-footer {
+    overflow-x: clip;
+  }
+
+  .site-footer .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .site-footer-inner,
+  .footer-unified-grid,
+  .footer-link-col,
+  .footer-intro-line,
+  .footer-badge-strip,
+  .footer-copyright-row,
+  .footer-meta-note,
+  .footer-dev-note {
+    min-width: 0;
+    max-width: 100%;
+  }
+
   .landing-aside {
     width: min(100%, 460px);
     gap: 8px;
