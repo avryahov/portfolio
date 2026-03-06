@@ -464,20 +464,16 @@
         return String(item);
       });
 
-      var subject = 'Обсуждение проекта: ' + (type || 'Запрос с сайта');
-      var lines = [
+      var summary = [
         'Имя: ' + (name || 'Не указано'),
         'Контакт: ' + (contact || 'Не указан'),
         'Тип запроса: ' + (type || 'Не указан'),
         'Тематика: ' + (topics.length ? topics.join(', ') : 'Не выбрана'),
-        '',
-        'Описание:',
-        message || 'Не заполнено'
-      ];
-      var body = lines.join('\n');
-      var mailto = 'mailto:a.v.rjakhov@yandex.ru?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-
-      window.location.href = mailto;
+        'Описание: ' + (message || 'Не заполнено')
+      ].join(' | ');
+      var vkLink = 'https://vk.com/itpuh';
+      window.open(vkLink, '_blank', 'noopener,noreferrer');
+      console.info('Заявка с формы:', summary);
       closeModal();
       form.reset();
     });
@@ -607,33 +603,6 @@
     pageNavStrip.setAttribute('data-detached', 'true');
   }
 
-  function usePrimaryNavOnContacts() {
-    var path = window.location.pathname || '/';
-    if (path.indexOf('/contacts/') === -1) {
-      return;
-    }
-
-    var strip = document.querySelector('.page-nav-strip');
-    if (!strip) {
-      return;
-    }
-
-    var navScroll = strip.querySelector('[data-nav-scroll]');
-    if (!navScroll) {
-      return;
-    }
-
-    var root = normalizeRootPath(document.body.getAttribute('data-root') || '.');
-    navScroll.innerHTML =
-      '<a href="' + root + '/index.html#about">Обо мне</a>' +
-      '<a href="' + root + '/index.html#education">Образование</a>' +
-      '<a href="' + root + '/index.html#experience">Опыт работы</a>' +
-      '<a href="' + root + '/index.html#lifecycle">Услуги</a>' +
-      '<a href="' + root + '/index.html#qualification">Квалификация</a>' +
-      '<a href="https://vk.com/itpuh">Блог</a>' +
-      '<a href="' + root + '/contacts/" aria-current="page" class="active">Контакты</a>';
-  }
-
   initTheme();
 
   Promise.all([
@@ -641,7 +610,6 @@
     loadComponent('footer', 'footer.html')
   ]).then(function () {
     detachPageNavStripFromHeaderHost();
-    usePrimaryNavOnContacts();
     syncThemeToggle(document.documentElement.getAttribute('data-theme') || 'light');
     markCurrentNav();
     initThemeToggle();
