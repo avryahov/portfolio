@@ -199,6 +199,7 @@
 .experience-grid {
   display: flex;
   gap: 20px;
+  justify-content: center;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: none;
@@ -919,6 +920,7 @@ body[data-root="."] .qual-toggle-btn {
   }
 
   .experience-grid {
+    justify-content: flex-start;
     touch-action: pan-x;
     scroll-snap-type: x mandatory;
   }
