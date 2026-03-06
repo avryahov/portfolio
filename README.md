@@ -89,12 +89,6 @@
 - `/services/legacy-modernization.html`
 - `/services/pki-security.html`
 - `/services/devops-reliability.html`
-- `/blog/`
-- `/blog/news.html`
-- `/blog/news-projects.html`
-- `/blog/articles.html`
-- `/blog/materials.html`
-- `/blog/events.html`
 
 ## Архитектура фронтенда
 
@@ -170,7 +164,6 @@
 ├── teaching/
 ├── qualification/
 ├── services/
-├── blog/
 ├── manifest.webmanifest
 └── scripts/
     └── serve-local.sh
