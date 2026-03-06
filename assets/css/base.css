@@ -1915,30 +1915,61 @@ html.reveal-enabled .reveal.is-visible {
 
   .anchor-nav {
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: 8px;
     padding: 12px 0;
     overflow: hidden;
   }
 
   .anchor-nav-scroll {
-    gap: 8px;
-    min-width: 0;
-    flex: 1 1 auto;
+    display: none;
   }
 
-  .anchor-nav-scroll a {
-    width: auto;
-    min-height: 40px;
-    padding: 8px 12px;
-    border-radius: 999px;
-    display: inline-flex;
-    align-items: center;
+  .site-nav {
+    display: none;
   }
 
   .anchor-nav-controls {
-    margin-left: 8px;
+    margin-left: 0;
+    width: 100%;
+    min-width: 0;
     gap: 8px;
+    justify-content: flex-end;
+  }
+
+  .anchor-nav .nav-search {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+  }
+
+  /* On mobile keep only expanded search field + theme toggle in pinned bar. */
+  .anchor-nav .nav-search.is-collapsed,
+  .anchor-nav .nav-search.is-collapsed.is-expanded {
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    border-radius: 999px;
+    padding: 0 14px;
+    gap: 8px;
+  }
+
+  .anchor-nav .nav-search.is-collapsed input,
+  .anchor-nav .nav-search.is-collapsed.is-expanded input {
+    width: 100%;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .anchor-nav .nav-search.is-collapsed .nav-search-toggle,
+  .anchor-nav .nav-search.is-collapsed.is-expanded .nav-search-toggle {
+    width: var(--circle-icon-size);
+    min-width: var(--circle-icon-size);
+    max-width: var(--circle-icon-size);
+    height: var(--circle-icon-size);
+    justify-content: center;
+    align-items: center;
   }
 
   .anchor-nav .theme-toggle {
