@@ -307,6 +307,13 @@ body.drag-scroll-armed * {
     radial-gradient(700px 220px at 84% -20%, rgba(109, 150, 255, 0.2), transparent 70%),
     linear-gradient(140deg, rgba(34, 56, 126, 0.94) 0%, rgba(50, 46, 117, 0.95) 56%, rgba(72, 39, 109, 0.95) 100%);
   color: #eef3ff;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+.exp-card:hover {
+  border-color: rgba(148, 177, 255, 0.62);
+  box-shadow: 0 12px 26px rgba(47, 95, 232, 0.2);
+  transform: translateY(-2px);
 }
 
 .exp-top {
@@ -869,6 +876,13 @@ body.drag-scroll-armed * {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+.qual-mini-card:hover {
+  border-color: rgba(148, 177, 255, 0.62);
+  box-shadow: 0 10px 22px rgba(47, 95, 232, 0.18);
+  transform: translateY(-2px);
 }
 
 .qual-mini-icon {
@@ -951,6 +965,13 @@ body[data-root="."] .qual-toggle-btn {
   padding: 30px;
   border-top: 6px solid #4b72f0;
   background: rgba(10, 19, 52, 0.56);
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+.skill-group:hover {
+  border-color: rgba(148, 177, 255, 0.62);
+  box-shadow: 0 12px 26px rgba(47, 95, 232, 0.18);
+  transform: translateY(-2px);
 }
 
 .skill-group h3 {
@@ -1264,6 +1285,11 @@ html[data-theme="light"] .exp-card {
   background: linear-gradient(135deg, #5d84e5 0%, #6f60cf 56%, #7d4cac 100%);
 }
 
+html[data-theme="light"] .exp-card:hover {
+  border-top-color: rgba(203, 224, 255, 0.98);
+  box-shadow: 0 12px 24px rgba(45, 101, 231, 0.14);
+}
+
 html[data-theme="light"] .exp-role {
   color: #2d3b61 !important;
 }
@@ -1372,6 +1398,11 @@ html[data-theme="light"] .qual-mini-card {
   background: #f9fbff;
 }
 
+html[data-theme="light"] .qual-mini-card:hover {
+  border-color: rgba(74, 120, 230, 0.62);
+  box-shadow: 0 10px 22px rgba(45, 101, 231, 0.14);
+}
+
 html[data-theme="light"] .qual-mini-card h4 {
   color: #111111;
 }
@@ -1384,6 +1415,11 @@ html[data-theme="light"] .qual-toggle-btn {
 html[data-theme="light"] .skill-group {
   border-top: 6px solid #2563eb;
   background: transparent;
+}
+
+html[data-theme="light"] .skill-group:hover {
+  border-color: rgba(74, 120, 230, 0.62);
+  box-shadow: 0 12px 24px rgba(45, 101, 231, 0.12);
 }
 
 html[data-theme="light"] .skill-group h3 {
