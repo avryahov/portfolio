@@ -2030,7 +2030,7 @@ html.reveal-enabled .reveal.is-visible {
   }
 
   .footer-brand-mark {
-    font-size: clamp(1.8rem, 11vw, 2.9rem);
+    font-size: clamp(1.45rem, 8.4vw, 2.2rem);
   }
 
   .footer-meta-note {
@@ -2054,6 +2054,13 @@ html.reveal-enabled .reveal.is-visible {
 
   .contact-topics label {
     width: 100%;
+  }
+}
+
+@media (max-width: 390px) {
+  .footer-brand-mark {
+    font-size: clamp(1.28rem, 7.2vw, 1.72rem);
+    line-height: 1.05;
   }
 }
 
