@@ -43,6 +43,8 @@ body {
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 html.theme-switching *,
@@ -53,6 +55,8 @@ html.theme-switching *::after {
 
 body {
   font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   color: var(--ink);
   background:
     radial-gradient(1200px 520px at 92% -8%, var(--bg-grad-1), transparent 64%),
@@ -997,8 +1001,17 @@ main.section,
   font-size: clamp(2.2rem, 5vw, 5.2rem);
   line-height: 0.95;
   letter-spacing: 0.02em;
-  font-family: var(--font-title);
+  font-family: "Manrope", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   font-weight: 800;
+}
+
+/* iOS Safari fallback: force stable sans rendering for key headings. */
+@supports (-webkit-touch-callout: none) {
+  .landing-header h1,
+  .page-title,
+  .footer-brand-mark {
+    font-family: "Manrope", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
 }
 
 .footer-social-wrap {
@@ -2061,6 +2074,23 @@ html.reveal-enabled .reveal.is-visible {
   .footer-brand-mark {
     font-size: clamp(1.28rem, 7.2vw, 1.72rem);
     line-height: 1.05;
+  }
+}
+
+@media (max-width: 430px) {
+  .landing-header h1 {
+    font-size: clamp(1.62rem, 7.4vw, 2.08rem);
+    line-height: 1.12;
+  }
+
+  .page-title {
+    font-size: clamp(1.56rem, 7vw, 1.98rem);
+    line-height: 1.14;
+  }
+
+  .kicker {
+    font-size: 0.86rem;
+    letter-spacing: 0.045em;
   }
 }
 
