@@ -1193,6 +1193,8 @@ main.section,
   color: #c9d2ea;
   font-size: 0.94rem;
   line-height: 1.36;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .footer-link-col a:hover {
@@ -1315,6 +1317,8 @@ main.section,
   color: #b7c4e6;
   font-size: 0.9rem;
   grid-column: 1;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .footer-meta-note {
@@ -1329,6 +1333,7 @@ main.section,
   flex-wrap: nowrap;
   justify-content: flex-end;
   white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 
 .footer-dev-note {
@@ -1343,6 +1348,7 @@ main.section,
   font-size: 0.76rem;
   letter-spacing: 0.01em;
   white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 
 .back-to-top {
@@ -1848,6 +1854,11 @@ html.reveal-enabled .reveal.is-visible {
 }
 
 @media (max-width: 767px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
   body {
     padding-bottom: 98px;
   }
@@ -1987,6 +1998,20 @@ html.reveal-enabled .reveal.is-visible {
 
   .footer-brand-mark {
     font-size: clamp(1.8rem, 11vw, 2.9rem);
+  }
+
+  .footer-meta-note {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 6px;
+    white-space: normal;
+  }
+
+  .footer-dev-note {
+    white-space: normal;
+    max-width: 100%;
   }
 
   .contact-topics {
