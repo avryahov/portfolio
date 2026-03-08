@@ -6,7 +6,7 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 repo_root="$(cd "${script_dir}/.." && pwd)"
 
 # shellcheck disable=SC1091
-source "${repo_root}/deploy/uat/env.sh"
+source "${repo_root}/deploy/prod/env.sh"
 
 LOCAL_BRANCH="$(git -C "${repo_root}" branch --show-current 2>/dev/null || true)"
 
@@ -16,11 +16,11 @@ if [[ -z "${LOCAL_BRANCH}" ]]; then
 fi
 
 if [[ "${LOCAL_BRANCH}" != "${DEPLOY_BRANCH}" ]]; then
-  echo "Local branch is '${LOCAL_BRANCH}', expected '${DEPLOY_BRANCH}' before UAT deploy." >&2
+  echo "Local branch is '${LOCAL_BRANCH}', expected '${DEPLOY_BRANCH}' before PROD deploy." >&2
   exit 1
 fi
 
-echo "Deploying '${DEPLOY_BRANCH}' to Synology UAT:"
+echo "Deploying '${DEPLOY_BRANCH}' to cloud PROD:"
 echo "  host: ${DEPLOY_HOST}"
 echo "  port: ${DEPLOY_PORT}"
 echo "  user: ${DEPLOY_USER}"
@@ -33,10 +33,11 @@ cd "${DEPLOY_PATH}"
 git fetch origin
 git checkout "${DEPLOY_BRANCH}"
 git pull --ff-only origin "${DEPLOY_BRANCH}"
-bash scripts/version.sh sync
+bash ../scripts/version.sh sync
+bash nginx/reload-nginx.sh
 echo
-echo "UAT updated"
+echo "PROD updated"
 echo "Branch: \$(git branch --show-current)"
 echo "Commit: \$(git rev-parse --short HEAD)"
-echo "Version: \$(bash scripts/version.sh current)"
+echo "Version: \$(bash ../scripts/version.sh current)"
 EOF

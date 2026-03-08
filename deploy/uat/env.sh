@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+DEPLOY_HOST="${DEPLOY_HOST:-192.168.1.78}"
+DEPLOY_PORT="${DEPLOY_PORT:-3022}"
+DEPLOY_USER="${DEPLOY_USER:-avryahov}"
+DEPLOY_PATH="${DEPLOY_PATH:-/volume1/web/portfolio}"
+DEPLOY_BRANCH="${DEPLOY_BRANCH:-dev}"

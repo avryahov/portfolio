@@ -27,6 +27,7 @@
 - После правок компонентов (`components/header.html`, `components/footer.html`) обновлять `componentVersion` в `assets/js/main.js`.
 - Для build-версии использовать `./scripts/version.sh`, а не править build-плашку в footer вручную.
 - Для выкладки на домашний UAT NAS использовать `./scripts/deploy-uat-nas.sh`.
+- Для выкладки в облачный PROD использовать `./scripts/deploy-prod-cloud.sh`.
 - После правок CSS/JS обновлять `?v=` у подключений на нужных страницах (ручной cache-busting).
 
 ## Общее
@@ -271,12 +272,7 @@ certbot --nginx \
 ### 1.2) Выкладка на домашний UAT NAS
 
 - Скрипт деплоя: `./scripts/deploy-uat-nas.sh`
-- По умолчанию используются:
-  - `NAS_HOST=192.168.1.78`
-  - `NAS_PORT=3022`
-  - `NAS_USER=avryahov`
-  - `NAS_PATH=/volume1/web/portfolio`
-  - `NAS_BRANCH=dev`
+- Параметры по умолчанию лежат в `deploy/uat/env.sh`
 - Перед деплоем скрипт проверяет, что локальная ветка тоже `dev`.
 - На NAS выполняются:
   - `git fetch origin`
@@ -284,7 +280,19 @@ certbot --nginx \
   - `git pull --ff-only origin dev`
   - `bash scripts/version.sh sync`
 - Пример с переопределением хоста:
-  `NAS_HOST=nas.local NAS_PORT=3022 ./scripts/deploy-uat-nas.sh`
+  `DEPLOY_HOST=nas.local DEPLOY_PORT=3022 ./scripts/deploy-uat-nas.sh`
+
+### 1.3) Выкладка в облачный PROD
+
+- Скрипт деплоя: `./scripts/deploy-prod-cloud.sh`
+- Параметры по умолчанию лежат в `deploy/prod/env.sh`
+- На PROD выполняются:
+  - `git fetch origin`
+  - `git checkout <branch>`
+  - `git pull --ff-only origin <branch>`
+  - `bash ../scripts/version.sh sync`
+  - `bash nginx/reload-nginx.sh`
+- `deploy/nginx/bootstrap-nginx.sh` использовать только для первичной настройки сервера, а не для обычного обновления релиз-стенда.
 
 ### 2) Обновили JS/CSS файл
 
