@@ -3,7 +3,7 @@
 set -euo pipefail
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-repo_root="$(cd "${script_dir}/.." && pwd)"
+repo_root="$(cd "${script_dir}/../.." && pwd)"
 
 required_files=(
   "index.html"
@@ -11,9 +11,11 @@ required_files=(
   "components/header.html"
   "components/footer.html"
   "assets/js/main.js"
-  "scripts/version.sh"
-  "scripts/deploy-uat-nas.sh"
-  "scripts/deploy-prod-cloud.sh"
+  "ops/scripts/version.sh"
+  "ops/scripts/deploy-uat-nas.sh"
+  "ops/scripts/deploy-prod-cloud.sh"
+  "ops/deploy/uat/env.sh"
+  "ops/deploy/prod/env.sh"
   "version.env"
 )
 
@@ -24,6 +26,6 @@ for file in "${required_files[@]}"; do
   fi
 done
 
-echo "Current build version: $(bash "${repo_root}/scripts/version.sh" current)"
+echo "Current build version: $(bash "${repo_root}/ops/scripts/version.sh" current)"
 
 echo "CI validation passed."

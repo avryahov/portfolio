@@ -23,16 +23,10 @@ jobs:
           CI_REPOSITORY: ${{ github.repository }}
           CI_SHA: ${{ github.sha }}
           CI_CLONE_URL_BASE: http://192.168.1.77:3000
-        run: |
-          set -euo pipefail
-          rm -rf .git
-          git init .
-          git remote add origin "${CI_CLONE_URL_BASE}/${CI_REPOSITORY}.git"
-          git -c http.extraHeader="Authorization: Bearer ${CI_REPO_TOKEN}" fetch --no-tags origin "${CI_SHA}"
-          git checkout --detach FETCH_HEAD
+        run: bash ./ops/scripts/checkout-forgejo-ci.sh
 
       - name: Validate repository state
-        run: bash ./scripts/ci-validate.sh
+        run: bash ./ops/scripts/ci-validate.sh
 
   build:
     needs: validate
@@ -44,16 +38,10 @@ jobs:
           CI_REPOSITORY: ${{ github.repository }}
           CI_SHA: ${{ github.sha }}
           CI_CLONE_URL_BASE: http://192.168.1.77:3000
-        run: |
-          set -euo pipefail
-          rm -rf .git
-          git init .
-          git remote add origin "${CI_CLONE_URL_BASE}/${CI_REPOSITORY}.git"
-          git -c http.extraHeader="Authorization: Bearer ${CI_REPO_TOKEN}" fetch --no-tags origin "${CI_SHA}"
-          git checkout --detach FETCH_HEAD
+        run: bash ./ops/scripts/checkout-forgejo-ci.sh
 
       - name: Build site artifact
-        run: bash ./scripts/build-release.sh .build/uat
+        run: bash ./ops/scripts/build-release.sh .build/uat
 
   pre-deploy-uat:
     needs: validate
@@ -72,19 +60,13 @@ jobs:
           CI_REPOSITORY: ${{ github.repository }}
           CI_SHA: ${{ github.sha }}
           CI_CLONE_URL_BASE: http://192.168.1.77:3000
-        run: |
-          set -euo pipefail
-          rm -rf .git
-          git init .
-          git remote add origin "${CI_CLONE_URL_BASE}/${CI_REPOSITORY}.git"
-          git -c http.extraHeader="Authorization: Bearer ${CI_REPO_TOKEN}" fetch --no-tags origin "${CI_SHA}"
-          git checkout --detach FETCH_HEAD
+        run: bash ./ops/scripts/checkout-forgejo-ci.sh
 
       - name: Prepare SSH credentials
-        run: bash ./scripts/prepare-ssh-deploy-key.sh
+        run: bash ./ops/scripts/prepare-ssh-deploy-key.sh
 
       - name: Pre-deploy UAT target check
-        run: bash ./scripts/check-ssh-deploy-target.sh
+        run: bash ./ops/scripts/check-ssh-deploy-target.sh
 
   deploy-uat:
     needs:
@@ -108,22 +90,16 @@ jobs:
           CI_REPOSITORY: ${{ github.repository }}
           CI_SHA: ${{ github.sha }}
           CI_CLONE_URL_BASE: http://192.168.1.77:3000
-        run: |
-          set -euo pipefail
-          rm -rf .git
-          git init .
-          git remote add origin "${CI_CLONE_URL_BASE}/${CI_REPOSITORY}.git"
-          git -c http.extraHeader="Authorization: Bearer ${CI_REPO_TOKEN}" fetch --no-tags origin "${CI_SHA}"
-          git checkout --detach FETCH_HEAD
+        run: bash ./ops/scripts/checkout-forgejo-ci.sh
 
       - name: Build site artifact
-        run: bash ./scripts/build-release.sh "${RELEASE_DIR}"
+        run: bash ./ops/scripts/build-release.sh "${RELEASE_DIR}"
 
       - name: Prepare SSH credentials
-        run: bash ./scripts/prepare-ssh-deploy-key.sh
+        run: bash ./ops/scripts/prepare-ssh-deploy-key.sh
 
       - name: Deploy release to UAT NAS
-        run: bash ./scripts/deploy-static-site.sh "${RELEASE_DIR}"
+        run: bash ./ops/scripts/deploy-static-site.sh "${RELEASE_DIR}"
 
   smoke-uat:
     needs: deploy-uat
@@ -142,16 +118,10 @@ jobs:
           CI_REPOSITORY: ${{ github.repository }}
           CI_SHA: ${{ github.sha }}
           CI_CLONE_URL_BASE: http://192.168.1.77:3000
-        run: |
-          set -euo pipefail
-          rm -rf .git
-          git init .
-          git remote add origin "${CI_CLONE_URL_BASE}/${CI_REPOSITORY}.git"
-          git -c http.extraHeader="Authorization: Bearer ${CI_REPO_TOKEN}" fetch --no-tags origin "${CI_SHA}"
-          git checkout --detach FETCH_HEAD
+        run: bash ./ops/scripts/checkout-forgejo-ci.sh
 
       - name: Prepare SSH credentials
-        run: bash ./scripts/prepare-ssh-deploy-key.sh
+        run: bash ./ops/scripts/prepare-ssh-deploy-key.sh
 
       - name: Smoke test deployed UAT files
-        run: bash ./scripts/smoke-static-deploy.sh
+        run: bash ./ops/scripts/smoke-static-deploy.sh

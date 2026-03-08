@@ -15,7 +15,7 @@
 - Локальный запуск:
 
 ```bash
-./scripts/serve-local.sh
+./ops/scripts/serve-local.sh
 ```
 
 - Проверка в браузере: `http://127.0.0.1:8080`.
@@ -25,7 +25,7 @@
 - Редактировать страницы и стили напрямую (`.html`, `.css`, `.js`).
 - Для внутренних страниц использовать шаблон с `data-root=".."` + `data-component="header/footer"`.
 - После правок компонентов (`components/header.html`, `components/footer.html`) обновлять `componentVersion` в `assets/js/main.js`.
-- Для build-версии использовать `./scripts/version.sh`, а не править build-плашку в footer вручную.
+- Для build-версии использовать `./ops/scripts/version.sh`, а не править build-плашку в footer вручную.
 - Основной путь выкладки теперь идет через локальный `Forgejo Actions`.
 - На целевых серверах больше не требуется `git clone` или `git pull`: доставляется подготовленная publishable-директория без `.git`-истории.
 - Workflow разложены по стадиям: `validate -> build -> pre-deploy -> deploy -> smoke`.
@@ -33,8 +33,8 @@
 - `pre-deploy` отдельно проверяет SSH-доступ и права записи до запуска доставки.
 - `deploy` повторно собирает release и отправляет на целевой сервер архивом `tar.gz` через `scp/ssh`.
 - `smoke` после деплоя подтверждает, что в целевом каталоге есть базовые статические файлы и отсутствует `.git`.
-- Для ручного запуска деплоя на домашний UAT NAS можно использовать `./scripts/deploy-uat-nas.sh`.
-- Для ручного запуска деплоя в облачный PROD можно использовать `./scripts/deploy-prod-cloud.sh`.
+- Для ручного запуска деплоя на домашний UAT NAS можно использовать `./ops/scripts/deploy-uat-nas.sh`.
+- Для ручного запуска деплоя в облачный PROD можно использовать `./ops/scripts/deploy-prod-cloud.sh`.
 - После правок CSS/JS обновлять `?v=` у подключений на нужных страницах (ручной cache-busting).
 
 ## Общее
@@ -174,9 +174,11 @@
 ├── teaching/
 ├── qualification/
 ├── services/
-├── manifest.webmanifest
-└── scripts/
-    └── serve-local.sh
+├── ops/
+│   ├── deploy/
+│   └── scripts/
+│       └── serve-local.sh
+└── manifest.webmanifest
 ```
 
 ## Особенности контента и UI
@@ -194,7 +196,7 @@
 Требуется `python3`.
 
 ```bash
-./scripts/serve-local.sh
+./ops/scripts/serve-local.sh
 ```
 
 По умолчанию:
@@ -204,7 +206,7 @@
 Кастомный хост/порт:
 
 ```bash
-./scripts/serve-local.sh 8080 0.0.0.0
+./ops/scripts/serve-local.sh 8080 0.0.0.0
 ```
 
 ## Деплой (Linux, static hosting)
@@ -241,8 +243,8 @@ server {
 
 Для первого деплоя используйте готовые файлы:
 
-- [deploy/nginx/portfolio.conf](/Users/avrjakhov/repositories/git/itpuh/portfolio/deploy/nginx/portfolio.conf)
-- [deploy/nginx/bootstrap-nginx.sh](/Users/avrjakhov/repositories/git/itpuh/portfolio/deploy/nginx/bootstrap-nginx.sh)
+- [ops/deploy/nginx/portfolio.conf](/Users/avrjakhov/repositories/git/itpuh/portfolio/ops/deploy/nginx/portfolio.conf)
+- [ops/deploy/nginx/bootstrap-nginx.sh](/Users/avrjakhov/repositories/git/itpuh/portfolio/ops/deploy/nginx/bootstrap-nginx.sh)
 
 После активации HTTP-конфига и проверки DNS можно выпустить сертификат:
 
@@ -269,47 +271,47 @@ certbot --nginx \
 - `patch` считается автоматически как разница между эффективным количеством commit-ов и `PATCH_BASE_COUNT`.
 - Build-метаданные больше не нужно коммитить вручную: CI проштамповывает release artifact на этапе сборки.
 - Текущую сборку вывести командой:
-  `./scripts/version.sh current`
+  `./ops/scripts/version.sh current`
 - Обновить build-плашку в footer и `componentVersion` в рабочем дереве:
-  `./scripts/version.sh sync`
+  `./ops/scripts/version.sh sync`
 - Проштамповать build-плашку в уже собранной директории релиза:
-  `./scripts/version.sh stamp .build/uat`
+  `./ops/scripts/version.sh stamp .build/uat`
 - Итерировать `minor` и начать patch-счёт с нуля от текущей истории:
-  `./scripts/version.sh minor`
+  `./ops/scripts/version.sh minor`
 - Итерировать `major`, сбросить `minor` и начать patch-счёт с нуля:
-  `./scripts/version.sh major`
+  `./ops/scripts/version.sh major`
 
 ### 1.2) Выкладка на домашний UAT NAS
 
 - Автоматический сценарий: `push` в ветку `dev` запускает workflow `.forgejo/workflows/uat.yml`.
-- Скрипт деплоя: `./scripts/deploy-uat-nas.sh`
-- Параметры по умолчанию лежат в `deploy/uat/env.sh`
+- Скрипт деплоя: `./ops/scripts/deploy-uat-nas.sh`
+- Параметры по умолчанию лежат в `ops/deploy/uat/env.sh`
 - При ручном локальном запуске скрипт проверяет, что локальная ветка тоже `dev`.
 - На runner выполняются:
-  - `bash ./scripts/ci-validate.sh`
-  - `bash ./scripts/build-release.sh .build/uat`
+  - `bash ./ops/scripts/ci-validate.sh`
+  - `bash ./ops/scripts/build-release.sh .build/uat`
   - упаковка релиза в `tar.gz`
   - копирование архива по `scp`
   - распаковка по `ssh` в `DEPLOY_PATH`
 - На NAS не нужен git-репозиторий: достаточно существующей целевой директории и SSH-доступа.
 - Пример с переопределением хоста:
-  `DEPLOY_HOST=nas.local DEPLOY_PORT=3022 ./scripts/deploy-uat-nas.sh`
+  `DEPLOY_HOST=nas.local DEPLOY_PORT=3022 ./ops/scripts/deploy-uat-nas.sh`
 
 ### 1.3) Выкладка в облачный PROD
 
 - Автоматического `push -> PROD` нет.
-- PROD выкладывается вручную через workflow `.forgejo/workflows/prod-manual.yml`.
-- Скрипт деплоя: `./scripts/deploy-prod-cloud.sh`
-- Параметры по умолчанию лежат в `deploy/prod/env.sh`
+- PROD выкладывается вручную через workflow `.forgejo/workflows/prod.yml`.
+- Скрипт деплоя: `./ops/scripts/deploy-prod-cloud.sh`
+- Параметры по умолчанию лежат в `ops/deploy/prod/env.sh`
 - По умолчанию `DEPLOY_HOST=itpuh.ru`; если PROD-хост отличается, переопределите `DEPLOY_HOST` перед запуском.
 - На runner выполняются:
-  - `bash ./scripts/ci-validate.sh`
-  - `bash ./scripts/build-release.sh .build/prod`
+  - `bash ./ops/scripts/ci-validate.sh`
+  - `bash ./ops/scripts/build-release.sh .build/prod`
   - упаковка релиза в `tar.gz`
   - копирование архива по `scp`
   - распаковка по `ssh` в `DEPLOY_PATH`
   - post-hook `nginx -t && systemctl reload nginx` на удаленной стороне
-- `deploy/nginx/bootstrap-nginx.sh` использовать только для первичной настройки сервера, а не для обычного обновления релиз-стенда.
+- `ops/deploy/nginx/bootstrap-nginx.sh` использовать только для первичной настройки сервера, а не для обычного обновления релиз-стенда.
 
 ### 2) Обновили JS/CSS файл
 
@@ -338,15 +340,14 @@ certbot --nginx \
 - `.forgejo/workflows/uat.yml`
   - триггер: `push` в `dev` и ручной `workflow_dispatch`
   - шаги: `checkout` -> `validate` -> `build release` -> `deploy` на домашний UAT NAS
-- `.forgejo/workflows/prod-manual.yml`
+- `.forgejo/workflows/prod.yml`
   - триггер: только ручной `workflow_dispatch`
   - шаги: `checkout` -> `validate` -> `build release` -> `deploy` на PROD
 
 ### Что проверяет CI
 
 - наличие ключевых файлов проекта
-- корректный расчет build-версии через `./scripts/version.sh current`
-- корректный расчет build-версии через `./scripts/version.sh current`
+- корректный расчет build-версии через `./ops/scripts/version.sh current`
 
 ### Что входит в publishable release
 
@@ -365,7 +366,7 @@ certbot --nginx \
 - `services/`
 - `teaching/`
 
-Служебные файлы и директории (`.git`, `.forgejo`, `deploy/`, `scripts/`, `README.md`, `version.env`) на сервер не доставляются.
+Служебные файлы и директории (`.git`, `.forgejo`, `ops/`, `README.md`, `version.env`) на сервер не доставляются.
 
 Build-метаданные в footer и `componentVersion` проставляются в release artifact во время сборки и не требуют отдельного commit.
 
@@ -380,8 +381,8 @@ Build-метаданные в footer и `componentVersion` проставляю�
 - `UAT_DEPLOY_HOST` — опционально, хост UAT
 - `UAT_DEPLOY_PORT` — опционально, порт UAT
 - `UAT_DEPLOY_USER` — опционально, SSH-пользователь
-- `UAT_DEPLOY_PATH` — опционально, путь до git-репозитория на NAS
-- `UAT_DEPLOY_BRANCH` — опционально, ветка выкладки; по умолчанию берется из `deploy/uat/env.sh`
+- `UAT_DEPLOY_PATH` — опционально, путь до каталога выкладки на NAS
+- `UAT_DEPLOY_BRANCH` — опционально, ветка выкладки; по умолчанию берется из `ops/deploy/uat/env.sh`
 
 Для PROD workflow:
 

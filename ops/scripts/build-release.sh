@@ -3,7 +3,7 @@
 set -euo pipefail
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-repo_root="$(cd "${script_dir}/.." && pwd)"
+repo_root="$(cd "${script_dir}/../.." && pwd)"
 release_dir="${1:-${repo_root}/.build/release}"
 
 publish_entries=(
@@ -37,7 +37,7 @@ for entry in "${publish_entries[@]}"; do
   cp -R "${repo_root}/${entry}" "${release_dir}/"
 done
 
-bash "${repo_root}/scripts/version.sh" stamp "${release_dir}" >/dev/null
+bash "${repo_root}/ops/scripts/version.sh" stamp "${release_dir}" >/dev/null
 
 echo "Release directory prepared at: ${release_dir}"
-echo "Build version: $(bash "${repo_root}/scripts/version.sh" current)"
+echo "Build version: $(bash "${repo_root}/ops/scripts/version.sh" current)"

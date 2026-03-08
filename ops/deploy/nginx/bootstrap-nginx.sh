@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Bootstrap nginx from repo config on Ubuntu/Debian.
 # Usage:
-#   bash /var/www/portfolio/deploy/nginx/bootstrap-nginx.sh
+#   bash /var/www/portfolio/ops/deploy/nginx/bootstrap-nginx.sh
 #
 # Optional env vars:
 #   PROJECT_DIR=/var/www/portfolio
@@ -18,7 +18,7 @@ PRIMARY_DOMAIN="${PRIMARY_DOMAIN:-itpuh.ru}"
 PRIMARY_DOMAIN_ALT="${PRIMARY_DOMAIN_ALT:-xn--h1aoifk.xn--p1ai}"
 PRIMARY_DOMAIN_UNICODE="${PRIMARY_DOMAIN_UNICODE:-итпух.рф}"
 
-SRC_CONF="${PROJECT_DIR}/deploy/nginx/${NGINX_CONF_NAME}"
+SRC_CONF="${PROJECT_DIR}/ops/deploy/nginx/${NGINX_CONF_NAME}"
 DST_AVAIL="/etc/nginx/sites-available/${NGINX_CONF_NAME}"
 DST_ENABLED="/etc/nginx/sites-enabled/${NGINX_CONF_NAME}"
 

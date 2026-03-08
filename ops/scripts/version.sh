@@ -3,7 +3,7 @@
 set -euo pipefail
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-repo_root="$(cd "${script_dir}/.." && pwd)"
+repo_root="$(cd "${script_dir}/../.." && pwd)"
 version_file="${repo_root}/version.env"
 footer_file="${repo_root}/components/footer.html"
 main_js_file="${repo_root}/assets/js/main.js"
@@ -98,11 +98,11 @@ sync_footer_version() {
 print_usage() {
   cat <<'EOF'
 Usage:
-  ./scripts/version.sh current
-  ./scripts/version.sh sync
-  ./scripts/version.sh stamp <target_root>
-  ./scripts/version.sh minor
-  ./scripts/version.sh major
+  ./ops/scripts/version.sh current
+  ./ops/scripts/version.sh sync
+  ./ops/scripts/version.sh stamp <target_root>
+  ./ops/scripts/version.sh minor
+  ./ops/scripts/version.sh major
 
 Commands:
   current  Print the current full build version.
@@ -125,7 +125,7 @@ case "${command}" in
   stamp)
     target_root="${2:-}"
     if [[ -z "${target_root}" ]]; then
-      echo "Usage: ./scripts/version.sh stamp <target_root>" >&2
+      echo "Usage: ./ops/scripts/version.sh stamp <target_root>" >&2
       exit 1
     fi
     sync_footer_version "${target_root}"

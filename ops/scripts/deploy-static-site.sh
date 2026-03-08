@@ -3,7 +3,7 @@
 set -euo pipefail
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-repo_root="$(cd "${script_dir}/.." && pwd)"
+repo_root="$(cd "${script_dir}/../.." && pwd)"
 release_dir="${1:-${RELEASE_DIR:-${repo_root}/.build/release}}"
 release_name="$(basename "${release_dir}")"
 archive_dir="${repo_root}/.build"
