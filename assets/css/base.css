@@ -1875,6 +1875,15 @@ html.reveal-enabled .reveal.is-visible {
     justify-self: start;
   }
 
+  .footer-meta-note {
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+
+  .footer-meta-note > span:last-child {
+    flex-basis: 100%;
+  }
+
   .contact-modal-dialog {
     width: calc(100% - 16px);
     margin: 24px auto;
@@ -2318,6 +2327,10 @@ html[data-mobile-ui="true"] .footer-dev-note {
 html[data-mobile-ui="true"] .footer-build-note {
   white-space: normal;
   max-width: 100%;
+}
+
+html[data-mobile-ui="true"] .footer-meta-note > span:last-child {
+  flex-basis: 100%;
 }
 
 html[data-mobile-ui="true"] .edu-line {
