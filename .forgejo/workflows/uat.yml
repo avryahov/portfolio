@@ -83,5 +83,20 @@ jobs:
           fi
           chmod 644 ~/.ssh/known_hosts
 
+      - name: Debug UAT SSH connectivity
+        run: |
+          set -euo pipefail
+          command -v ssh || true
+          command -v scp || true
+          command -v tar || true
+          getent hosts "${DEPLOY_HOST}" || true
+          ssh -vvv \
+            -o BatchMode=yes \
+            -o StrictHostKeyChecking=yes \
+            -o ConnectTimeout=10 \
+            -p "${DEPLOY_PORT}" \
+            "${DEPLOY_USER}@${DEPLOY_HOST}" \
+            "exit 0"
+
       - name: Deploy release to UAT NAS
         run: bash ./scripts/deploy-static-site.sh "${RELEASE_DIR}"
