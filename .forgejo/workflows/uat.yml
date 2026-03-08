@@ -1,4 +1,4 @@
-name: UAT CI/CD
+name: UAT
 
 on:
   push:
