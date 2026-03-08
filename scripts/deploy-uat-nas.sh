@@ -2,7 +2,8 @@
 
 set -euo pipefail
 
-NAS_HOST="${NAS_HOST:-192.168.1.77}"
+NAS_HOST="${NAS_HOST:-192.168.1.78}"
+NAS_PORT="${NAS_PORT:-3022}"
 NAS_USER="${NAS_USER:-avryahov}"
 NAS_PATH="${NAS_PATH:-/volume1/web/portfolio}"
 NAS_BRANCH="${NAS_BRANCH:-dev}"
@@ -20,11 +21,12 @@ fi
 
 echo "Deploying '${NAS_BRANCH}' to Synology UAT:"
 echo "  host: ${NAS_HOST}"
+echo "  port: ${NAS_PORT}"
 echo "  user: ${NAS_USER}"
 echo "  path: ${NAS_PATH}"
 echo
 
-ssh "${NAS_USER}@${NAS_HOST}" <<EOF
+ssh -p "${NAS_PORT}" "${NAS_USER}@${NAS_HOST}" <<EOF
 set -euo pipefail
 cd "${NAS_PATH}"
 git fetch origin

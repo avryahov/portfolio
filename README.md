@@ -272,7 +272,8 @@ certbot --nginx \
 
 - Скрипт деплоя: `./scripts/deploy-uat-nas.sh`
 - По умолчанию используются:
-  - `NAS_HOST=192.168.1.77`
+  - `NAS_HOST=192.168.1.78`
+  - `NAS_PORT=3022`
   - `NAS_USER=avryahov`
   - `NAS_PATH=/volume1/web/portfolio`
   - `NAS_BRANCH=dev`
@@ -283,7 +284,7 @@ certbot --nginx \
   - `git pull --ff-only origin dev`
   - `bash scripts/version.sh sync`
 - Пример с переопределением хоста:
-  `NAS_HOST=nas.local ./scripts/deploy-uat-nas.sh`
+  `NAS_HOST=nas.local NAS_PORT=3022 ./scripts/deploy-uat-nas.sh`
 
 ### 2) Обновили JS/CSS файл
 
