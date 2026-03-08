@@ -25,6 +25,7 @@
 - Редактировать страницы и стили напрямую (`.html`, `.css`, `.js`).
 - Для внутренних страниц использовать шаблон с `data-root=".."` + `data-component="header/footer"`.
 - После правок компонентов (`components/header.html`, `components/footer.html`) обновлять `componentVersion` в `assets/js/main.js`.
+- Для build-версии использовать `./scripts/version.sh`, а не править build-плашку в footer вручную.
 - После правок CSS/JS обновлять `?v=` у подключений на нужных страницах (ручной cache-busting).
 
 ## Общее
@@ -201,6 +202,12 @@
 
 Подходит любой статический хостинг (Nginx/Apache/Caddy/CDN object storage).
 
+Целевой домен:
+
+- `itpuh.ru`
+- `итпух.рф`
+- Punycode для `nginx`, `certbot`, части DNS/API-инструментов: `xn--h1aoifk.xn--p1ai`
+
 Критично:
 
 - раздавать сайт по HTTP(S), не `file://`
@@ -213,7 +220,7 @@
 ```nginx
 server {
     listen 80;
-    server_name example.com www.example.com;
+    server_name itpuh.ru www.itpuh.ru итпух.рф www.итпух.рф xn--h1aoifk.xn--p1ai www.xn--h1aoifk.xn--p1ai;
     root /var/www/portfolio;
     index index.html;
 
@@ -223,11 +230,42 @@ server {
 }
 ```
 
+Для первого деплоя используйте готовые файлы:
+
+- [deploy/nginx/portfolio.conf](/Users/avrjakhov/repositories/git/itpuh/portfolio/deploy/nginx/portfolio.conf)
+- [deploy/nginx/bootstrap-nginx.sh](/Users/avrjakhov/repositories/git/itpuh/portfolio/deploy/nginx/bootstrap-nginx.sh)
+
+После активации HTTP-конфига и проверки DNS можно выпустить сертификат:
+
+```bash
+certbot --nginx \
+  -d itpuh.ru \
+  -d www.itpuh.ru \
+  -d xn--h1aoifk.xn--p1ai \
+  -d www.xn--h1aoifk.xn--p1ai \
+  --redirect \
+  -m your-email@example.com \
+  --agree-tos -n
+```
+
 ## Правила сопровождения
 
 ### 1) Обновили `components/header.html` или `components/footer.html`
 
 - Поднимите `componentVersion` в `assets/js/main.js`, иначе можно поймать stale-кэш компонента.
+
+### 1.1) Обновили или итерировали build-версию
+
+- Состояние `major/minor` хранится в `version.env`.
+- `patch` считается автоматически как разница между общим количеством commit-ов и `PATCH_BASE_COUNT`.
+- Текущую сборку вывести командой:
+  `./scripts/version.sh current`
+- Обновить build-плашку в footer и `componentVersion`:
+  `./scripts/version.sh sync`
+- Итерировать `minor` и начать patch-счёт с нуля от текущей истории:
+  `./scripts/version.sh minor`
+- Итерировать `major`, сбросить `minor` и начать patch-счёт с нуля:
+  `./scripts/version.sh major`
 
 ### 2) Обновили JS/CSS файл
 
