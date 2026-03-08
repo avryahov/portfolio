@@ -120,6 +120,87 @@
     update();
   }
 
+  function detectBrowserInfo(userAgent) {
+    var matchers = [
+      { name: 'samsung-internet', regex: /SamsungBrowser\/([\d.]+)/i },
+      { name: 'yandex-browser', regex: /YaBrowser\/([\d.]+)/i },
+      { name: 'edge', regex: /EdgA?\/([\d.]+)/i },
+      { name: 'opera', regex: /(?:OPR|OPiOS)\/([\d.]+)/i },
+      { name: 'chrome', regex: /(?:CriOS|Chrome)\/([\d.]+)/i },
+      { name: 'firefox', regex: /(?:FxiOS|Firefox)\/([\d.]+)/i },
+      { name: 'safari', regex: /Version\/([\d.]+).*Safari/i }
+    ];
+
+    for (var i = 0; i < matchers.length; i += 1) {
+      var match = userAgent.match(matchers[i].regex);
+      if (match) {
+        return {
+          family: matchers[i].name,
+          version: match[1] || ''
+        };
+      }
+    }
+
+    return {
+      family: 'unknown',
+      version: ''
+    };
+  }
+
+  function evaluateBrowserContext() {
+    var nav = window.navigator || {};
+    var userAgent = nav.userAgent || '';
+    var userAgentData = nav.userAgentData || null;
+    var maxTouchPoints = Number(nav.maxTouchPoints || 0);
+    var screenWidth = window.screen && window.screen.width ? window.screen.width : window.innerWidth;
+    var screenHeight = window.screen && window.screen.height ? window.screen.height : window.innerHeight;
+    var screenShortestSide = Math.min(screenWidth || 0, screenHeight || 0);
+    var coarsePointer = window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(any-pointer: coarse)').matches;
+    var noHover = window.matchMedia('(hover: none)').matches || window.matchMedia('(any-hover: none)').matches;
+    var touchDevice = coarsePointer || noHover || maxTouchPoints > 0 || 'ontouchstart' in window;
+    var mobileAgent = /Android.+Mobile|iPhone|iPod|Windows Phone|Opera Mini|IEMobile|BlackBerry|webOS|Mobile Safari/i.test(userAgent);
+    var tabletAgent = /iPad|Tablet|Silk/i.test(userAgent) || ((nav.platform || '') === 'MacIntel' && maxTouchPoints > 1);
+    var uaDataMobile = !!(userAgentData && userAgentData.mobile);
+    var phoneLikeTouchDevice = touchDevice && screenShortestSide > 0 && screenShortestSide <= 540;
+    var browser = detectBrowserInfo(userAgent);
+    var deviceClass = mobileAgent || uaDataMobile ? 'phone' : (tabletAgent ? 'tablet' : 'desktop');
+    var mobileUi = mobileAgent || uaDataMobile || phoneLikeTouchDevice;
+
+    return {
+      browserFamily: browser.family,
+      browserVersion: browser.version,
+      deviceClass: deviceClass,
+      mobileUi: mobileUi
+    };
+  }
+
+  function applyBrowserContext(context) {
+    var root = document.documentElement;
+    root.setAttribute('data-mobile-ui', context.mobileUi ? 'true' : 'false');
+    root.setAttribute('data-device-class', context.deviceClass);
+    root.setAttribute('data-browser-family', context.browserFamily);
+    if (context.browserVersion) {
+      root.setAttribute('data-browser-version', context.browserVersion);
+    } else {
+      root.removeAttribute('data-browser-version');
+    }
+  }
+
+  var browserContext = null;
+
+  function refreshBrowserContext() {
+    browserContext = evaluateBrowserContext();
+    applyBrowserContext(browserContext);
+    return browserContext;
+  }
+
+  function isMobileUi() {
+    if (!browserContext) {
+      refreshBrowserContext();
+    }
+    return !!browserContext.mobileUi;
+  }
+
   function initResponsiveNavMenus() {
     var strips = document.querySelectorAll('.anchor-strip');
     if (!strips.length) {
@@ -133,7 +214,6 @@
       if (!toggle || !nav) {
         return;
       }
-      var mobileBottomMedia = window.matchMedia('(max-width: 767px)');
 
       function closeMenu(withAnimation) {
         nav.classList.toggle('is-animated', !!withAnimation);
@@ -156,7 +236,7 @@
       }
 
       toggle.addEventListener('click', function () {
-        if (mobileBottomMedia.matches) {
+        if (isMobileUi()) {
           return;
         }
         var opened = nav.classList.contains('is-open');
@@ -181,7 +261,7 @@
 
       window.addEventListener('resize', function () {
         closeMenu(false);
-        if (mobileBottomMedia.matches) {
+        if (isMobileUi()) {
           toggle.setAttribute('aria-hidden', 'true');
           toggle.setAttribute('tabindex', '-1');
         } else {
@@ -191,7 +271,7 @@
       });
 
       closeMenu(false);
-      if (mobileBottomMedia.matches) {
+      if (isMobileUi()) {
         toggle.setAttribute('aria-hidden', 'true');
         toggle.setAttribute('tabindex', '-1');
       }
@@ -490,11 +570,9 @@
       button.innerHTML = '<span aria-hidden="true">↑</span>';
       document.body.appendChild(button);
     }
-    var mobileNavMedia = window.matchMedia('(max-width: 767px)');
-
     function placeButton() {
       var controls = document.querySelector('.anchor-nav-controls');
-      if (mobileNavMedia.matches && controls) {
+      if (isMobileUi() && controls) {
         if (button.parentElement !== controls) {
           controls.appendChild(button);
         }
@@ -604,6 +682,9 @@
   }
 
   initTheme();
+  refreshBrowserContext();
+  window.addEventListener('resize', refreshBrowserContext, { passive: true });
+  window.addEventListener('orientationchange', refreshBrowserContext, { passive: true });
 
   Promise.all([
     loadComponent('header', 'header.html'),
