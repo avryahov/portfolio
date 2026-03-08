@@ -648,7 +648,7 @@
     }
 
     var root = normalizeRootPath(document.body.getAttribute('data-root') || '.');
-    var componentVersion = '20260309-202';
+    var componentVersion = '20260309-205';
     var url = root + '/components/' + componentPath + '?v=' + componentVersion;
 
     return fetch(url, { cache: 'no-store' })
