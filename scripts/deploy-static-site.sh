@@ -21,6 +21,14 @@ SSH_COMMON_OPTS=(
   -o StrictHostKeyChecking=yes
   -p "${DEPLOY_PORT}"
 )
+SCP_COMMON_OPTS=(
+  -i "${SSH_IDENTITY_FILE}"
+  -o IdentitiesOnly=yes
+  -o PreferredAuthentications=publickey
+  -o PubkeyAuthentication=yes
+  -o StrictHostKeyChecking=yes
+  -P "${DEPLOY_PORT}"
+)
 
 if [[ ! -d "${release_dir}" ]]; then
   echo "Release directory not found: ${release_dir}" >&2
@@ -69,7 +77,7 @@ tar -C "$(dirname "${release_dir}")" -czf "${archive_path}" "${release_name}"
 remote_tmp_archive="/tmp/${release_name}.tar.gz"
 remote_tmp_dir="/tmp/${release_name}-extract"
 
-scp "${SSH_COMMON_OPTS[@]}" "${archive_path}" "${DEPLOY_USER}@${DEPLOY_HOST}:${remote_tmp_archive}"
+scp "${SCP_COMMON_OPTS[@]}" "${archive_path}" "${DEPLOY_USER}@${DEPLOY_HOST}:${remote_tmp_archive}"
 
 ssh "${SSH_COMMON_OPTS[@]}" "${DEPLOY_USER}@${DEPLOY_HOST}" <<EOF
 set -euo pipefail
