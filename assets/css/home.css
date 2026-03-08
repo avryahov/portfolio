@@ -263,6 +263,7 @@
   padding: 4px 2px 10px;
   scrollbar-width: none;
   touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
 
 .experience-grid::-webkit-scrollbar {
@@ -998,8 +999,23 @@ body[data-root="."] .qual-toggle-btn {
   }
 
   .edu-group {
-    padding-top: 70px;
+    gap: 20px;
+    padding-top: 56px;
     grid-template-columns: 1fr;
+  }
+
+  .edu-group::before,
+  .edu-group::after {
+    content: none;
+  }
+
+  .edu-group-label {
+    position: static;
+    margin-bottom: 2px;
+  }
+
+  .edu-item {
+    min-height: 0;
   }
 
   .lifecycle-track {
@@ -1009,7 +1025,7 @@ body[data-root="."] .qual-toggle-btn {
 
   .experience-grid {
     justify-content: flex-start;
-    touch-action: pan-x;
+    touch-action: auto;
     scroll-snap-type: x mandatory;
   }
 
@@ -1057,6 +1073,31 @@ body[data-root="."] .qual-toggle-btn {
   .devops-points {
     min-height: 0;
   }
+}
+
+html[data-mobile-ui="true"] .edu-line {
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+html[data-mobile-ui="true"] .edu-group {
+  gap: 20px;
+  padding-top: 0;
+  grid-template-columns: 1fr;
+}
+
+html[data-mobile-ui="true"] .edu-group::before,
+html[data-mobile-ui="true"] .edu-group::after {
+  content: none;
+}
+
+html[data-mobile-ui="true"] .edu-group-label {
+  position: static;
+  margin-bottom: 2px;
+}
+
+html[data-mobile-ui="true"] .edu-item {
+  min-height: 0;
 }
 
 @media (max-width: 640px) {
