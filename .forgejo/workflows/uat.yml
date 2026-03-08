@@ -1,0 +1,69 @@
+name: UAT CI/CD
+
+on:
+  push:
+    branches:
+      - dev
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: uat-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: docker
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate repository state
+        run: bash ./scripts/ci-validate.sh
+
+  build-and-deploy-uat:
+    needs: validate
+    runs-on: docker
+    env:
+      DEPLOY_HOST: ${{ secrets.UAT_DEPLOY_HOST }}
+      DEPLOY_PORT: ${{ secrets.UAT_DEPLOY_PORT }}
+      DEPLOY_USER: ${{ secrets.UAT_DEPLOY_USER }}
+      DEPLOY_PATH: ${{ secrets.UAT_DEPLOY_PATH }}
+      DEPLOY_BRANCH: ${{ secrets.UAT_DEPLOY_BRANCH }}
+      UAT_KNOWN_HOSTS: ${{ secrets.UAT_KNOWN_HOSTS }}
+      UAT_SSH_KEY: ${{ secrets.UAT_SSH_KEY }}
+      SKIP_LOCAL_BRANCH_CHECK: "1"
+      RELEASE_DIR: .build/uat
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build publishable release directory
+        run: bash ./scripts/build-release.sh "${RELEASE_DIR}"
+
+      - name: Prepare SSH key
+        run: |
+          set -euo pipefail
+          if [[ -z "${UAT_SSH_KEY:-}" ]]; then
+            echo "UAT_SSH_KEY secret is empty." >&2
+            exit 1
+          fi
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "${UAT_SSH_KEY}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          if [[ -n "${UAT_KNOWN_HOSTS:-}" ]]; then
+            printf '%s\n' "${UAT_KNOWN_HOSTS}" > ~/.ssh/known_hosts
+          elif [[ -n "${DEPLOY_HOST:-}" ]]; then
+            ssh-keyscan -p "${DEPLOY_PORT:-22}" -H "${DEPLOY_HOST}" > ~/.ssh/known_hosts
+          fi
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Deploy release to UAT NAS
+        run: bash ./scripts/deploy-static-site.sh "${RELEASE_DIR}"

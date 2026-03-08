@@ -26,8 +26,10 @@
 - Для внутренних страниц использовать шаблон с `data-root=".."` + `data-component="header/footer"`.
 - После правок компонентов (`components/header.html`, `components/footer.html`) обновлять `componentVersion` в `assets/js/main.js`.
 - Для build-версии использовать `./scripts/version.sh`, а не править build-плашку в footer вручную.
-- Для выкладки на домашний UAT NAS использовать `./scripts/deploy-uat-nas.sh`.
-- Для выкладки в облачный PROD использовать `./scripts/deploy-prod-cloud.sh`.
+- Основной путь выкладки теперь идет через локальный `Forgejo Actions`.
+- На целевых серверах больше не требуется `git clone` или `git pull`: доставляется подготовленная publishable-директория без `.git`-истории.
+- Для ручного запуска деплоя на домашний UAT NAS можно использовать `./scripts/deploy-uat-nas.sh`.
+- Для ручного запуска деплоя в облачный PROD можно использовать `./scripts/deploy-prod-cloud.sh`.
 - После правок CSS/JS обновлять `?v=` у подключений на нужных страницах (ручной cache-busting).
 
 ## Общее
@@ -271,30 +273,30 @@ certbot --nginx \
 
 ### 1.2) Выкладка на домашний UAT NAS
 
+- Автоматический сценарий: `push` в ветку `dev` запускает workflow `.forgejo/workflows/uat.yml`.
 - Скрипт деплоя: `./scripts/deploy-uat-nas.sh`
 - Параметры по умолчанию лежат в `deploy/uat/env.sh`
-- Перед деплоем скрипт проверяет, что локальная ветка тоже `dev`.
-- На NAS выполняются:
-  - `git fetch origin`
-  - `git checkout dev`
-  - `git pull --ff-only origin dev`
-  - `bash scripts/version.sh sync`
+- При ручном локальном запуске скрипт проверяет, что локальная ветка тоже `dev`.
+- На runner выполняются:
+  - `bash ./scripts/ci-validate.sh`
+  - `bash ./scripts/build-release.sh .build/uat`
+  - `rsync --delete` подготовленной директории в `DEPLOY_PATH`
+- На NAS не нужен git-репозиторий: достаточно существующей целевой директории и SSH-доступа.
 - Пример с переопределением хоста:
   `DEPLOY_HOST=nas.local DEPLOY_PORT=3022 ./scripts/deploy-uat-nas.sh`
-- Если на NAS репозиторий клонировался от `root`, исправьте владельца перед первым deploy:
-  `sudo -i && chown -R avryahov:users /volume1/web/portfolio`
 
 ### 1.3) Выкладка в облачный PROD
 
+- Автоматического `push -> PROD` нет.
+- PROD выкладывается вручную через workflow `.forgejo/workflows/prod-manual.yml`.
 - Скрипт деплоя: `./scripts/deploy-prod-cloud.sh`
 - Параметры по умолчанию лежат в `deploy/prod/env.sh`
 - По умолчанию `DEPLOY_HOST=itpuh.ru`; если PROD-хост отличается, переопределите `DEPLOY_HOST` перед запуском.
-- На PROD выполняются:
-  - `git fetch origin`
-  - `git checkout <branch>`
-  - `git pull --ff-only origin <branch>`
-  - `bash ../scripts/version.sh sync`
-  - `bash nginx/reload-nginx.sh`
+- На runner выполняются:
+  - `bash ./scripts/ci-validate.sh`
+  - `bash ./scripts/build-release.sh .build/prod`
+  - `rsync --delete` подготовленной директории в `DEPLOY_PATH`
+  - post-hook `nginx -t && systemctl reload nginx` на удаленной стороне
 - `deploy/nginx/bootstrap-nginx.sh` использовать только для первичной настройки сервера, а не для обычного обновления релиз-стенда.
 
 ### 2) Обновили JS/CSS файл
@@ -317,8 +319,83 @@ certbot --nginx \
 - Темы: переключение светлая/темная + сохранение состояния.
 - Модалка "Обсудить проект": открытие сообщества VK и сброс формы.
 
+## Локальный CI/CD в Forgejo
+
+### Что запускается
+
+- `.forgejo/workflows/uat.yml`
+  - триггер: `push` в `dev` и ручной `workflow_dispatch`
+  - шаги: `checkout` -> `validate` -> `build release` -> `deploy` на домашний UAT NAS
+- `.forgejo/workflows/prod-manual.yml`
+  - триггер: только ручной `workflow_dispatch`
+  - шаги: `checkout` -> `validate` -> `build release` -> `deploy` на PROD
+
+### Что проверяет CI
+
+- наличие ключевых файлов проекта
+- корректный расчет build-версии через `./scripts/version.sh current`
+- актуальность build-плашки в footer и `componentVersion` в `assets/js/main.js`
+
+### Что входит в publishable release
+
+В релизную директорию попадают только файлы, которые реально должны быть на web-сервере:
+
+- `index.html`
+- `favicon.ico`
+- `manifest.webmanifest`
+- `assets/`
+- `components/`
+- `education/`
+- `inverter/`
+- `open-solutions/`
+- `orgmu/`
+- `qualification/`
+- `services/`
+- `teaching/`
+
+Служебные файлы и директории (`.git`, `.forgejo`, `deploy/`, `scripts/`, `README.md`, `version.env`) на сервер не доставляются.
+
+Если `scripts/version.sh sync` меняет tracked-файлы, workflow падает. Это означает, что нужно локально выполнить:
+
+```bash
+./scripts/version.sh sync
+git add components/footer.html assets/js/main.js
+git commit -m "chore: sync build metadata"
+```
+
+### Какие secrets нужны в Forgejo
+
+Если под `vault` имеется в виду локальное хранилище секретов Forgejo, то использовать нужно именно `Actions Secrets`. Для текущего контура этого достаточно; внешний HashiCorp Vault можно подключить позже отдельно.
+
+Для UAT workflow:
+
+- `UAT_SSH_KEY` — приватный ключ для SSH-доступа с runner к NAS
+- `UAT_KNOWN_HOSTS` — опционально, заранее сохраненный `known_hosts`; если не задан, workflow попытается выполнить `ssh-keyscan`
+- `UAT_DEPLOY_HOST` — опционально, хост UAT
+- `UAT_DEPLOY_PORT` — опционально, порт UAT
+- `UAT_DEPLOY_USER` — опционально, SSH-пользователь
+- `UAT_DEPLOY_PATH` — опционально, путь до git-репозитория на NAS
+- `UAT_DEPLOY_BRANCH` — опционально, ветка выкладки; по умолчанию берется из `deploy/uat/env.sh`
+
+Для PROD workflow:
+
+- `PROD_SSH_KEY`
+- `PROD_KNOWN_HOSTS`
+- `PROD_DEPLOY_HOST`
+- `PROD_DEPLOY_PORT`
+- `PROD_DEPLOY_USER`
+- `PROD_DEPLOY_PATH`
+- `PROD_DEPLOY_BRANCH`
+
+Важно:
+
+- На удаленной стороне не нужен git-репозиторий.
+- Нужны только `ssh`, целевая директория и доступ на запись для пользователя деплоя.
+- Для текущей схемы на runner и на цели должен быть доступен `rsync`.
+- Runner читает секреты из Forgejo Secrets и не хранит ключи в репозитории.
+
 ## Известные ограничения
 
 - Поиск в верхнем меню сейчас UI-only (раскрытие/поле ввода), без движка поиска по контенту.
 - Несколько разделов в статусе подготовительных мок-страниц (см. карту сайта).
-- В репозитории нет CI/lint/test pipeline.
+- CI/CD стал локальным и минималистичным: без npm/lint/test toolchain, с artifact-based delivery через SSH/rsync.

@@ -1,0 +1,66 @@
+name: PROD Deploy
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prod-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: docker
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate repository state
+        run: bash ./scripts/ci-validate.sh
+
+  build-and-deploy-prod:
+    needs: validate
+    runs-on: docker
+    env:
+      DEPLOY_HOST: ${{ secrets.PROD_DEPLOY_HOST }}
+      DEPLOY_PORT: ${{ secrets.PROD_DEPLOY_PORT }}
+      DEPLOY_USER: ${{ secrets.PROD_DEPLOY_USER }}
+      DEPLOY_PATH: ${{ secrets.PROD_DEPLOY_PATH }}
+      DEPLOY_BRANCH: ${{ secrets.PROD_DEPLOY_BRANCH }}
+      PROD_KNOWN_HOSTS: ${{ secrets.PROD_KNOWN_HOSTS }}
+      PROD_SSH_KEY: ${{ secrets.PROD_SSH_KEY }}
+      SKIP_LOCAL_BRANCH_CHECK: "1"
+      RELEASE_DIR: .build/prod
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build publishable release directory
+        run: bash ./scripts/build-release.sh "${RELEASE_DIR}"
+
+      - name: Prepare SSH key
+        run: |
+          set -euo pipefail
+          if [[ -z "${PROD_SSH_KEY:-}" ]]; then
+            echo "PROD_SSH_KEY secret is empty." >&2
+            exit 1
+          fi
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "${PROD_SSH_KEY}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          if [[ -n "${PROD_KNOWN_HOSTS:-}" ]]; then
+            printf '%s\n' "${PROD_KNOWN_HOSTS}" > ~/.ssh/known_hosts
+          elif [[ -n "${DEPLOY_HOST:-}" ]]; then
+            ssh-keyscan -p "${DEPLOY_PORT:-22}" -H "${DEPLOY_HOST}" > ~/.ssh/known_hosts
+          fi
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Deploy release to PROD
+        run: bash ./scripts/deploy-static-site.sh "${RELEASE_DIR}"
