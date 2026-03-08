@@ -261,7 +261,8 @@ certbot --nginx \
 ### 1.1) Обновили или итерировали build-версию
 
 - Состояние `major/minor` хранится в `version.env`.
-- `patch` считается автоматически как разница между общим количеством commit-ов и `PATCH_BASE_COUNT`.
+- `patch` считается автоматически как разница между эффективным количеством commit-ов и `PATCH_BASE_COUNT`.
+- Для локального `sync` используется стабильная схема без hash в footer-версии, чтобы CI не ломался после каждого нового commit.
 - Текущую сборку вывести командой:
   `./scripts/version.sh current`
 - Обновить build-плашку в footer и `componentVersion`:

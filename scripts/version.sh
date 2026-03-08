@@ -20,21 +20,37 @@ git_count() {
   git -C "${repo_root}" rev-list --count HEAD
 }
 
-git_short_hash() {
-  git -C "${repo_root}" rev-parse --short HEAD
+has_tracked_changes() {
+  if git -C "${repo_root}" diff --quiet HEAD --; then
+    return 1
+  fi
+
+  return 0
+}
+
+effective_commit_count() {
+  local total_count
+  total_count="$(git_count)"
+
+  if has_tracked_changes; then
+    printf '%s' "$((total_count + 1))"
+    return
+  fi
+
+  printf '%s' "${total_count}"
 }
 
 date_stamp() {
-  date '+%Y%m%d'
+  TZ="${VERSION_TZ:-Asia/Yekaterinburg}" date '+%Y%m%d'
 }
 
 component_stamp() {
-  printf '%s-%s' "$(date '+%Y%m%d')" "$(git_count)"
+  printf '%s-%s' "$(date_stamp)" "$(effective_commit_count)"
 }
 
 patch_number() {
   local total_count
-  total_count="$(git_count)"
+  total_count="$(effective_commit_count)"
   if (( total_count < PATCH_BASE_COUNT )); then
     echo "git commit count ${total_count} is below PATCH_BASE_COUNT ${PATCH_BASE_COUNT}" >&2
     exit 1
@@ -43,12 +59,11 @@ patch_number() {
 }
 
 full_version() {
-  printf '%s.%s.%s.%s.%s' \
+  printf '%s.%s.%s.%s' \
     "${MAJOR}" \
     "${MINOR}" \
     "$(patch_number)" \
-    "$(date_stamp)" \
-    "$(git_short_hash)"
+    "$(date_stamp)"
 }
 
 write_version_state() {
@@ -66,7 +81,7 @@ sync_footer_version() {
   version_string="$(full_version)"
   comp_version="$(component_stamp)"
 
-  perl -0pi -e 's/Сборка\s+[0-9]+\.[0-9]+\.[0-9]+\.[0-9]{8}\.[0-9a-f]+/"Сборка '"${version_string}"'"/ge' "${footer_file}"
+  perl -0pi -e 's/Сборка\s+[0-9]+\.[0-9]+\.[0-9]+\.[0-9]{8}(?:\.[0-9a-f]+)?/"Сборка '"${version_string}"'"/ge' "${footer_file}"
   perl -0pi -e "s/componentVersion = '\\d{8}-\\d+';/componentVersion = '${comp_version}';/g" "${main_js_file}"
 
   printf '%s\n' "${version_string}"
