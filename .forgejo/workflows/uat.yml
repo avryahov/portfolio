@@ -23,7 +23,13 @@ jobs:
           CI_REPOSITORY: ${{ github.repository }}
           CI_SHA: ${{ github.sha }}
           CI_CLONE_URL_BASE: http://192.168.1.77:3000
-        run: bash ./scripts/checkout-forgejo-ci.sh
+        run: |
+          set -euo pipefail
+          rm -rf .git
+          git init .
+          git remote add origin "${CI_CLONE_URL_BASE}/${CI_REPOSITORY}.git"
+          git -c http.extraHeader="Authorization: Bearer ${CI_REPO_TOKEN}" fetch --no-tags origin "${CI_SHA}"
+          git checkout --detach FETCH_HEAD
 
       - name: Validate repository state
         run: bash ./scripts/ci-validate.sh
@@ -38,7 +44,13 @@ jobs:
           CI_REPOSITORY: ${{ github.repository }}
           CI_SHA: ${{ github.sha }}
           CI_CLONE_URL_BASE: http://192.168.1.77:3000
-        run: bash ./scripts/checkout-forgejo-ci.sh
+        run: |
+          set -euo pipefail
+          rm -rf .git
+          git init .
+          git remote add origin "${CI_CLONE_URL_BASE}/${CI_REPOSITORY}.git"
+          git -c http.extraHeader="Authorization: Bearer ${CI_REPO_TOKEN}" fetch --no-tags origin "${CI_SHA}"
+          git checkout --detach FETCH_HEAD
 
       - name: Build publishable release directory
         run: bash ./scripts/build-release.sh .build/uat
@@ -60,7 +72,13 @@ jobs:
           CI_REPOSITORY: ${{ github.repository }}
           CI_SHA: ${{ github.sha }}
           CI_CLONE_URL_BASE: http://192.168.1.77:3000
-        run: bash ./scripts/checkout-forgejo-ci.sh
+        run: |
+          set -euo pipefail
+          rm -rf .git
+          git init .
+          git remote add origin "${CI_CLONE_URL_BASE}/${CI_REPOSITORY}.git"
+          git -c http.extraHeader="Authorization: Bearer ${CI_REPO_TOKEN}" fetch --no-tags origin "${CI_SHA}"
+          git checkout --detach FETCH_HEAD
 
       - name: Prepare SSH credentials
         run: bash ./scripts/prepare-ssh-deploy-key.sh
@@ -90,7 +108,13 @@ jobs:
           CI_REPOSITORY: ${{ github.repository }}
           CI_SHA: ${{ github.sha }}
           CI_CLONE_URL_BASE: http://192.168.1.77:3000
-        run: bash ./scripts/checkout-forgejo-ci.sh
+        run: |
+          set -euo pipefail
+          rm -rf .git
+          git init .
+          git remote add origin "${CI_CLONE_URL_BASE}/${CI_REPOSITORY}.git"
+          git -c http.extraHeader="Authorization: Bearer ${CI_REPO_TOKEN}" fetch --no-tags origin "${CI_SHA}"
+          git checkout --detach FETCH_HEAD
 
       - name: Build publishable release directory
         run: bash ./scripts/build-release.sh "${RELEASE_DIR}"
