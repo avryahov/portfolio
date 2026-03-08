@@ -26,6 +26,7 @@
 - Для внутренних страниц использовать шаблон с `data-root=".."` + `data-component="header/footer"`.
 - После правок компонентов (`components/header.html`, `components/footer.html`) обновлять `componentVersion` в `assets/js/main.js`.
 - Для build-версии использовать `./scripts/version.sh`, а не править build-плашку в footer вручную.
+- Для выкладки на домашний UAT NAS использовать `./scripts/deploy-uat-nas.sh`.
 - После правок CSS/JS обновлять `?v=` у подключений на нужных страницах (ручной cache-busting).
 
 ## Общее
@@ -266,6 +267,23 @@ certbot --nginx \
   `./scripts/version.sh minor`
 - Итерировать `major`, сбросить `minor` и начать patch-счёт с нуля:
   `./scripts/version.sh major`
+
+### 1.2) Выкладка на домашний UAT NAS
+
+- Скрипт деплоя: `./scripts/deploy-uat-nas.sh`
+- По умолчанию используются:
+  - `NAS_HOST=192.168.1.77`
+  - `NAS_USER=avryahov`
+  - `NAS_PATH=/volume1/web/portfolio`
+  - `NAS_BRANCH=dev`
+- Перед деплоем скрипт проверяет, что локальная ветка тоже `dev`.
+- На NAS выполняются:
+  - `git fetch origin`
+  - `git checkout dev`
+  - `git pull --ff-only origin dev`
+  - `bash scripts/version.sh sync`
+- Пример с переопределением хоста:
+  `NAS_HOST=nas.local ./scripts/deploy-uat-nas.sh`
 
 ### 2) Обновили JS/CSS файл
 
