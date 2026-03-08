@@ -305,10 +305,12 @@ body.drag-scroll-armed * {
   transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
 }
 
-.exp-card:hover {
-  border-color: rgba(148, 177, 255, 0.62);
-  box-shadow: 0 12px 26px rgba(47, 95, 232, 0.2);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .exp-card:hover {
+    border-color: rgba(148, 177, 255, 0.62);
+    box-shadow: 0 12px 26px rgba(47, 95, 232, 0.2);
+    transform: translateY(-2px);
+  }
 }
 
 .exp-top {
@@ -1320,9 +1322,11 @@ html[data-theme="light"] .exp-card {
   background: linear-gradient(135deg, #5d84e5 0%, #6f60cf 56%, #7d4cac 100%);
 }
 
-html[data-theme="light"] .exp-card:hover {
-  border-top-color: rgba(203, 224, 255, 0.98);
-  box-shadow: 0 12px 24px rgba(45, 101, 231, 0.14);
+@media (hover: hover) and (pointer: fine) {
+  html[data-theme="light"] .exp-card:hover {
+    border-top-color: rgba(203, 224, 255, 0.98);
+    box-shadow: 0 12px 24px rgba(45, 101, 231, 0.14);
+  }
 }
 
 html[data-theme="light"] .exp-role {
