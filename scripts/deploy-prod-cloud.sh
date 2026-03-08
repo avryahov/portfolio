@@ -20,6 +20,11 @@ if [[ "${LOCAL_BRANCH}" != "${DEPLOY_BRANCH}" ]]; then
   exit 1
 fi
 
+if [[ -z "${DEPLOY_HOST}" ]]; then
+  echo "DEPLOY_HOST is empty. Set the real PROD host in deploy/prod/env.sh or export DEPLOY_HOST=..." >&2
+  exit 1
+fi
+
 echo "Deploying '${DEPLOY_BRANCH}' to cloud PROD:"
 echo "  host: ${DEPLOY_HOST}"
 echo "  port: ${DEPLOY_PORT}"
@@ -30,6 +35,10 @@ echo
 ssh -p "${DEPLOY_PORT}" "${DEPLOY_USER}@${DEPLOY_HOST}" <<EOF
 set -euo pipefail
 cd "${DEPLOY_PATH}"
+if ! git rev-parse --show-toplevel >/dev/null 2>&1; then
+  echo "Remote path '${DEPLOY_PATH}' is not a readable git repository on PROD." >&2
+  exit 1
+fi
 git fetch origin
 git checkout "${DEPLOY_BRANCH}"
 git pull --ff-only origin "${DEPLOY_BRANCH}"

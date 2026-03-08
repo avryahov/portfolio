@@ -281,11 +281,14 @@ certbot --nginx \
   - `bash scripts/version.sh sync`
 - Пример с переопределением хоста:
   `DEPLOY_HOST=nas.local DEPLOY_PORT=3022 ./scripts/deploy-uat-nas.sh`
+- Если на NAS репозиторий клонировался от `root`, исправьте владельца перед первым deploy:
+  `sudo -i && chown -R avryahov:users /volume1/web/portfolio`
 
 ### 1.3) Выкладка в облачный PROD
 
 - Скрипт деплоя: `./scripts/deploy-prod-cloud.sh`
 - Параметры по умолчанию лежат в `deploy/prod/env.sh`
+- По умолчанию `DEPLOY_HOST=itpuh.ru`; если PROD-хост отличается, переопределите `DEPLOY_HOST` перед запуском.
 - На PROD выполняются:
   - `git fetch origin`
   - `git checkout <branch>`

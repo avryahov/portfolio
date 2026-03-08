@@ -20,6 +20,11 @@ if [[ "${LOCAL_BRANCH}" != "${DEPLOY_BRANCH}" ]]; then
   exit 1
 fi
 
+if [[ -z "${DEPLOY_HOST}" || -z "${DEPLOY_USER}" || -z "${DEPLOY_PATH}" ]]; then
+  echo "UAT deploy environment is incomplete. Check deploy/uat/env.sh." >&2
+  exit 1
+fi
+
 echo "Deploying '${DEPLOY_BRANCH}' to Synology UAT:"
 echo "  host: ${DEPLOY_HOST}"
 echo "  port: ${DEPLOY_PORT}"
@@ -30,6 +35,11 @@ echo
 ssh -p "${DEPLOY_PORT}" "${DEPLOY_USER}@${DEPLOY_HOST}" <<EOF
 set -euo pipefail
 cd "${DEPLOY_PATH}"
+if ! git rev-parse --show-toplevel >/dev/null 2>&1; then
+  echo "Remote path '${DEPLOY_PATH}' is not a readable git repository for user '${DEPLOY_USER}'." >&2
+  echo "On Synology this usually means the repo was cloned as root; fix with: sudo -i && chown -R ${DEPLOY_USER}:users ${DEPLOY_PATH}" >&2
+  exit 1
+fi
 git fetch origin
 git checkout "${DEPLOY_BRANCH}"
 git pull --ff-only origin "${DEPLOY_BRANCH}"
