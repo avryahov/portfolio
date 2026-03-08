@@ -34,7 +34,7 @@ jobs:
       - name: Validate repository state
         run: bash ./scripts/ci-validate.sh
 
-  build-release:
+  build:
     needs: validate
     runs-on: docker
     steps:
@@ -52,10 +52,10 @@ jobs:
           git -c http.extraHeader="Authorization: Bearer ${CI_REPO_TOKEN}" fetch --no-tags origin "${CI_SHA}"
           git checkout --detach FETCH_HEAD
 
-      - name: Build publishable release directory
+      - name: Build site artifact
         run: bash ./scripts/build-release.sh .build/uat
 
-  verify-uat-target:
+  pre-deploy-uat:
     needs: validate
     runs-on: docker
     env:
@@ -83,13 +83,13 @@ jobs:
       - name: Prepare SSH credentials
         run: bash ./scripts/prepare-ssh-deploy-key.sh
 
-      - name: Verify remote UAT target
+      - name: Pre-deploy UAT target check
         run: bash ./scripts/check-ssh-deploy-target.sh
 
   deploy-uat:
     needs:
-      - build-release
-      - verify-uat-target
+      - build
+      - pre-deploy-uat
     runs-on: docker
     env:
       DEPLOY_HOST: ${{ secrets.UAT_DEPLOY_HOST }}
@@ -116,7 +116,7 @@ jobs:
           git -c http.extraHeader="Authorization: Bearer ${CI_REPO_TOKEN}" fetch --no-tags origin "${CI_SHA}"
           git checkout --detach FETCH_HEAD
 
-      - name: Build publishable release directory
+      - name: Build site artifact
         run: bash ./scripts/build-release.sh "${RELEASE_DIR}"
 
       - name: Prepare SSH credentials
@@ -124,3 +124,34 @@ jobs:
 
       - name: Deploy release to UAT NAS
         run: bash ./scripts/deploy-static-site.sh "${RELEASE_DIR}"
+
+  smoke-uat:
+    needs: deploy-uat
+    runs-on: docker
+    env:
+      DEPLOY_HOST: ${{ secrets.UAT_DEPLOY_HOST }}
+      DEPLOY_PORT: ${{ secrets.UAT_DEPLOY_PORT }}
+      DEPLOY_USER: ${{ secrets.UAT_DEPLOY_USER }}
+      DEPLOY_PATH: ${{ secrets.UAT_DEPLOY_PATH }}
+      DEPLOY_KNOWN_HOSTS: ${{ secrets.UAT_KNOWN_HOSTS }}
+      DEPLOY_SSH_KEY: ${{ secrets.UAT_SSH_KEY }}
+    steps:
+      - name: Checkout repository
+        env:
+          CI_REPO_TOKEN: ${{ github.token }}
+          CI_REPOSITORY: ${{ github.repository }}
+          CI_SHA: ${{ github.sha }}
+          CI_CLONE_URL_BASE: http://192.168.1.77:3000
+        run: |
+          set -euo pipefail
+          rm -rf .git
+          git init .
+          git remote add origin "${CI_CLONE_URL_BASE}/${CI_REPOSITORY}.git"
+          git -c http.extraHeader="Authorization: Bearer ${CI_REPO_TOKEN}" fetch --no-tags origin "${CI_SHA}"
+          git checkout --detach FETCH_HEAD
+
+      - name: Prepare SSH credentials
+        run: bash ./scripts/prepare-ssh-deploy-key.sh
+
+      - name: Smoke test deployed UAT files
+        run: bash ./scripts/smoke-static-deploy.sh
