@@ -262,11 +262,13 @@ certbot --nginx \
 
 - Состояние `major/minor` хранится в `version.env`.
 - `patch` считается автоматически как разница между эффективным количеством commit-ов и `PATCH_BASE_COUNT`.
-- Для локального `sync` используется стабильная схема без hash в footer-версии, чтобы CI не ломался после каждого нового commit.
+- Build-метаданные больше не нужно коммитить вручную: CI проштамповывает release artifact на этапе сборки.
 - Текущую сборку вывести командой:
   `./scripts/version.sh current`
-- Обновить build-плашку в footer и `componentVersion`:
+- Обновить build-плашку в footer и `componentVersion` в рабочем дереве:
   `./scripts/version.sh sync`
+- Проштамповать build-плашку в уже собранной директории релиза:
+  `./scripts/version.sh stamp .build/uat`
 - Итерировать `minor` и начать patch-счёт с нуля от текущей истории:
   `./scripts/version.sh minor`
 - Итерировать `major`, сбросить `minor` и начать patch-счёт с нуля:
@@ -281,7 +283,9 @@ certbot --nginx \
 - На runner выполняются:
   - `bash ./scripts/ci-validate.sh`
   - `bash ./scripts/build-release.sh .build/uat`
-  - `rsync --delete` подготовленной директории в `DEPLOY_PATH`
+  - упаковка релиза в `tar.gz`
+  - копирование архива по `scp`
+  - распаковка по `ssh` в `DEPLOY_PATH`
 - На NAS не нужен git-репозиторий: достаточно существующей целевой директории и SSH-доступа.
 - Пример с переопределением хоста:
   `DEPLOY_HOST=nas.local DEPLOY_PORT=3022 ./scripts/deploy-uat-nas.sh`
@@ -296,7 +300,9 @@ certbot --nginx \
 - На runner выполняются:
   - `bash ./scripts/ci-validate.sh`
   - `bash ./scripts/build-release.sh .build/prod`
-  - `rsync --delete` подготовленной директории в `DEPLOY_PATH`
+  - упаковка релиза в `tar.gz`
+  - копирование архива по `scp`
+  - распаковка по `ssh` в `DEPLOY_PATH`
   - post-hook `nginx -t && systemctl reload nginx` на удаленной стороне
 - `deploy/nginx/bootstrap-nginx.sh` использовать только для первичной настройки сервера, а не для обычного обновления релиз-стенда.
 
@@ -335,7 +341,7 @@ certbot --nginx \
 
 - наличие ключевых файлов проекта
 - корректный расчет build-версии через `./scripts/version.sh current`
-- актуальность build-плашки в footer и `componentVersion` в `assets/js/main.js`
+- корректный расчет build-версии через `./scripts/version.sh current`
 
 ### Что входит в publishable release
 
@@ -356,13 +362,7 @@ certbot --nginx \
 
 Служебные файлы и директории (`.git`, `.forgejo`, `deploy/`, `scripts/`, `README.md`, `version.env`) на сервер не доставляются.
 
-Если `scripts/version.sh sync` меняет tracked-файлы, workflow падает. Это означает, что нужно локально выполнить:
-
-```bash
-./scripts/version.sh sync
-git add components/footer.html assets/js/main.js
-git commit -m "chore: sync build metadata"
-```
+Build-метаданные в footer и `componentVersion` проставляются в release artifact во время сборки и не требуют отдельного commit.
 
 ### Какие secrets нужны в Forgejo
 
@@ -392,11 +392,12 @@ git commit -m "chore: sync build metadata"
 
 - На удаленной стороне не нужен git-репозиторий.
 - Нужны только `ssh`, целевая директория и доступ на запись для пользователя деплоя.
-- Для текущей схемы на runner и на цели должен быть доступен `rsync`.
+- Для текущей схемы на runner должны быть доступны `ssh`, `scp`, `tar`.
+- На целевой стороне должны быть доступны `ssh` и `tar`.
 - Runner читает секреты из Forgejo Secrets и не хранит ключи в репозитории.
 
 ## Известные ограничения
 
 - Поиск в верхнем меню сейчас UI-only (раскрытие/поле ввода), без движка поиска по контенту.
 - Несколько разделов в статусе подготовительных мок-страниц (см. карту сайта).
-- CI/CD стал локальным и минималистичным: без npm/lint/test toolchain, с artifact-based delivery через SSH/rsync.
+- CI/CD стал локальным и минималистичным: без npm/lint/test toolchain, с artifact-based delivery через SSH/SCP.

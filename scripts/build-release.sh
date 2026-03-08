@@ -21,12 +21,10 @@ publish_entries=(
   "manifest.webmanifest"
 )
 
-if ! command -v rsync >/dev/null 2>&1; then
-  echo "rsync not found. Install rsync to build the release directory." >&2
+if ! command -v cp >/dev/null 2>&1; then
+  echo "cp not found. Cannot build the release directory." >&2
   exit 1
 fi
-
-bash "${repo_root}/scripts/version.sh" sync >/dev/null
 
 rm -rf "${release_dir}"
 mkdir -p "${release_dir}"
@@ -36,8 +34,10 @@ for entry in "${publish_entries[@]}"; do
     echo "Publish entry is missing: ${entry}" >&2
     exit 1
   fi
-  rsync -a "${repo_root}/${entry}" "${release_dir}/"
+  cp -R "${repo_root}/${entry}" "${release_dir}/"
 done
+
+bash "${repo_root}/scripts/version.sh" stamp "${release_dir}" >/dev/null
 
 echo "Release directory prepared at: ${release_dir}"
 echo "Build version: $(bash "${repo_root}/scripts/version.sh" current)"

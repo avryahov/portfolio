@@ -5,6 +5,9 @@ set -euo pipefail
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 repo_root="$(cd "${script_dir}/.." && pwd)"
 release_dir="${1:-${RELEASE_DIR:-${repo_root}/.build/release}}"
+release_name="$(basename "${release_dir}")"
+archive_dir="${repo_root}/.build"
+archive_path="${archive_dir}/${release_name}.tar.gz"
 
 DEPLOY_PORT="${DEPLOY_PORT:-22}"
 DEPLOY_POST_HOOK="${DEPLOY_POST_HOOK:-}"
@@ -20,8 +23,13 @@ if [[ -z "${DEPLOY_HOST:-}" || -z "${DEPLOY_USER:-}" || -z "${DEPLOY_PATH:-}" ]]
   exit 1
 fi
 
-if ! command -v rsync >/dev/null 2>&1; then
-  echo "rsync not found. Install rsync to deploy the release directory." >&2
+if ! command -v tar >/dev/null 2>&1; then
+  echo "tar not found. Install tar to deploy the release directory." >&2
+  exit 1
+fi
+
+if ! command -v scp >/dev/null 2>&1; then
+  echo "scp not found. Install OpenSSH client to deploy the release directory." >&2
   exit 1
 fi
 
@@ -45,20 +53,30 @@ echo "  user: ${DEPLOY_USER}"
 echo "  path: ${DEPLOY_PATH}"
 echo
 
-ssh -p "${DEPLOY_PORT}" "${DEPLOY_USER}@${DEPLOY_HOST}" "mkdir -p '${DEPLOY_PATH}'"
+mkdir -p "${archive_dir}"
+rm -f "${archive_path}"
+tar -C "$(dirname "${release_dir}")" -czf "${archive_path}" "${release_name}"
 
-rsync \
-  -az \
-  --delete \
-  --omit-dir-times \
-  --no-perms \
-  -e "ssh -p ${DEPLOY_PORT}" \
-  "${release_dir}/" \
-  "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}/"
+remote_tmp_archive="/tmp/${release_name}.tar.gz"
+remote_tmp_dir="/tmp/${release_name}-extract"
+
+scp -P "${DEPLOY_PORT}" "${archive_path}" "${DEPLOY_USER}@${DEPLOY_HOST}:${remote_tmp_archive}"
+
+ssh -p "${DEPLOY_PORT}" "${DEPLOY_USER}@${DEPLOY_HOST}" <<EOF
+set -euo pipefail
+rm -rf "${remote_tmp_dir}"
+mkdir -p "${remote_tmp_dir}" "${DEPLOY_PATH}"
+tar -xzf "${remote_tmp_archive}" -C "${remote_tmp_dir}"
+find "${DEPLOY_PATH}" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
+cp -R "${remote_tmp_dir}/${release_name}/." "${DEPLOY_PATH}/"
+rm -rf "${remote_tmp_dir}" "${remote_tmp_archive}"
+EOF
 
 if [[ -n "${DEPLOY_POST_HOOK}" ]]; then
   ssh -p "${DEPLOY_PORT}" "${DEPLOY_USER}@${DEPLOY_HOST}" "${DEPLOY_POST_HOOK}"
 fi
+
+rm -f "${archive_path}"
 
 echo
 echo "Deploy completed successfully."

@@ -75,14 +75,22 @@ EOF
 }
 
 sync_footer_version() {
+  local target_root="${1:-${repo_root}}"
+  local target_footer_file="${target_root}/components/footer.html"
+  local target_main_js_file="${target_root}/assets/js/main.js"
   local version_string
   local comp_version
+
+  if [[ ! -f "${target_footer_file}" || ! -f "${target_main_js_file}" ]]; then
+    echo "Version stamp targets not found under: ${target_root}" >&2
+    exit 1
+  fi
 
   version_string="$(full_version)"
   comp_version="$(component_stamp)"
 
-  perl -0pi -e 's/Сборка\s+[0-9]+\.[0-9]+\.[0-9]+\.[0-9]{8}(?:\.[0-9a-f]+)?/"Сборка '"${version_string}"'"/ge' "${footer_file}"
-  perl -0pi -e "s/componentVersion = '\\d{8}-\\d+';/componentVersion = '${comp_version}';/g" "${main_js_file}"
+  perl -0pi -e 's/Сборка\s+[0-9]+\.[0-9]+\.[0-9]+\.[0-9]{8}(?:\.[0-9a-f]+)?/"Сборка '"${version_string}"'"/ge' "${target_footer_file}"
+  perl -0pi -e "s/componentVersion = '\\d{8}-\\d+';/componentVersion = '${comp_version}';/g" "${target_main_js_file}"
 
   printf '%s\n' "${version_string}"
 }
@@ -92,12 +100,14 @@ print_usage() {
 Usage:
   ./scripts/version.sh current
   ./scripts/version.sh sync
+  ./scripts/version.sh stamp <target_root>
   ./scripts/version.sh minor
   ./scripts/version.sh major
 
 Commands:
   current  Print the current full build version.
-  sync     Refresh the footer build badge and component cache version.
+  sync     Refresh the footer build badge and component cache version in the repository.
+  stamp    Refresh the footer build badge and component cache version under a target directory.
   minor    Increment MINOR, reset patch counting to zero from the current git history point, then sync.
   major    Increment MAJOR, reset MINOR to zero, reset patch counting to zero from the current git history point, then sync.
 EOF
@@ -111,6 +121,14 @@ case "${command}" in
     ;;
   sync)
     sync_footer_version
+    ;;
+  stamp)
+    target_root="${2:-}"
+    if [[ -z "${target_root}" ]]; then
+      echo "Usage: ./scripts/version.sh stamp <target_root>" >&2
+      exit 1
+    fi
+    sync_footer_version "${target_root}"
     ;;
   minor)
     MINOR="$((MINOR + 1))"
