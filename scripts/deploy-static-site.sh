@@ -22,6 +22,7 @@ SSH_COMMON_OPTS=(
   -p "${DEPLOY_PORT}"
 )
 SCP_COMMON_OPTS=(
+  -O
   -i "${SSH_IDENTITY_FILE}"
   -o IdentitiesOnly=yes
   -o PreferredAuthentications=publickey
