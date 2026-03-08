@@ -91,7 +91,11 @@ jobs:
           command -v tar || true
           getent hosts "${DEPLOY_HOST}" || true
           ssh -vvv \
+            -i ~/.ssh/id_ed25519 \
+            -o IdentitiesOnly=yes \
             -o BatchMode=yes \
+            -o PreferredAuthentications=publickey \
+            -o PubkeyAuthentication=yes \
             -o StrictHostKeyChecking=yes \
             -o ConnectTimeout=10 \
             -p "${DEPLOY_PORT}" \

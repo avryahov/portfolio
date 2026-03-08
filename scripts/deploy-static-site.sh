@@ -12,6 +12,15 @@ archive_path="${archive_dir}/${release_name}.tar.gz"
 DEPLOY_PORT="${DEPLOY_PORT:-22}"
 DEPLOY_POST_HOOK="${DEPLOY_POST_HOOK:-}"
 SKIP_LOCAL_BRANCH_CHECK="${SKIP_LOCAL_BRANCH_CHECK:-0}"
+SSH_IDENTITY_FILE="${SSH_IDENTITY_FILE:-$HOME/.ssh/id_ed25519}"
+SSH_COMMON_OPTS=(
+  -i "${SSH_IDENTITY_FILE}"
+  -o IdentitiesOnly=yes
+  -o PreferredAuthentications=publickey
+  -o PubkeyAuthentication=yes
+  -o StrictHostKeyChecking=yes
+  -p "${DEPLOY_PORT}"
+)
 
 if [[ ! -d "${release_dir}" ]]; then
   echo "Release directory not found: ${release_dir}" >&2
@@ -60,9 +69,9 @@ tar -C "$(dirname "${release_dir}")" -czf "${archive_path}" "${release_name}"
 remote_tmp_archive="/tmp/${release_name}.tar.gz"
 remote_tmp_dir="/tmp/${release_name}-extract"
 
-scp -P "${DEPLOY_PORT}" "${archive_path}" "${DEPLOY_USER}@${DEPLOY_HOST}:${remote_tmp_archive}"
+scp "${SSH_COMMON_OPTS[@]}" "${archive_path}" "${DEPLOY_USER}@${DEPLOY_HOST}:${remote_tmp_archive}"
 
-ssh -p "${DEPLOY_PORT}" "${DEPLOY_USER}@${DEPLOY_HOST}" <<EOF
+ssh "${SSH_COMMON_OPTS[@]}" "${DEPLOY_USER}@${DEPLOY_HOST}" <<EOF
 set -euo pipefail
 rm -rf "${remote_tmp_dir}"
 mkdir -p "${remote_tmp_dir}" "${DEPLOY_PATH}"
@@ -73,7 +82,7 @@ rm -rf "${remote_tmp_dir}" "${remote_tmp_archive}"
 EOF
 
 if [[ -n "${DEPLOY_POST_HOOK}" ]]; then
-  ssh -p "${DEPLOY_PORT}" "${DEPLOY_USER}@${DEPLOY_HOST}" "${DEPLOY_POST_HOOK}"
+  ssh "${SSH_COMMON_OPTS[@]}" "${DEPLOY_USER}@${DEPLOY_HOST}" "${DEPLOY_POST_HOOK}"
 fi
 
 rm -f "${archive_path}"
