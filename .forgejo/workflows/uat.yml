@@ -89,6 +89,9 @@ jobs:
           command -v ssh || true
           command -v scp || true
           command -v tar || true
+          hostname -i || true
+          ip route || true
+          ip addr || true
           getent hosts "${DEPLOY_HOST}" || true
           ssh -vvv \
             -i ~/.ssh/id_ed25519 \
