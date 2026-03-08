@@ -4,9 +4,10 @@ set -euo pipefail
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 repo_root="$(cd "${script_dir}/../.." && pwd)"
+site_root="${repo_root}/site"
 version_file="${repo_root}/version.env"
-footer_file="${repo_root}/components/footer.html"
-main_js_file="${repo_root}/assets/js/main.js"
+footer_file="${site_root}/components/footer.html"
+main_js_file="${site_root}/assets/js/main.js"
 
 if [[ ! -f "${version_file}" ]]; then
   echo "version file not found: ${version_file}" >&2
@@ -75,7 +76,7 @@ EOF
 }
 
 sync_footer_version() {
-  local target_root="${1:-${repo_root}}"
+  local target_root="${1:-${site_root}}"
   local target_footer_file="${target_root}/components/footer.html"
   local target_main_js_file="${target_root}/assets/js/main.js"
   local version_string

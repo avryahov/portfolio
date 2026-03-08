@@ -4,13 +4,10 @@ set -euo pipefail
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 repo_root="$(cd "${script_dir}/../.." && pwd)"
+site_root="${repo_root}/site"
 
 required_files=(
-  "index.html"
   "README.md"
-  "components/header.html"
-  "components/footer.html"
-  "assets/js/main.js"
   "ops/scripts/version.sh"
   "ops/scripts/deploy-uat-nas.sh"
   "ops/scripts/deploy-prod-cloud.sh"
@@ -19,9 +16,23 @@ required_files=(
   "version.env"
 )
 
+site_required_files=(
+  "index.html"
+  "components/header.html"
+  "components/footer.html"
+  "assets/js/main.js"
+)
+
 for file in "${required_files[@]}"; do
   if [[ ! -f "${repo_root}/${file}" ]]; then
     echo "Required file is missing: ${file}" >&2
+    exit 1
+  fi
+done
+
+for file in "${site_required_files[@]}"; do
+  if [[ ! -f "${site_root}/${file}" ]]; then
+    echo "Required site file is missing: site/${file}" >&2
     exit 1
   fi
 done

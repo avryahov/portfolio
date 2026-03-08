@@ -1,6 +1,7 @@
 # Portfolio Александра Ряхова (static MPA)
 
 Статический многостраничный сайт-визитка/портфолио на чистом HTML/CSS/JS без сборщика и без backend.
+Исходники сайта находятся в `site/`, operational-скрипты и deploy-конфигурация вынесены в `ops/`.
 
 ### Что это за проект
 
@@ -22,9 +23,9 @@
 
 ### Как работать с проектом
 
-- Редактировать страницы и стили напрямую (`.html`, `.css`, `.js`).
+- Редактировать страницы и стили напрямую в `site/` (`.html`, `.css`, `.js`).
 - Для внутренних страниц использовать шаблон с `data-root=".."` + `data-component="header/footer"`.
-- После правок компонентов (`components/header.html`, `components/footer.html`) обновлять `componentVersion` в `assets/js/main.js`.
+- После правок компонентов (`site/components/header.html`, `site/components/footer.html`) обновлять `componentVersion` в `site/assets/js/main.js`.
 - Для build-версии использовать `./ops/scripts/version.sh`, а не править build-плашку в footer вручную.
 - Основной путь выкладки теперь идет через локальный `Forgejo Actions`.
 - На целевых серверах больше не требуется `git clone` или `git pull`: доставляется подготовленная publishable-директория без `.git`-истории.
@@ -109,9 +110,9 @@
   - `<div data-component="header"></div>`
   - `<div data-component="footer"></div>`
 - Компоненты находятся в:
-  - `components/header.html`
-  - `components/footer.html`
-- Подгрузка выполняется через `fetch()` в `assets/js/main.js`.
+  - `site/components/header.html`
+  - `site/components/footer.html`
+- Подгрузка выполняется через `fetch()` в `site/assets/js/main.js`.
 
 Важно: сайт нельзя открывать корректно через `file://` из-за `fetch` компонентов. Нужен HTTP-сервер.
 
@@ -124,16 +125,16 @@
 ### 3) Темизация
 
 - Переменные темы:
-  - `assets/css/themes/theme-dark.css`
-  - `assets/css/themes/theme-light.css`
-- Базовые (fallback) токены в `assets/css/base.css`.
-- Переключение тем в `assets/js/main.js`:
+  - `site/assets/css/themes/theme-dark.css`
+  - `site/assets/css/themes/theme-light.css`
+- Базовые (fallback) токены в `site/assets/css/base.css`.
+- Переключение тем в `site/assets/js/main.js`:
   - ключ хранения: `portfolio-theme-v2`
   - тема по умолчанию: `dark` (если в storage нет `light`)
 
 ### 4) JS-модули
 
-- `assets/js/main.js`
+- `site/assets/js/main.js`
   - инициализация темы и переключателя
   - загрузка `header/footer`
   - подсветка активного пункта верхней навигации по `pathname`
@@ -142,43 +143,38 @@
   - UI поиска в шапке (раскрытие/сворачивание)
   - модалка "Обсудить проект" (переход в сообщество VK)
   - кнопка "наверх"
-- `assets/js/home-nav.js`
+- `site/assets/js/home-nav.js`
   - якорная навигация главной
   - активный якорь при скролле
   - горизонтальный drag/wheel-scroll блоков опыта и lifecycle
-- `assets/js/about-toggle.js`
+- `site/assets/js/about-toggle.js`
   - сворачивание/разворачивание блока `about`
-- `assets/js/reveal.js`
+- `site/assets/js/reveal.js`
   - reveal-анимации через `IntersectionObserver`
 
 ## Структура директорий
 
 ```text
 .
-├── index.html
-├── components/
-│   ├── header.html
-│   └── footer.html
-├── assets/
-│   ├── css/
-│   │   ├── base.css
-│   │   ├── home.css
-│   │   ├── themes/
-│   │   └── sections/
-│   ├── js/
-│   └── img/
-├── orgmu/
-├── inverter/
-├── open-solutions/
-├── education/
-├── teaching/
-├── qualification/
-├── services/
+├── site/
+│   ├── index.html
+│   ├── components/
+│   ├── assets/
+│   ├── orgmu/
+│   ├── inverter/
+│   ├── open-solutions/
+│   ├── education/
+│   ├── teaching/
+│   ├── qualification/
+│   ├── services/
+│   ├── favicon.ico
+│   └── manifest.webmanifest
 ├── ops/
 │   ├── deploy/
 │   └── scripts/
 │       └── serve-local.sh
-└── manifest.webmanifest
+├── .forgejo/
+└── .build/
 ```
 
 ## Особенности контента и UI
@@ -261,9 +257,9 @@ certbot --nginx \
 
 ## Правила сопровождения
 
-### 1) Обновили `components/header.html` или `components/footer.html`
+### 1) Обновили `site/components/header.html` или `site/components/footer.html`
 
-- Поднимите `componentVersion` в `assets/js/main.js`, иначе можно поймать stale-кэш компонента.
+- Поднимите `componentVersion` в `site/assets/js/main.js`, иначе можно поймать stale-кэш компонента.
 
 ### 1.1) Обновили или итерировали build-версию
 
@@ -351,7 +347,7 @@ certbot --nginx \
 
 ### Что входит в publishable release
 
-В релизную директорию попадают только файлы, которые реально должны быть на web-сервере:
+В релизную директорию попадают только файлы, которые реально должны быть на web-сервере. Источник для сборки теперь `site/`, но сам artifact остается плоским:
 
 - `index.html`
 - `favicon.ico`
