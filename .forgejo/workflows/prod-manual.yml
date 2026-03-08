@@ -20,18 +20,27 @@ jobs:
           CI_REPOSITORY: ${{ github.repository }}
           CI_SHA: ${{ github.sha }}
           CI_CLONE_URL_BASE: http://192.168.1.77:3000
-        run: |
-          set -euo pipefail
-          rm -rf .git
-          git init .
-          git remote add origin "${CI_CLONE_URL_BASE}/${CI_REPOSITORY}.git"
-          git -c http.extraHeader="Authorization: Bearer ${CI_REPO_TOKEN}" fetch --no-tags origin "${CI_SHA}"
-          git checkout --detach FETCH_HEAD
+        run: bash ./scripts/checkout-forgejo-ci.sh
 
       - name: Validate repository state
         run: bash ./scripts/ci-validate.sh
 
-  build-and-deploy-prod:
+  build-release:
+    needs: validate
+    runs-on: docker
+    steps:
+      - name: Checkout repository
+        env:
+          CI_REPO_TOKEN: ${{ github.token }}
+          CI_REPOSITORY: ${{ github.repository }}
+          CI_SHA: ${{ github.sha }}
+          CI_CLONE_URL_BASE: http://192.168.1.77:3000
+        run: bash ./scripts/checkout-forgejo-ci.sh
+
+      - name: Build publishable release directory
+        run: bash ./scripts/build-release.sh .build/prod
+
+  verify-prod-target:
     needs: validate
     runs-on: docker
     env:
@@ -39,9 +48,36 @@ jobs:
       DEPLOY_PORT: ${{ secrets.PROD_DEPLOY_PORT }}
       DEPLOY_USER: ${{ secrets.PROD_DEPLOY_USER }}
       DEPLOY_PATH: ${{ secrets.PROD_DEPLOY_PATH }}
+      DEPLOY_KNOWN_HOSTS: ${{ secrets.PROD_KNOWN_HOSTS }}
+      DEPLOY_SSH_KEY: ${{ secrets.PROD_SSH_KEY }}
+    steps:
+      - name: Checkout repository
+        env:
+          CI_REPO_TOKEN: ${{ github.token }}
+          CI_REPOSITORY: ${{ github.repository }}
+          CI_SHA: ${{ github.sha }}
+          CI_CLONE_URL_BASE: http://192.168.1.77:3000
+        run: bash ./scripts/checkout-forgejo-ci.sh
+
+      - name: Prepare SSH credentials
+        run: bash ./scripts/prepare-ssh-deploy-key.sh
+
+      - name: Verify remote PROD target
+        run: bash ./scripts/check-ssh-deploy-target.sh
+
+  deploy-prod:
+    needs:
+      - build-release
+      - verify-prod-target
+    runs-on: docker
+    env:
+      DEPLOY_HOST: ${{ secrets.PROD_DEPLOY_HOST }}
+      DEPLOY_PORT: ${{ secrets.PROD_DEPLOY_PORT }}
+      DEPLOY_USER: ${{ secrets.PROD_DEPLOY_USER }}
+      DEPLOY_PATH: ${{ secrets.PROD_DEPLOY_PATH }}
       DEPLOY_BRANCH: ${{ secrets.PROD_DEPLOY_BRANCH }}
-      PROD_KNOWN_HOSTS: ${{ secrets.PROD_KNOWN_HOSTS }}
-      PROD_SSH_KEY: ${{ secrets.PROD_SSH_KEY }}
+      DEPLOY_KNOWN_HOSTS: ${{ secrets.PROD_KNOWN_HOSTS }}
+      DEPLOY_SSH_KEY: ${{ secrets.PROD_SSH_KEY }}
       SKIP_LOCAL_BRANCH_CHECK: "1"
       RELEASE_DIR: .build/prod
     steps:
@@ -51,34 +87,13 @@ jobs:
           CI_REPOSITORY: ${{ github.repository }}
           CI_SHA: ${{ github.sha }}
           CI_CLONE_URL_BASE: http://192.168.1.77:3000
-        run: |
-          set -euo pipefail
-          rm -rf .git
-          git init .
-          git remote add origin "${CI_CLONE_URL_BASE}/${CI_REPOSITORY}.git"
-          git -c http.extraHeader="Authorization: Bearer ${CI_REPO_TOKEN}" fetch --no-tags origin "${CI_SHA}"
-          git checkout --detach FETCH_HEAD
+        run: bash ./scripts/checkout-forgejo-ci.sh
 
       - name: Build publishable release directory
         run: bash ./scripts/build-release.sh "${RELEASE_DIR}"
 
-      - name: Prepare SSH key
-        run: |
-          set -euo pipefail
-          if [[ -z "${PROD_SSH_KEY:-}" ]]; then
-            echo "PROD_SSH_KEY secret is empty." >&2
-            exit 1
-          fi
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          printf '%s\n' "${PROD_SSH_KEY}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          if [[ -n "${PROD_KNOWN_HOSTS:-}" ]]; then
-            printf '%s\n' "${PROD_KNOWN_HOSTS}" > ~/.ssh/known_hosts
-          elif [[ -n "${DEPLOY_HOST:-}" ]]; then
-            ssh-keyscan -p "${DEPLOY_PORT:-22}" -H "${DEPLOY_HOST}" > ~/.ssh/known_hosts
-          fi
-          chmod 644 ~/.ssh/known_hosts
+      - name: Prepare SSH credentials
+        run: bash ./scripts/prepare-ssh-deploy-key.sh
 
       - name: Deploy release to PROD
         run: bash ./scripts/deploy-static-site.sh "${RELEASE_DIR}"

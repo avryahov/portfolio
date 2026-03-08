@@ -23,18 +23,27 @@ jobs:
           CI_REPOSITORY: ${{ github.repository }}
           CI_SHA: ${{ github.sha }}
           CI_CLONE_URL_BASE: http://192.168.1.77:3000
-        run: |
-          set -euo pipefail
-          rm -rf .git
-          git init .
-          git remote add origin "${CI_CLONE_URL_BASE}/${CI_REPOSITORY}.git"
-          git -c http.extraHeader="Authorization: Bearer ${CI_REPO_TOKEN}" fetch --no-tags origin "${CI_SHA}"
-          git checkout --detach FETCH_HEAD
+        run: bash ./scripts/checkout-forgejo-ci.sh
 
       - name: Validate repository state
         run: bash ./scripts/ci-validate.sh
 
-  build-and-deploy-uat:
+  build-release:
+    needs: validate
+    runs-on: docker
+    steps:
+      - name: Checkout repository
+        env:
+          CI_REPO_TOKEN: ${{ github.token }}
+          CI_REPOSITORY: ${{ github.repository }}
+          CI_SHA: ${{ github.sha }}
+          CI_CLONE_URL_BASE: http://192.168.1.77:3000
+        run: bash ./scripts/checkout-forgejo-ci.sh
+
+      - name: Build publishable release directory
+        run: bash ./scripts/build-release.sh .build/uat
+
+  verify-uat-target:
     needs: validate
     runs-on: docker
     env:
@@ -42,9 +51,36 @@ jobs:
       DEPLOY_PORT: ${{ secrets.UAT_DEPLOY_PORT }}
       DEPLOY_USER: ${{ secrets.UAT_DEPLOY_USER }}
       DEPLOY_PATH: ${{ secrets.UAT_DEPLOY_PATH }}
+      DEPLOY_KNOWN_HOSTS: ${{ secrets.UAT_KNOWN_HOSTS }}
+      DEPLOY_SSH_KEY: ${{ secrets.UAT_SSH_KEY }}
+    steps:
+      - name: Checkout repository
+        env:
+          CI_REPO_TOKEN: ${{ github.token }}
+          CI_REPOSITORY: ${{ github.repository }}
+          CI_SHA: ${{ github.sha }}
+          CI_CLONE_URL_BASE: http://192.168.1.77:3000
+        run: bash ./scripts/checkout-forgejo-ci.sh
+
+      - name: Prepare SSH credentials
+        run: bash ./scripts/prepare-ssh-deploy-key.sh
+
+      - name: Verify remote UAT target
+        run: bash ./scripts/check-ssh-deploy-target.sh
+
+  deploy-uat:
+    needs:
+      - build-release
+      - verify-uat-target
+    runs-on: docker
+    env:
+      DEPLOY_HOST: ${{ secrets.UAT_DEPLOY_HOST }}
+      DEPLOY_PORT: ${{ secrets.UAT_DEPLOY_PORT }}
+      DEPLOY_USER: ${{ secrets.UAT_DEPLOY_USER }}
+      DEPLOY_PATH: ${{ secrets.UAT_DEPLOY_PATH }}
       DEPLOY_BRANCH: ${{ secrets.UAT_DEPLOY_BRANCH }}
-      UAT_KNOWN_HOSTS: ${{ secrets.UAT_KNOWN_HOSTS }}
-      UAT_SSH_KEY: ${{ secrets.UAT_SSH_KEY }}
+      DEPLOY_KNOWN_HOSTS: ${{ secrets.UAT_KNOWN_HOSTS }}
+      DEPLOY_SSH_KEY: ${{ secrets.UAT_SSH_KEY }}
       SKIP_LOCAL_BRANCH_CHECK: "1"
       RELEASE_DIR: .build/uat
     steps:
@@ -54,56 +90,13 @@ jobs:
           CI_REPOSITORY: ${{ github.repository }}
           CI_SHA: ${{ github.sha }}
           CI_CLONE_URL_BASE: http://192.168.1.77:3000
-        run: |
-          set -euo pipefail
-          rm -rf .git
-          git init .
-          git remote add origin "${CI_CLONE_URL_BASE}/${CI_REPOSITORY}.git"
-          git -c http.extraHeader="Authorization: Bearer ${CI_REPO_TOKEN}" fetch --no-tags origin "${CI_SHA}"
-          git checkout --detach FETCH_HEAD
+        run: bash ./scripts/checkout-forgejo-ci.sh
 
       - name: Build publishable release directory
         run: bash ./scripts/build-release.sh "${RELEASE_DIR}"
 
-      - name: Prepare SSH key
-        run: |
-          set -euo pipefail
-          if [[ -z "${UAT_SSH_KEY:-}" ]]; then
-            echo "UAT_SSH_KEY secret is empty." >&2
-            exit 1
-          fi
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          printf '%s\n' "${UAT_SSH_KEY}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          if [[ -n "${UAT_KNOWN_HOSTS:-}" ]]; then
-            printf '%s\n' "${UAT_KNOWN_HOSTS}" > ~/.ssh/known_hosts
-          elif [[ -n "${DEPLOY_HOST:-}" ]]; then
-            ssh-keyscan -p "${DEPLOY_PORT:-22}" -H "${DEPLOY_HOST}" > ~/.ssh/known_hosts
-          fi
-          chmod 644 ~/.ssh/known_hosts
-
-      - name: Debug UAT SSH connectivity
-        run: |
-          set -euo pipefail
-          command -v ssh || true
-          command -v scp || true
-          command -v tar || true
-          hostname -i || true
-          ip route || true
-          ip addr || true
-          getent hosts "${DEPLOY_HOST}" || true
-          ssh -vvv \
-            -i ~/.ssh/id_ed25519 \
-            -o IdentitiesOnly=yes \
-            -o BatchMode=yes \
-            -o PreferredAuthentications=publickey \
-            -o PubkeyAuthentication=yes \
-            -o StrictHostKeyChecking=yes \
-            -o ConnectTimeout=10 \
-            -p "${DEPLOY_PORT}" \
-            "${DEPLOY_USER}@${DEPLOY_HOST}" \
-            "exit 0"
+      - name: Prepare SSH credentials
+        run: bash ./scripts/prepare-ssh-deploy-key.sh
 
       - name: Deploy release to UAT NAS
         run: bash ./scripts/deploy-static-site.sh "${RELEASE_DIR}"
